@@ -6,6 +6,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
+    'airbnb',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
@@ -17,5 +18,17 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'import/prefer-default-export': 'off',
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: [
+          '**/vite.config.js',
+          '**/postcss.config.js',
+          '**/tailwind.config.js',
+        ],
+      },
+    ],
   },
-}
+};

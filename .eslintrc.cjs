@@ -7,12 +7,19 @@ module.exports = {
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
     'airbnb',
+    'plugin:prettier/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   settings: { react: { version: '18.2' } },
   plugins: ['react-refresh'],
   rules: {
+    // 'max-len': 'off',
+    'object-curly-newline': ['error', { multiline: true, consistent: true }],
+    'object-curly-spacing': ['error', 'always'],
+    'array-bracket-newline': ['error', { multiline: true, minItems: 3 }],
+    'array-element-newline': ['error', { multiline: true, minItems: 3 }],
+    'function-paren-newline': ['error', 'consistent'],
     'react/jsx-no-target-blank': 'off',
     'react-refresh/only-export-components': [
       'warn',
@@ -30,6 +37,7 @@ module.exports = {
         ],
       },
     ],
-    'linebreak-style': ['error', 'windows'],
+    'linebreak-style': ['error', 'unix'],
+    'no-console': 'off',
   },
 };

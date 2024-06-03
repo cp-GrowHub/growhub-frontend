@@ -30,6 +30,6 @@ module.exports = {
         ],
       },
     ],
-    'linebreak-style': ['error', 'unix'],
+    'linebreak-style': ['error', 'windows'],
   },
 };

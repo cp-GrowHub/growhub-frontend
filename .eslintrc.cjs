@@ -18,7 +18,7 @@ module.exports = {
     'object-curly-newline': ['error', { multiline: true, consistent: true }],
     'object-curly-spacing': ['error', 'always'],
     'array-bracket-newline': ['error', { multiline: true, minItems: 3 }],
-    'array-element-newline': ['error', { multiline: true, minItems: 3 }],
+    'array-element-newline': 'off',
     'function-paren-newline': 'off',
     'react/jsx-no-target-blank': 'off',
     'react-refresh/only-export-components': [

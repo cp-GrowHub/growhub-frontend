@@ -336,7 +336,7 @@ const api = (() => {
     api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('GET', '/discussions');
 
-    return response.data.discussions;
+    return response;
   };
 
   /**
@@ -356,7 +356,7 @@ const api = (() => {
       tags,
     });
 
-    return response.data.discussions;
+    return response;
   };
 
   /**
@@ -370,7 +370,7 @@ const api = (() => {
     api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('GET', `/discussions/${discussionId}`);
 
-    return response.data.discussion;
+    return response;
   };
 
   /**
@@ -389,7 +389,7 @@ const api = (() => {
       { content }
     );
 
-    return response.data.comment;
+    return response;
   };
 
   /**
@@ -403,7 +403,7 @@ const api = (() => {
     api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('DELETE', `/discussions/${discussionId}`);
 
-    return response.message;
+    return response;
   };
 
   /**
@@ -421,7 +421,7 @@ const api = (() => {
       `/discussions/${discussionId}/comments/${commentId}`
     );
 
-    return response.message;
+    return response;
   };
 
   /**
@@ -438,7 +438,7 @@ const api = (() => {
       `/discussions/${discussionId}/upvote`
     );
 
-    return response.message;
+    return response;
   };
 
   /**
@@ -455,7 +455,7 @@ const api = (() => {
       `/discussions/${discussionId}/downvote`
     );
 
-    return response.message;
+    return response;
   };
 
   /**
@@ -472,7 +472,7 @@ const api = (() => {
       `/discussions/${discussionId}/neutral-vote`
     );
 
-    return response.message;
+    return response;
   };
 
   /**
@@ -490,7 +490,7 @@ const api = (() => {
       `/discussions/${discussionId}/comments/${commentId}/upvote`
     );
 
-    return response.message;
+    return response;
   };
 
   /**
@@ -508,7 +508,7 @@ const api = (() => {
       `/discussions/${discussionId}/comments/${commentId}/downvote`
     );
 
-    return response.message;
+    return response;
   };
 
   /**
@@ -526,7 +526,7 @@ const api = (() => {
       `/discussions/${discussionId}/comments/${commentId}/neutral-vote`
     );
 
-    return response.message;
+    return response;
   };
 
   /**

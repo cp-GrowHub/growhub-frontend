@@ -28,17 +28,24 @@ function App() {
   if (authUser === null) {
     return (
       <div className="font-poppins min-h-screen transition-all duration-500 ease-in-out">
-        {/* <Loading /> */}
+        <Loading />
         <header>
           <h1 className="text-4xl text-text">GrowHub</h1>
         </header>
+        {/* <Routes>
+          <Route path='/*' element={} />
+          <Route path='/register' element={} />
+        </Routes> */}
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <h1 className="text-4xl font-bold text-blue-400">Hello, Tailwind CSS!</h1>
+    <div className="min-h-screen flex items-center justify-center">
+      <Loading />
+      <header>
+        <h1 className="text-4xl font-bold text-text">GrowHub</h1>
+      </header>
     </div>
   );
 }

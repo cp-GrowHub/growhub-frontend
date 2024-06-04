@@ -230,7 +230,7 @@ const api = (() => {
     api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('PUT', `/goals/${goalId}`, { finished });
 
-    return response.message;
+    return response.data.goal;
   };
 
   /**
@@ -310,7 +310,7 @@ const api = (() => {
       archived,
     });
 
-    return response.message;
+    return response.data.note;
   };
 
   /**

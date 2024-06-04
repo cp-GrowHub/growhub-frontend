@@ -27,7 +27,7 @@ function asyncUpdateNote({ title, body, archived, noteId }) {
     dispatch(showLoading());
 
     try {
-      const note = await api.updateNote({
+      const note = await api.editNote({
         title,
         body,
         archived,

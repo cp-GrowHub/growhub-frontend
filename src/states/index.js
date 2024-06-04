@@ -6,6 +6,7 @@ import todosReducer from './todos/reducer';
 import notesReducer from './notes/reducer';
 import goalsReducer from './goals/reducer';
 import blogsReducer from './blogs/reducer';
+import discussionsReducer from './discussions/reducer';
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     notes: notesReducer,
     goals: goalsReducer,
     blogs: blogsReducer,
+    discussions: discussionsReducer,
   },
 });
 

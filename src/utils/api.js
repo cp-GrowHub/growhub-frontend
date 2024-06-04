@@ -546,7 +546,7 @@ const api = (() => {
       tags,
     });
 
-    return response.data.blog;
+    return response;
   };
 
   /**
@@ -558,7 +558,7 @@ const api = (() => {
     api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('GET', '/blogs');
 
-    return response.data.blogs;
+    return response;
   };
 
   /**
@@ -571,7 +571,7 @@ const api = (() => {
   const getDetailBlog = async ({ blogId }) => {
     const response = await apiRequest('GET', `/blogs/${blogId}`);
 
-    return response.data.blog;
+    return response;
   };
 
   /**
@@ -592,7 +592,7 @@ const api = (() => {
       tags,
     });
 
-    return response.data.blog;
+    return response;
   };
 
   /**
@@ -606,7 +606,7 @@ const api = (() => {
     api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('DELETE', `/blogs/${blogId}`);
 
-    return response.message;
+    return response;
   };
 
   return {

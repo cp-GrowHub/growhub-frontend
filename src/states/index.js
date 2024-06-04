@@ -4,6 +4,7 @@ import usersReducer from './users/reducer';
 import isPreloadReducer from './isPreload/reducer';
 import todosReducer from './todos/reducer';
 import notesReducer from './notes/reducer';
+import goalsReducer from './goals/reducer';
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     users: usersReducer,
     todos: todosReducer,
     notes: notesReducer,
+    goals: goalsReducer,
   },
 });
 

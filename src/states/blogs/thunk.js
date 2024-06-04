@@ -14,7 +14,7 @@ function asyncCreateBlog({ title, body, tags }) {
 
     try {
       const response = await api.createBlog({ title, body, tags });
-      const { blog } = response.data.blog;
+      const { blog } = response.data;
       dispatch(createBlogActionCreator(blog));
       alert(response.message);
     } catch (err) {
@@ -31,7 +31,7 @@ function asyncUpdateBlog({ title, body, tags, blogId }) {
 
     try {
       const response = await api.editBlog({ title, body, tags, blogId });
-      const { blog } = response.data.blog;
+      const { blog } = response.data;
       dispatch(updateBlogActionCreator(blog));
       alert(response.message);
     } catch (err) {
@@ -64,7 +64,7 @@ function asyncGetAllBlogs() {
 
     try {
       const response = await api.getAllBlogs();
-      const { blogs } = response.data.blogs;
+      const { blogs } = response.data;
       dispatch(receiveBlogsActionCreator(blogs));
     } catch (err) {
       alert(err.message);
@@ -80,7 +80,7 @@ function asyncGetDetailBlog({ blogId }) {
 
     try {
       const response = await api.getDetailBlog({ blogId });
-      const { blog } = response.data.blog;
+      const { blog } = response.data;
       dispatch(receiveDetailBlogActionCreator(blog));
     } catch (err) {
       alert(err.message);

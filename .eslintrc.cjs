@@ -41,5 +41,6 @@ module.exports = {
     'no-console': 'off',
     'no-alert': 'off',
     'react/require-default-props': 'off',
+    'react/button-has-type': 'off',
   },
 };

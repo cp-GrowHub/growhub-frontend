@@ -40,5 +40,6 @@ module.exports = {
     'linebreak-style': ['error', 'unix'],
     'no-console': 'off',
     'no-alert': 'off',
+    'react/require-default-props': 'off',
   },
 };

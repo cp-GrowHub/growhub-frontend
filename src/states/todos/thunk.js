@@ -1,10 +1,26 @@
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import {
+  receiveTodosByUserActionCreator,
   createTodoActionCreator,
   updateTodoActionCreator,
   deleteTodoActionCreator,
 } from './action';
 import api from '../../utils/api';
+
+function asyncReceiveTodos() {
+  return async (dispatch) => {
+    dispatch(showLoading());
+
+    try {
+      const todos = await api.getTodosByUser();
+      dispatch(receiveTodosByUserActionCreator(todos));
+    } catch (error) {
+      console.error('Failed to fetch todos:', error);
+    } finally {
+      dispatch(hideLoading());
+    }
+  };
+}
 
 function asyncCreateTodo({ name, highPriority, priority }) {
   return async (dispatch) => {
@@ -56,4 +72,4 @@ function asyncDeleteTodo({ todoId }) {
   };
 }
 
-export { asyncCreateTodo, asyncUpdateTodo, asyncDeleteTodo };
+export { asyncReceiveTodos, asyncCreateTodo, asyncUpdateTodo, asyncDeleteTodo };

@@ -13,7 +13,7 @@ import {
 function Sidebar() {
   return (
     <aside className="bg-card1 text-text w-30 p-1 flex flex-col min-h-screen">
-      <nav>
+      <nav className="flex-1">
         <ul>
           <li className="mb-2">
             <NavLink
@@ -123,6 +123,15 @@ function Sidebar() {
           </li>
         </ul>
       </nav>
+      <div className="sticky bottom-0 p-4">
+        <button
+          type="button"
+          className="flex items-center justify-center w-full p-1 rounded-2xl text-text bg-black-0 outline-2 outline hover:bg-red-700"
+          onClick={() => console.log('Log Out')}
+        >
+          <span className="text-sm">Log Out</span>
+        </button>
+      </div>
     </aside>
   );
 }

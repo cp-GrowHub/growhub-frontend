@@ -3,9 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { asyncUnsetAuthUser } from './states/authUser/thunk';
 import { asyncPreloadProcess } from './states/isPreload/thunk';
-import TestLoginPage from './pages/TestLoginPage';
 import Loading from './components/Loading';
-import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
 import LoginPage from './pages/LoginPage';
@@ -47,7 +45,6 @@ function App() {
           <Loading />
           <Sidebar onLogout={onLogout} />
           <div className="flex-1 flex flex-col p-4">
-            <Header />
             <Routes>
               <Route
                 path="/"
@@ -115,7 +112,6 @@ function App() {
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/test-login" element={<TestLoginPage />} />
             <Route path="*" element={<LoginPage />} />
           </Routes>
         </div>

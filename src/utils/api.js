@@ -96,7 +96,7 @@ const api = (() => {
    * @returns {Promise<Object>} - Returns a promise that resolves to the user's profile.
    */
   const getOwnProfile = async () => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('GET', '/users/me');
 
     return response.data.user; // {}
@@ -130,7 +130,7 @@ const api = (() => {
    */
   const getTodosByUser = async () => {
     const token = getAccessToken();
-    api.defaults.headers.common.Authorization = `Bearer ${token}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${token}`;
     const response = await apiRequest('GET', '/todos');
 
     return response.data.todos;
@@ -146,7 +146,7 @@ const api = (() => {
    * @returns {Promise<Object>} - Returns a promise that resolves to the created todo.
    */
   const createTodo = async ({ name, highPriority, priority }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('POST', '/todos/', {
       name,
       highPriority,
@@ -167,7 +167,7 @@ const api = (() => {
    * @returns {Promise<string>} - Returns a promise that resolves to a success message.
    */
   const updateTodo = async ({ highPriority, priority, finished, todoId }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('PUT', `/todos/${todoId}`, {
       highPriority,
       priority,
@@ -185,7 +185,7 @@ const api = (() => {
    * @returns {Promise<string>} - Returns a promise that resolves to a success message.
    */
   const deleteTodo = async ({ todoId }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('DELETE', `/todos/${todoId}`);
 
     return response.message;
@@ -197,7 +197,7 @@ const api = (() => {
    * @returns {Promise<Array>} - Returns a promise that resolves to an array of goals.
    */
   const getGoalsByUser = async () => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('GET', '/goals');
 
     return response.data.goals;
@@ -212,7 +212,7 @@ const api = (() => {
    * @returns {Promise<Object>} - Returns a promise that resolves to the created goal.
    */
   const createGoal = async ({ name, deadline }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('POST', '/goals', { name, deadline });
 
     return response.data.goal;
@@ -227,7 +227,7 @@ const api = (() => {
    * @returns {Promise<string>} - Returns a promise that resolves to a success message.
    */
   const updateGoal = async ({ finished, goalId }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('PUT', `/goals/${goalId}`, { finished });
 
     return response.data.goal;
@@ -241,7 +241,7 @@ const api = (() => {
    * @returns {Promise<string>} - Returns a promise that resolves to a success message.
    */
   const deleteGoal = async ({ goalId }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('DELETE', `/goals/${goalId}`);
 
     return response.message;
@@ -253,7 +253,7 @@ const api = (() => {
    * @returns {Promise<Array>} - Returns a promise that resolves to an array of notes.
    */
   const getNotesByUser = async () => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('GET', '/notes');
 
     return response.data.notes;
@@ -269,7 +269,7 @@ const api = (() => {
    * @returns {Promise<Object>} - Returns a promise that resolves to the created note.
    */
   const createNote = async ({ title, body, archived }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('POST', '/notes', {
       title,
       body,
@@ -303,7 +303,7 @@ const api = (() => {
    * @returns {Promise<string>} - Returns a promise that resolves to a success message.
    */
   const editNote = async ({ title, body, archived, noteId }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('PUT', `/notes/${noteId}/edit`, {
       title,
       body,
@@ -321,7 +321,7 @@ const api = (() => {
    * @returns {Promise<string>} - Returns a promise that resolves to a success message.
    */
   const deleteNote = async ({ noteId }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('DELETE', `/notes/${noteId}`);
 
     return response.message;
@@ -333,7 +333,7 @@ const api = (() => {
    * @returns {Promise<Array>} - Returns a promise that resolves to an array of discussions.
    */
   const getDiscussions = async () => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('GET', '/discussions');
 
     return response;
@@ -349,7 +349,7 @@ const api = (() => {
    * @returns {Promise<Object>} - Returns a promise that resolves to the created discussion.
    */
   const createDiscussion = async ({ title, body, tags }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('POST', `/discussions`, {
       title,
       body,
@@ -367,7 +367,7 @@ const api = (() => {
    * @returns {Promise<Object>} - Returns a promise that resolves to the discussion details.
    */
   const getDetailDiscussion = async ({ discussionId }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('GET', `/discussions/${discussionId}`);
 
     return response;
@@ -382,7 +382,7 @@ const api = (() => {
    * @returns {Promise<Object>} - Returns a promise that resolves to the created comment.
    */
   const addComment = async ({ content, discussionId }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest(
       'POST',
       `/discussions/${discussionId}/comments`,
@@ -400,7 +400,7 @@ const api = (() => {
    * @returns {Promise<string>} - Returns a promise that resolves to a success message.
    */
   const deleteDiscussion = async ({ discussionId }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('DELETE', `/discussions/${discussionId}`);
 
     return response;
@@ -415,7 +415,7 @@ const api = (() => {
    * @returns {Promise<string>} - Returns a promise that resolves to a success message.
    */
   const deleteComment = async ({ discussionId, commentId }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest(
       'DELETE',
       `/discussions/${discussionId}/comments/${commentId}`
@@ -432,7 +432,7 @@ const api = (() => {
    * @returns {Promise<string>} - Returns a promise that resolves to a success message.
    */
   const upvoteDiscussion = async ({ discussionId }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest(
       'POST',
       `/discussions/${discussionId}/upvote`
@@ -449,7 +449,7 @@ const api = (() => {
    * @returns {Promise<string>} - Returns a promise that resolves to a success message.
    */
   const downvoteDiscussion = async ({ discussionId }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest(
       'POST',
       `/discussions/${discussionId}/downvote`
@@ -466,7 +466,7 @@ const api = (() => {
    * @returns {Promise<string>} - Returns a promise that resolves to a success message.
    */
   const neutralizeDiscussion = async ({ discussionId }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest(
       'POST',
       `/discussions/${discussionId}/neutral-vote`
@@ -484,7 +484,7 @@ const api = (() => {
    * @returns {Promise<string>} - Returns a promise that resolves to a success message.
    */
   const upvoteComment = async ({ discussionId, commentId }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest(
       'POST',
       `/discussions/${discussionId}/comments/${commentId}/upvote`
@@ -502,7 +502,7 @@ const api = (() => {
    * @returns {Promise<string>} - Returns a promise that resolves to a success message.
    */
   const downvoteComment = async ({ discussionId, commentId }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest(
       'POST',
       `/discussions/${discussionId}/comments/${commentId}/downvote`
@@ -520,7 +520,7 @@ const api = (() => {
    * @returns {Promise<string>} - Returns a promise that resolves to a success message.
    */
   const neutralizeComment = async ({ discussionId, commentId }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest(
       'POST',
       `/discussions/${discussionId}/comments/${commentId}/neutral-vote`
@@ -539,7 +539,7 @@ const api = (() => {
    * @returns {Promise<Object>} - Returns a promise that resolves to the created blog.
    */
   const createBlog = async ({ title, body, tags }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('POST', '/blogs/add', {
       title,
       body,
@@ -555,7 +555,7 @@ const api = (() => {
    * @returns {Promise<Array>} - Returns a promise that resolves to an array of blogs.
    */
   const getAllBlogs = async () => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('GET', '/blogs');
 
     return response;
@@ -585,7 +585,7 @@ const api = (() => {
    * @returns {Promise<Object>} - Returns a promise that resolves to the updated blog.
    */
   const editBlog = async ({ title, body, tags, blogId }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('PUT', `/blogs/${blogId}`, {
       title,
       body,
@@ -603,7 +603,7 @@ const api = (() => {
    * @returns {Promise<string>} - Returns a promise that resolves to a success message.
    */
   const deleteBlog = async ({ blogId }) => {
-    api.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('DELETE', `/blogs/${blogId}`);
 
     return response;

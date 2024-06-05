@@ -9,9 +9,10 @@ import {
   FaComments,
   FaBlog,
 } from 'react-icons/fa';
+import PropTypes from 'prop-types';
 import NavItem from './NavItem';
 
-function Sidebar() {
+function Sidebar({ onLogout }) {
   return (
     <aside className="bg-card1 text-text w-30 p-1 flex flex-col min-h-screen">
       <nav className="flex-1">
@@ -43,7 +44,7 @@ function Sidebar() {
         <button
           type="button"
           className="flex items-center justify-center w-full p-1 rounded-2xl text-text bg-black-0 outline-2 outline hover:bg-red-700"
-          onClick={() => console.log('Log Out')}
+          onClick={onLogout}
         >
           <span className="text-sm">Log Out</span>
         </button>
@@ -51,5 +52,9 @@ function Sidebar() {
     </aside>
   );
 }
+
+Sidebar.propTypes = {
+  onLogout: PropTypes.func.isRequired,
+};
 
 export default Sidebar;

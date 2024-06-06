@@ -5,7 +5,7 @@ function Button({ type = 'button', text, onClick }) {
   return (
     <button
       type={type}
-      className="w-full px-4 py-2 mt-4 text-text bg-card3 rounded-md hover:bg-card4 focus:outline-none focus:bg-card4"
+      className="w-full px-4 py-2 mt-4 text-text bg-black font-bold rounded-md hover:bg-card4 focus:outline-none focus:bg-card4"
       onClick={onClick}
     >
       {text}

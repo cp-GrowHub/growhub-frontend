@@ -39,12 +39,12 @@ function App() {
   }
 
   return (
-    <div className="font-poppins min-h-screen transition-all duration-500 ease-in-out flex">
+    <div className="font-poppins min-h-screen w-full transition-all duration-500 ease-in-out flex">
       {authUser ? (
         <>
           <Loading />
           <Sidebar onLogout={onLogout} />
-          <div className="flex-1 flex flex-col p-4">
+          <div className=" flex flex-col p-4">
             <Routes>
               <Route
                 path="/"
@@ -107,7 +107,7 @@ function App() {
           </div>
         </>
       ) : (
-        <div className="min-h-screen flex items-center justify-center">
+        <div className="min-h-screen w-full flex items-center justify-center">
           <Loading />
           <Routes>
             <Route path="/login" element={<LoginPage />} />

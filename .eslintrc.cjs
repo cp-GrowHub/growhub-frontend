@@ -43,5 +43,6 @@ module.exports = {
     'react/require-default-props': 'off',
     'react/button-has-type': 'off',
     'no-shadow': 'off',
+    'no-nested-ternary': 'off',
   },
 };

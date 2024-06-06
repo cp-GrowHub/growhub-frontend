@@ -4,21 +4,25 @@ import PageCard from '../components/PageCard';
 import UpcomingGoalCard from '../components/UpcomingGoalCard';
 import ToDoListCard from '../components/ToDoListCard';
 import OutlineButton from '../components/OutlineButton';
-import { asyncReceiveTodos } from '../states/todos/thunk';
-import { initialGoals, dummyTodos } from '../utils/dummyData';
+import { asyncReceiveTodos, asyncUpdateTodo } from '../states/todos/thunk';
 import api from '../utils/api';
+import { asyncGetGoalsByUser, asyncUpdateGoal } from '../states/goals/thunk';
 
 function HomePage() {
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
-  const [goals, setGoals] = useState(initialGoals);
-  const [localTodos, setLocalTodos] = useState(dummyTodos);
   const authUser = useSelector((state) => state.authUser);
-  // const todos = useSelector((state) => state.todos);
+  const todos = useSelector((state) =>
+    Array.isArray(state.todos) ? state.todos : []
+  );
+  const goals = useSelector((state) =>
+    Array.isArray(state.goals) ? state.goals : []
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(asyncReceiveTodos());
+    dispatch(asyncGetGoalsByUser());
   }, [dispatch]);
 
   useEffect(() => {
@@ -35,35 +39,32 @@ function HomePage() {
     fetchQuote();
   }, []);
 
-  const toggleGoalFinish = (id) => {
-    setGoals((prevGoals) =>
-      prevGoals.map((goal) =>
-        goal.id === id ? { ...goal, finished: !goal.finished } : goal
-      )
-    );
+  const toggleGoalHandler = (id) => {
+    const selectedGoal = goals.find((goal) => goal.id === id);
+    if (selectedGoal) {
+      dispatch(
+        asyncUpdateGoal({ goalId: id, finished: !selectedGoal.finished })
+      );
+    }
   };
 
-  const handleToggleTodo = (id) => {
-    setLocalTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
+  const toggleTodoHandler = (id) => {
+    const selectedTodo = todos.find((todo) => todo.id === id);
+    if (selectedTodo) {
+      dispatch(
+        asyncUpdateTodo({
+          finished: !selectedTodo.finished,
+          todoId: id,
+        })
+      );
+    }
   };
 
-  const sortedTodos = [...localTodos].sort((a, b) => {
-    if (a.priority === 'High Priority' && b.priority !== 'High Priority') {
-      return -1;
-    }
-    if (a.priority !== 'High Priority' && b.priority === 'High Priority') {
-      return 1;
-    }
-    if (a.priority === 'Priority' && b.priority !== 'Priority') {
-      return -1;
-    }
-    if (a.priority !== 'Priority' && b.priority === 'Priority') {
-      return 1;
-    }
+  const sortedTodos = [...todos].sort((a, b) => {
+    if (a.highPriority && !b.highPriority) return -1;
+    if (!a.highPriority && b.highPriority) return 1;
+    if (a.priority && !b.priority) return -1;
+    if (!a.priority && b.priority) return 1;
     return 0;
   });
 
@@ -105,9 +106,8 @@ function HomePage() {
             {sortedTodos.map((todo) => (
               <ToDoListCard
                 key={todo.id}
-                task={todo}
-                priority={todo.priority}
-                onToggle={() => handleToggleTodo(todo.id)}
+                todo={todo}
+                onToggle={() => toggleTodoHandler(todo.id)}
               />
             ))}
           </div>
@@ -125,7 +125,7 @@ function HomePage() {
                 (new Date(goal.deadline) - new Date()) / (1000 * 60 * 60 * 24)
               }
               isFinished={goal.finished}
-              onToggleFinish={() => toggleGoalFinish(goal.id)}
+              onToggleFinish={() => toggleGoalHandler(goal.id)}
             />
           ))}
         </div>

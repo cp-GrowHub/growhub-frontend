@@ -1,33 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function ToDoListCard({ task, priority, onToggle }) {
+function ToDoListCard({ todo, onToggle }) {
+  const priorityLabel = todo.highPriority
+    ? 'High Priority'
+    : todo.priority
+      ? 'Priority'
+      : '';
+
   return (
     <div className="flex items-center justify-between p-2 border-b border-card4 bg-card1 rounded-lg">
       <div className="flex items-center">
         <input
           type="checkbox"
           className="mr-2"
-          checked={task.completed}
+          checked={todo.finished}
           onChange={onToggle}
         />
-        <span className="text-text">{task.title}</span>
+        <span className="text-text">{todo.name}</span>
       </div>
-      <span
-        className={`px-2 py-1 rounded ${priority === 'High Priority' ? 'bg-red-500' : 'bg-yellow-500'}`}
-      >
-        {priority}
-      </span>
+      {priorityLabel && (
+        <span
+          className={`px-2 py-1 rounded ${priorityLabel === 'High Priority' ? 'bg-red-500' : 'bg-yellow-500'}`}
+        >
+          {priorityLabel}
+        </span>
+      )}
     </div>
   );
 }
 
 ToDoListCard.propTypes = {
-  task: PropTypes.shape({
-    completed: PropTypes.bool.isRequired,
-    title: PropTypes.string.isRequired,
+  todo: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    highPriority: PropTypes.bool.isRequired,
+    priority: PropTypes.bool.isRequired,
+    finished: PropTypes.bool.isRequired,
   }).isRequired,
-  priority: PropTypes.string.isRequired,
   onToggle: PropTypes.func.isRequired,
 };
 

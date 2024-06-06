@@ -16,6 +16,7 @@ import DiscussionPage from './pages/DiscussionPage';
 import BlogPage from './pages/BlogPage';
 import MyAccountPage from './pages/MyAccountPage';
 import PrivateRoute from './components/PrivateRoute';
+import StateTestPage from './pages/StateTestPage';
 
 function App() {
   const authUser = useSelector((state) => state.authUser);
@@ -99,6 +100,14 @@ function App() {
                 element={
                   <PrivateRoute>
                     <MyAccountPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/state-test"
+                element={
+                  <PrivateRoute>
+                    <StateTestPage />
                   </PrivateRoute>
                 }
               />

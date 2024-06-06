@@ -21,13 +21,8 @@ function PageCard({ to, title, color, content }) {
 PageCard.propTypes = {
   to: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  color: PropTypes.string,
-  content: PropTypes.string,
-};
-
-PageCard.defaultProps = {
-  color: 'card4', // Default color class
-  content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', // Default content
+  color: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
 };
 
 export default PageCard;

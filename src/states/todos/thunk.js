@@ -37,14 +37,12 @@ function asyncCreateTodo({ name, highPriority, priority }) {
   };
 }
 
-function asyncUpdateTodo({ highPriority, priority, finished, todoId }) {
+function asyncUpdateTodo({ finished, todoId }) {
   return async (dispatch) => {
     dispatch(showLoading());
 
     try {
       const todo = await api.updateTodo({
-        highPriority,
-        priority,
         finished,
         todoId,
       });

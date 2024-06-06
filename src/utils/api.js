@@ -186,15 +186,13 @@ const api = (() => {
    * @param {string} param0.todoId - The ID of the todo to update.
    * @returns {Promise<string>} - Returns a promise that resolves to a success message.
    */
-  const updateTodo = async ({ highPriority, priority, finished, todoId }) => {
+  const updateTodo = async ({ finished, todoId }) => {
     instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
     const response = await apiRequest('PUT', `/todos/${todoId}`, {
-      highPriority,
-      priority,
       finished,
     });
 
-    return response.message;
+    return response.data.todo;
   };
 
   /**

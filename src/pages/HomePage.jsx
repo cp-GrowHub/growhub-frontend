@@ -6,8 +6,11 @@ import ToDoListCard from '../components/ToDoListCard';
 import OutlineButton from '../components/OutlineButton';
 import { asyncReceiveTodos } from '../states/todos/thunk';
 import { initialGoals, dummyTodos } from '../utils/dummyData';
+import api from '../utils/api';
 
 function HomePage() {
+  const [quote, setQuote] = useState('');
+  const [author, setAuthor] = useState('');
   const [goals, setGoals] = useState(initialGoals);
   const [localTodos, setLocalTodos] = useState(dummyTodos);
   const authUser = useSelector((state) => state.authUser);
@@ -17,6 +20,20 @@ function HomePage() {
   useEffect(() => {
     dispatch(asyncReceiveTodos());
   }, [dispatch]);
+
+  useEffect(() => {
+    const fetchQuote = async () => {
+      try {
+        const { author, quote } = await api.getQuote();
+        setQuote(quote);
+        setAuthor(author);
+      } catch (err) {
+        alert(`Failed to fetch quote: ${err}`);
+      }
+    };
+
+    fetchQuote();
+  }, []);
 
   const toggleGoalFinish = (id) => {
     setGoals((prevGoals) =>
@@ -56,11 +73,11 @@ function HomePage() {
 
   return (
     <div className="p-4 flex flex-col gap-10">
-      <section className="flex gap-3">
+      <section className="flex gap-3 xl:max-h-[27rem] sm:max-h-[32rem]">
         <div className="flex-1 flex flex-col gap-3">
           <div className="bg-card3 rounded-xl px-10 py-6 flex items-center">
             <h2 className="text-3xl font-semibold text-text">
-              Hello, {authUser.name}
+              Hello, {authUser.name}!
             </h2>
           </div>
           <div className="bg-card1 px-10 py-10 rounded-xl flex flex-col gap-3 h-full flex-grow justify-center">
@@ -80,11 +97,11 @@ function HomePage() {
             />
           </div>
         </div>
-        <div className="flex-1 flex flex-col gap-3">
+        <div className="flex-1 flex flex-col gap-3 ">
           <h2 className="text-3xl font-bold text-text p-4">
             Your Path to Productivity
           </h2>
-          <div className="bg-card2 p-4 rounded-xl max-h-80 overflow-y-auto space-y-4 h-full flex-grow">
+          <div className="bg-card2 p-4 rounded-xl overflow-y-auto space-y-4 h-full flex-grow">
             {sortedTodos.map((todo) => (
               <ToDoListCard
                 key={todo.id}
@@ -97,7 +114,7 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="mb-6 bg-card4 p-6 rounded-xl">
+      <section className=" bg-card4 bg-opacity-60 p-6 rounded-xl">
         <h2 className="text-2xl font-bold text-text pb-6">Upcoming goals</h2>
         <div className="grid grid-cols-3 gap-4">
           {sortedGoals.map((goal) => (
@@ -114,24 +131,51 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="grid grid-cols-3 gap-4">
+      <section>
+        <h2 className="text-text text-2xl font-bold mb-4">
+          Be the best version!
+        </h2>
+        <div className="grid grid-cols-3 gap-6">
+          <PageCard
+            to="/notes"
+            title="Notes"
+            color="card1"
+            content="Catat ide-ide penting dan informasi berharga yang Anda temui sehari-hari."
+          />
+          <PageCard
+            to="/todos"
+            title="To-Do List"
+            color="card2"
+            content="Kelola daftar tugas Anda dengan mudah dan tetap produktif setiap hari."
+          />
+          <PageCard
+            to="/goals"
+            title="Goals"
+            color="card3"
+            content="Tetapkan tujuan pribadi Anda dan lacak kemajuan untuk mencapainya."
+          />
+        </div>
+      </section>
+
+      <section className="border rounded-3xl p-10 px-16 bg-card3">
+        <blockquote className="text-text flex flex-col items-start">
+          <p className="text-text">&quot;{quote}&quot;</p>
+          <footer className="text-right text-text italic">- {author}</footer>
+        </blockquote>
+      </section>
+
+      <section className="grid grid-cols-3 gap-6">
         <PageCard
-          to="/notes"
-          title="Notes"
-          color="card1"
-          content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-        />
-        <PageCard
-          to="/todos"
-          title="To-Do List"
+          to="/discussions"
+          title="Discussions"
           color="card2"
-          content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          content="Ikuti diskusi dan bagikan pandangan Anda dengan komunitas."
         />
         <PageCard
-          to="/goals"
-          title="Goals"
+          to="/blogs"
+          title="Blogs"
           color="card3"
-          content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          content="Baca artikel dan tulisan inspiratif dari berbagai penulis."
         />
       </section>
     </div>

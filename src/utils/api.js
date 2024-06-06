@@ -2,9 +2,17 @@ import axios from 'axios';
 
 const api = (() => {
   const BASE_URL = 'http://localhost:5000';
+  const QUOTES_URL = 'https://stoic.tekloon.net';
 
   const instance = axios.create({
     baseURL: BASE_URL,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const quotesInstance = axios.create({
+    baseURL: QUOTES_URL,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -38,6 +46,18 @@ const api = (() => {
 
   const clearAccessToken = () => {
     localStorage.removeItem('accessToken');
+  };
+
+  const getQuote = async () => {
+    try {
+      const response = await quotesInstance.get('/stoic-quote');
+      return {
+        author: response.data.author,
+        quote: response.data.quote,
+      };
+    } catch (error) {
+      throw new Error(error.message || 'Something went wrong');
+    }
   };
 
   /**
@@ -648,6 +668,7 @@ const api = (() => {
     getDetailBlog,
     editBlog,
     deleteBlog,
+    getQuote,
   };
 })();
 

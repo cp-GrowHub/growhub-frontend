@@ -12,9 +12,13 @@ function UpcomingGoalCard({ title, daysLeft, isFinished, onToggleFinish }) {
           <FaExclamationCircle className="text-red-500" />
         )}
       </button>
-      <div className="flex-1">
+      <div className="flex-1 flex flex-col">
+        <div className="flex">
+          <p className="text-text text-sm inline-block border-b px-1 pb-[0.1rem] mb-1">
+            {Math.round(daysLeft)} days left
+          </p>
+        </div>
         <h3 className="text-lg font-bold">{title}</h3>
-        <p>{Math.round(daysLeft)} days left</p>
       </div>
     </div>
   );

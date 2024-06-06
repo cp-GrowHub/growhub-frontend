@@ -8,12 +8,12 @@ function PageCard({ to, title, color, content }) {
   return (
     <NavLink
       to={to}
-      className={`p-4 rounded-md shadow-md flex flex-col justify-between text-text hover:bg-opacity-80 ${backgroundColorClass}`}
+      className={`p-4 rounded-3xl shadow-md flex flex-col justify-between text-text hover:bg-opacity-80 ${backgroundColorClass}`}
     >
-      <div className="flex flex-col items-start">
-        <h2 className="pt-10 text-2xl font-semibold">{title}</h2>
+      <div className="flex flex-col items-start p-4">
+        <h2 className="pt-6 text-2xl font-semibold">{title}</h2>
+        <p className="mt-2">{content}</p>
       </div>
-      <p className="mt-2">{content}</p>
     </NavLink>
   );
 }

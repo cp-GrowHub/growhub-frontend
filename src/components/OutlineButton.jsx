@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function OutlineButton({ type = 'button', text, to, href, ...props }) {
   const buttonClassName =

@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
 import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import useGoals from '../hooks/useGoals';
 import UpcomingGoalCard from '../components/HomePage/UpcomingGoalCard';
 import GoalsFilterButtons from '../components/Goals/GoalsFilterButtons';
@@ -8,6 +9,7 @@ import GoalsFilterButtons from '../components/Goals/GoalsFilterButtons';
 function GoalsPage() {
   const { upcomingGoals, sortedGoals, toggleGoalHandler } = useGoals();
   const authUser = useSelector((state) => state.authUser);
+  const navigate = useNavigate();
   const [filter, setFilter] = useState('all');
 
   const filteredGoals = sortedGoals.filter((goal) => {
@@ -41,7 +43,14 @@ function GoalsPage() {
       <section className="p-4 rounded-xl">
         <div className="flex flex-row justify-between pb-4">
           <GoalsFilterButtons currentFilter={filter} setFilter={setFilter} />
-          <button className="text-text font-bold">+ Create new goal</button>
+          <button
+            className="text-bekgron bg-text px-6 rounded-3xl hover:text-text hover:bg-bekgron hover:border-2"
+            onClick={() => {
+              navigate('/goals/createGoal');
+            }}
+          >
+            + Create new goal
+          </button>
         </div>
         <div className="grid grid-cols-4 gap-4 overflow-y-auto max-h-80">
           {filteredGoals.map((goal) => (
@@ -59,13 +68,13 @@ function GoalsPage() {
                   <FaTimesCircle className="text-red-500" />
                 )}
               </button>
-              <p>
+              <p className="text-sm">
                 {Math.round(
                   (new Date(goal.deadline) - new Date()) / (1000 * 60 * 60 * 24)
                 )}{' '}
                 days left
               </p>
-              <p className="h">{goal.name}</p>
+              <p className="font-semibold text-lg">{goal.name}</p>
             </div>
           ))}
         </div>

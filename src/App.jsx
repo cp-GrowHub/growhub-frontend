@@ -16,6 +16,7 @@ import DiscussionPage from './pages/DiscussionPage';
 import BlogPage from './pages/BlogPage';
 import MyAccountPage from './pages/MyAccountPage';
 import PrivateRoute from './components/common/PrivateRoute';
+import CreateGoalPage from './pages/CreateGoalPage';
 
 function App() {
   const authUser = useSelector((state) => state.authUser);
@@ -102,8 +103,18 @@ function App() {
                   </PrivateRoute>
                 }
               />
+              <Route
+                path="/goals/createGoal"
+                element={
+                  <PrivateRoute>
+                    <CreateGoalPage />
+                  </PrivateRoute>
+                }
+              />
             </Routes>
-            <Footer />
+            <div className="mt-auto">
+              <Footer />
+            </div>
           </div>
         </>
       ) : (

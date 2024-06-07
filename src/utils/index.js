@@ -40,6 +40,7 @@ function getUpcomingGoals(goals) {
       (goal) =>
         (new Date(goal.deadline) - new Date()) / (1000 * 60 * 60 * 24) > 0
     )
+    .filter((goal) => !goal.finished)
     .sort((a, b) => new Date(a.deadline) - new Date(b.deadline))
     .slice(0, 3);
 

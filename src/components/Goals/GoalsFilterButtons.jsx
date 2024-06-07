@@ -1,0 +1,32 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import OutlineButton from '../common/OutlineButton';
+
+function GoalsFilterButtons({ currentFilter, setFilter }) {
+  return (
+    <div className="flex flex-row gap-4">
+      <OutlineButton
+        text="Show All"
+        onClick={() => setFilter('all')}
+        isActive={currentFilter === 'all'}
+      />
+      <OutlineButton
+        text="Completed"
+        onClick={() => setFilter('completed')}
+        isActive={currentFilter === 'completed'}
+      />
+      <OutlineButton
+        text="Uncompleted"
+        onClick={() => setFilter('uncompleted')}
+        isActive={currentFilter === 'uncompleted'}
+      />
+    </div>
+  );
+}
+
+GoalsFilterButtons.propTypes = {
+  currentFilter: PropTypes.string.isRequired,
+  setFilter: PropTypes.func.isRequired,
+};
+
+export default GoalsFilterButtons;

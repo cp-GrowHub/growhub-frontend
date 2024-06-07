@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { asyncGetGoalsByUser, asyncUpdateGoal } from '../states/goals/thunk';
-import { sortGoals } from '../utils';
+import { getUpcomingGoals, sortGoalsByDeadline } from '../utils';
 
 const useGoals = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,8 @@ const useGoals = () => {
   };
 
   return {
-    goals: sortGoals(goals),
+    upcomingGoals: getUpcomingGoals(goals),
+    sortedGoals: sortGoalsByDeadline(goals),
     toggleGoalHandler,
   };
 };

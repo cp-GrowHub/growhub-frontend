@@ -14,8 +14,10 @@ function UpcomingGoalCard({ title, daysLeft, isFinished, onToggleFinish }) {
       </button>
       <div className="flex-1 flex flex-col">
         <div className="flex">
-          <p className="text-text text-sm inline-block border-b px-1 pb-[0.1rem] mb-1">
-            {Math.round(daysLeft)} days left
+          <p
+            className={`text-sm inline-block border-b px-1 pb-[0.1rem] mb-1 ${daysLeft < 0 ? 'text-red-400 font-semibold' : 'text-text'}`}
+          >
+            {daysLeft < 0 ? 'Past due' : `${Math.round(daysLeft)} days left`}
           </p>
         </div>
         <h3 className="text-lg font-bold">{title}</h3>

@@ -10,7 +10,7 @@ import useTodos from '../hooks/useTodos';
 
 function HomePage() {
   const { quote, author } = useQuote();
-  const { goals, toggleGoalHandler } = useGoals();
+  const { upcomingGoals, toggleGoalHandler } = useGoals();
   const { todos, toggleTodoHandler } = useTodos();
   const authUser = useSelector((state) => state.authUser);
 
@@ -56,10 +56,10 @@ function HomePage() {
         </div>
       </section>
 
-      <section className=" bg-card4 bg-opacity-60 p-6 rounded-xl">
+      <section className=" bg-card4 bg-opacity-60 px-6 py-4 rounded-xl">
         <h2 className="text-2xl font-bold text-text pb-6">Upcoming goals</h2>
         <div className="grid grid-cols-3 gap-4">
-          {goals.map((goal) => (
+          {upcomingGoals.map((goal) => (
             <UpcomingGoalCard
               key={goal.id}
               title={goal.name}

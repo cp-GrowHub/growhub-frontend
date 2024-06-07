@@ -34,11 +34,22 @@ function sortTodos(todos) {
   return sortedTodos;
 }
 
-function sortGoals(goals) {
-  const sortedGoals = [...goals]
+function getUpcomingGoals(goals) {
+  const upcomingGoals = [...goals]
+    .filter(
+      (goal) =>
+        (new Date(goal.deadline) - new Date()) / (1000 * 60 * 60 * 24) > 0
+    )
     .sort((a, b) => new Date(a.deadline) - new Date(b.deadline))
     .slice(0, 3);
 
+  return upcomingGoals;
+}
+
+function sortGoalsByDeadline(goals) {
+  const sortedGoals = [...goals].sort(
+    (a, b) => new Date(a.deadline) - new Date(b.deadline)
+  );
   return sortedGoals;
 }
 
@@ -64,4 +75,4 @@ function getTime() {
   };
 }
 
-export { postedAt, sortTodos, sortGoals, getTime };
+export { postedAt, sortTodos, getUpcomingGoals, sortGoalsByDeadline, getTime };

@@ -2,9 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-function OutlineButton({ type = 'button', text, to, href, ...props }) {
-  const buttonClassName =
-    'w-full px-4 py-2 border-2 border-text text-text rounded-md hover:bg-card4 focus:outline-none';
+function OutlineButton({
+  type = 'button',
+  text,
+  to,
+  href,
+  isActive,
+  ...props
+}) {
+  const buttonClassName = `w-full px-4 py-2 border-2 text-text rounded-md focus:outline-none ${
+    isActive ? 'bg-text text-bekgron' : 'border-text hover:bg-card4'
+  }`;
 
   if (to) {
     return (
@@ -43,7 +51,7 @@ OutlineButton.propTypes = {
   text: PropTypes.string.isRequired,
   to: PropTypes.string,
   href: PropTypes.string,
-  children: PropTypes.node,
+  isActive: PropTypes.bool,
   onClick: PropTypes.func,
 };
 

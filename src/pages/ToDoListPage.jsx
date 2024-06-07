@@ -55,7 +55,7 @@ function ToDoListPage() {
   return (
     <section className="p-20">
       <ToDoListHeader />
-      <div className="mt-4">
+      <div className="mt-4 overflow-y-auto p-5 max-h-96">
         {sortedTodos.map((todo) => (
           <ToDoItem
             key={todo.id}
@@ -65,7 +65,9 @@ function ToDoListPage() {
           />
         ))}
       </div>
-      <AddTaskForm onSubmitCreate={createTodoHandler} />
+      <div className="p-4">
+        <AddTaskForm onSubmitCreate={createTodoHandler} />
+      </div>
     </section>
   );
 }

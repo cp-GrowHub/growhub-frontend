@@ -22,4 +22,46 @@ function postedAt(date) {
   return 'baru saja';
 }
 
-export { postedAt };
+function sortTodos(todos) {
+  const sortedTodos = [...todos].sort((a, b) => {
+    if (a.highPriority && !b.highPriority) return -1;
+    if (!a.highPriority && b.highPriority) return 1;
+    if (a.priority && !b.priority) return -1;
+    if (!a.priority && b.priority) return 1;
+    return 0;
+  });
+
+  return sortedTodos;
+}
+
+function sortGoals(goals) {
+  const sortedGoals = [...goals]
+    .sort((a, b) => new Date(a.deadline) - new Date(b.deadline))
+    .slice(0, 3);
+
+  return sortedGoals;
+}
+
+function getTime() {
+  const date = new Date();
+  const day = date.getDate();
+  const month = date.toLocaleString('default', { month: 'long' });
+  const year = date.getFullYear();
+  const hours = date.getHours();
+  let timeStatus;
+
+  if (hours < 12) {
+    timeStatus = 'Morning';
+  } else if (hours < 18) {
+    timeStatus = 'Afternoon';
+  } else {
+    timeStatus = 'Night';
+  }
+
+  return {
+    date: `${day} ${month} ${year}`,
+    timeStatus,
+  };
+}
+
+export { postedAt, sortTodos, sortGoals, getTime };

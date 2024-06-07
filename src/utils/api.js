@@ -167,7 +167,7 @@ const api = (() => {
    */
   const createTodo = async ({ name, highPriority, priority }) => {
     instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
-    const response = await apiRequest('POST', '/todos/', {
+    const response = await apiRequest('POST', '/todos', {
       name,
       highPriority,
       priority,

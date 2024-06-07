@@ -1,68 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import PageCard from '../components/HomePage/PageCard';
 import UpcomingGoalCard from '../components/HomePage/UpcomingGoalCard';
 import ToDoListCard from '../components/HomePage/ToDoListCard';
 import OutlineButton from '../components/common/OutlineButton';
-import { asyncReceiveTodos, asyncUpdateTodo } from '../states/todos/thunk';
-import api from '../utils/api';
-import { asyncGetGoalsByUser, asyncUpdateGoal } from '../states/goals/thunk';
-import { sortGoals, sortTodos } from '../utils';
+import useGoals from '../hooks/useGoals';
+import useQuote from '../hooks/useQuotes';
+import useTodos from '../hooks/useTodos';
 
 function HomePage() {
-  const [quote, setQuote] = useState('');
-  const [author, setAuthor] = useState('');
+  const { quote, author } = useQuote();
+  const { goals, toggleGoalHandler } = useGoals();
+  const { todos, toggleTodoHandler } = useTodos();
   const authUser = useSelector((state) => state.authUser);
-  const todos = useSelector((state) =>
-    Array.isArray(state.todos) ? state.todos : []
-  );
-  const goals = useSelector((state) =>
-    Array.isArray(state.goals) ? state.goals : []
-  );
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(asyncReceiveTodos());
-    dispatch(asyncGetGoalsByUser());
-  }, [dispatch]);
-
-  useEffect(() => {
-    const fetchQuote = async () => {
-      try {
-        const { author, quote } = await api.getQuote();
-        setQuote(quote);
-        setAuthor(author);
-      } catch (err) {
-        alert(`Failed to fetch quote: ${err}`);
-      }
-    };
-
-    fetchQuote();
-  }, []);
-
-  const toggleGoalHandler = (id) => {
-    const selectedGoal = goals.find((goal) => goal.id === id);
-    if (selectedGoal) {
-      dispatch(
-        asyncUpdateGoal({ goalId: id, finished: !selectedGoal.finished })
-      );
-    }
-  };
-
-  const toggleTodoHandler = (id) => {
-    const selectedTodo = todos.find((todo) => todo.id === id);
-    if (selectedTodo) {
-      dispatch(
-        asyncUpdateTodo({
-          finished: !selectedTodo.finished,
-          todoId: id,
-        })
-      );
-    }
-  };
-
-  const sortedTodos = sortTodos(todos);
-  const sortedGoals = sortGoals(goals);
 
   return (
     <div className="p-4 flex flex-col gap-10">
@@ -95,7 +45,7 @@ function HomePage() {
             Your Path to Productivity
           </h2>
           <div className="bg-card2 p-4 rounded-xl overflow-y-auto space-y-4 h-full flex-grow">
-            {sortedTodos.map((todo) => (
+            {todos.map((todo) => (
               <ToDoListCard
                 key={todo.id}
                 todo={todo}
@@ -109,7 +59,7 @@ function HomePage() {
       <section className=" bg-card4 bg-opacity-60 p-6 rounded-xl">
         <h2 className="text-2xl font-bold text-text pb-6">Upcoming goals</h2>
         <div className="grid grid-cols-3 gap-4">
-          {sortedGoals.map((goal) => (
+          {goals.map((goal) => (
             <UpcomingGoalCard
               key={goal.id}
               title={goal.name}

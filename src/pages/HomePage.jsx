@@ -7,6 +7,7 @@ import OutlineButton from '../components/common/OutlineButton';
 import { asyncReceiveTodos, asyncUpdateTodo } from '../states/todos/thunk';
 import api from '../utils/api';
 import { asyncGetGoalsByUser, asyncUpdateGoal } from '../states/goals/thunk';
+import { sortGoals, sortTodos } from '../utils';
 
 function HomePage() {
   const [quote, setQuote] = useState('');
@@ -60,17 +61,8 @@ function HomePage() {
     }
   };
 
-  const sortedTodos = [...todos].sort((a, b) => {
-    if (a.highPriority && !b.highPriority) return -1;
-    if (!a.highPriority && b.highPriority) return 1;
-    if (a.priority && !b.priority) return -1;
-    if (!a.priority && b.priority) return 1;
-    return 0;
-  });
-
-  const sortedGoals = [...goals]
-    .sort((a, b) => new Date(a.deadline) - new Date(b.deadline))
-    .slice(0, 3);
+  const sortedTodos = sortTodos(todos);
+  const sortedGoals = sortGoals(goals);
 
   return (
     <div className="p-4 flex flex-col gap-10">

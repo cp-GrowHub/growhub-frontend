@@ -44,7 +44,7 @@ function App() {
         <>
           <Loading />
           <Sidebar onLogout={onLogout} />
-          <div className=" flex flex-col p-4">
+          <div className=" flex-1 flex flex-col p-4">
             <Routes>
               <Route
                 path="/"

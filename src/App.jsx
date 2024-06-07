@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { asyncUnsetAuthUser } from './states/authUser/thunk';
 import { asyncPreloadProcess } from './states/isPreload/thunk';
-import Loading from './components/Loading';
-import Sidebar from './components/Sidebar';
-import Footer from './components/Footer';
+import Loading from './components/common/Loading';
+import Sidebar from './components/common/Sidebar';
+import Footer from './components/common/Footer';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
@@ -15,7 +15,7 @@ import NotesPage from './pages/NotesPage';
 import DiscussionPage from './pages/DiscussionPage';
 import BlogPage from './pages/BlogPage';
 import MyAccountPage from './pages/MyAccountPage';
-import PrivateRoute from './components/PrivateRoute';
+import PrivateRoute from './components/common/PrivateRoute';
 
 function App() {
   const authUser = useSelector((state) => state.authUser);

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import PageCard from '../components/PageCard';
-import UpcomingGoalCard from '../components/UpcomingGoalCard';
-import ToDoListCard from '../components/ToDoListCard';
-import OutlineButton from '../components/OutlineButton';
+import PageCard from '../components/HomePage/PageCard';
+import UpcomingGoalCard from '../components/HomePage/UpcomingGoalCard';
+import ToDoListCard from '../components/HomePage/ToDoListCard';
+import OutlineButton from '../components/common/OutlineButton';
 import { asyncReceiveTodos, asyncUpdateTodo } from '../states/todos/thunk';
 import api from '../utils/api';
 import { asyncGetGoalsByUser, asyncUpdateGoal } from '../states/goals/thunk';
@@ -164,7 +164,7 @@ function HomePage() {
         </blockquote>
       </section>
 
-      <section className="grid grid-cols-3 gap-6">
+      <section className="grid grid-cols-3 gap-6 mb-10">
         <PageCard
           to="/discussions"
           title="Discussions"

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { asyncRegisterUser } from '../states/users/thunk';
-import FormInput from '../components/FormInput';
-import Button from '../components/Button';
+import FormInput from '../components/common/FormInput';
+import Button from '../components/common/Button';
 
 function RegisterPage() {
   const [firstName, setFirstName] = useState('');

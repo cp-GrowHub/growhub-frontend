@@ -44,5 +44,6 @@ module.exports = {
     'react/button-has-type': 'off',
     'no-shadow': 'off',
     'no-nested-ternary': 'off',
+    'react/jsx-props-no-spreading': 'off',
   },
 };

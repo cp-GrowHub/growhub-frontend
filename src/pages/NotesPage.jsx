@@ -119,11 +119,14 @@ function NotesPage() {
                 <p className="text-text">{detailNote.body}</p>
               </div>
               <div className="mt-4 flex flex-row gap-5">
-                <button className="py-2 px-4 bg-black text-text rounded-lg">
+                <button
+                  className="py-2 px-4 bg-black text-text rounded-lg hover:bg-text hover:text-bekgron"
+                  onClick={() => navigate(`/notes/${detailNote.id}`)}
+                >
                   Detail Note
                 </button>
                 <button
-                  className="py-2 px-4 bg-black text-text rounded-lg"
+                  className="py-2 px-4 bg-black text-text rounded-lg hover:bg-text hover:text-bekgron"
                   onClick={() => handleToggleArchive(detailNote)}
                 >
                   {detailNote.archived ? 'Unarchive' : 'Archive'} Note

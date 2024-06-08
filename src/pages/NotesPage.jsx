@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { asyncReceiveNotes } from '../states/notes/thunk';
+import { asyncReceiveNotes, asyncUpdateNote } from '../states/notes/thunk';
 import NotesFilterButton from '../components/Notes/NotesFilterButton';
 import NotesSearchForm from '../components/Notes/NotesSearchForm';
 import NotesItemCard from '../components/Notes/NotesItemCard';
@@ -21,9 +21,9 @@ function NotesPage() {
     let filtered = notes;
 
     if (filter === 'Unarchived') {
-      filtered = filtered.filter((note) => !note.archive);
+      filtered = filtered.filter((note) => !note.archived);
     } else if (filter === 'Archived') {
-      filtered = filtered.filter((note) => note.archive);
+      filtered = filtered.filter((note) => note.archived);
     }
 
     if (keyword) {
@@ -43,8 +43,32 @@ function NotesPage() {
   useEffect(() => {
     if (filteredNotes.length > 0) {
       setSelectedNote(filteredNotes[0]);
+    } else {
+      setSelectedNote(null);
     }
   }, [filteredNotes]);
+
+  const handleToggleArchive = (note) => {
+    const updatedNote = {
+      ...note,
+      archived: !note.archived,
+    };
+    dispatch(
+      asyncUpdateNote({
+        title: updatedNote.title,
+        body: updatedNote.body,
+        archived: updatedNote.archived,
+        noteId: updatedNote.id,
+      })
+    );
+  };
+
+  useEffect(() => {
+    if (selectedNote) {
+      const updatedNote = notes.find((note) => note.id === selectedNote.id);
+      setSelectedNote(updatedNote);
+    }
+  }, [notes, selectedNote]);
 
   return (
     <div className="flex flex-col min-h-[90vh]">
@@ -71,6 +95,7 @@ function NotesPage() {
               >
                 <NotesItemCard
                   title={note.title}
+                  archived={note.archived}
                   content={note.body}
                   date={postedAt(note.createdAt)}
                 />
@@ -91,9 +116,17 @@ function NotesPage() {
                 <p className="text-text">{selectedNoteDate}</p>
                 <p className="text-text">{selectedNote.body}</p>
               </div>
-              <button className="mt-4 py-2 px-4 bg-black text-text rounded-lg">
-                Detail Note
-              </button>
+              <div className="mt-4 flex flex-row gap-5">
+                <button className="py-2 px-4 bg-black text-text rounded-lg">
+                  Detail Note
+                </button>
+                <button
+                  className="py-2 px-4 bg-black text-text rounded-lg"
+                  onClick={() => handleToggleArchive(selectedNote)}
+                >
+                  {selectedNote.archived ? 'Unarchive' : 'Archive'} Note
+                </button>
+              </div>
             </div>
           </div>
         )}

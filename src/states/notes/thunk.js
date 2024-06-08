@@ -14,7 +14,6 @@ function asyncReceiveNotes() {
 
     try {
       const notes = await api.getNotesByUser();
-      console.log(notes);
       dispatch(receiveNotesByUserActionCreator(notes));
     } catch (error) {
       console.error('Failed to fetch notes:', error);

@@ -38,6 +38,7 @@ module.exports = {
       },
     ],
     'linebreak-style': ['error', 'unix'],
+    'prettier/prettier': ['error', { endOfLine: 'lf' }],
     'no-console': 'off',
     'no-alert': 'off',
     'react/require-default-props': 'off',

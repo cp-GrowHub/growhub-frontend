@@ -45,7 +45,7 @@ function App() {
         <>
           <Loading />
           <Sidebar onLogout={onLogout} />
-          <div className=" flex-1 flex flex-col p-4">
+          <div className="ml-[8rem] flex-1 flex flex-col p-4">
             <Routes>
               <Route
                 path="/"
@@ -73,6 +73,14 @@ function App() {
               />
               <Route
                 path="/notes"
+                element={
+                  <PrivateRoute>
+                    <NotesPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/notes/createNote"
                 element={
                   <PrivateRoute>
                     <NotesPage />

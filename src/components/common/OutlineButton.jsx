@@ -10,14 +10,21 @@ function OutlineButton({
   isActive,
   ...props
 }) {
-  const buttonClassName = `w-full px-4 py-2 border-2 text-text rounded-md focus:outline-none ${
-    isActive ? 'bg-text text-black' : 'border-text hover:bg-card4'
+  const buttonClassName = `w-full px-4 py-2 border-2 rounded-md focus:outline-none ${
+    isActive ? 'bg-text text-[#141314]' : 'border-text hover:bg-card4'
   }`;
+
+  const textColor = isActive ? '#141314' : '#E6E1E3';
 
   if (to) {
     return (
       <Link to={to} className="block">
-        <button type={type} className={buttonClassName} {...props}>
+        <button
+          type={type}
+          className={buttonClassName}
+          style={{ color: textColor }}
+          {...props}
+        >
           {text}
         </button>
       </Link>
@@ -32,7 +39,12 @@ function OutlineButton({
         rel="noopener noreferrer"
         className="block w-max"
       >
-        <button type={type} className={buttonClassName} {...props}>
+        <button
+          type={type}
+          className={buttonClassName}
+          style={{ color: textColor }}
+          {...props}
+        >
           {text}
         </button>
       </a>
@@ -40,7 +52,12 @@ function OutlineButton({
   }
 
   return (
-    <button type={type} className={buttonClassName} {...props}>
+    <button
+      type={type}
+      className={buttonClassName}
+      style={{ color: textColor }}
+      {...props}
+    >
       {text}
     </button>
   );

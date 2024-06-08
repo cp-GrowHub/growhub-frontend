@@ -12,13 +12,13 @@ module.exports = {
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   settings: { react: { version: '18.2' } },
-  plugins: ['react-refresh'],
+  plugins: ['react-refresh', 'prettier'],
   rules: {
     // 'max-len': 'off',
     'object-curly-newline': ['error', { multiline: true, consistent: true }],
     'object-curly-spacing': ['error', 'always'],
-    'array-bracket-newline': ['error', { multiline: true, minItems: 3 }],
-    'array-element-newline': 'off',
+    'array-bracket-newline': ['error', { multiline: true, minItems: 4 }],
+    'array-element-newline': ['error', { multiline: true, minItems: 4 }],
     'function-paren-newline': 'off',
     'react/jsx-no-target-blank': 'off',
     'react-refresh/only-export-components': [

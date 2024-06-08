@@ -17,6 +17,7 @@ import BlogPage from './pages/BlogPage';
 import MyAccountPage from './pages/MyAccountPage';
 import PrivateRoute from './components/common/PrivateRoute';
 import CreateGoalPage from './pages/CreateGoalPage';
+import CreateNotePage from './pages/CreateNotePage';
 
 function App() {
   const authUser = useSelector((state) => state.authUser);
@@ -83,7 +84,7 @@ function App() {
                 path="/notes/createNote"
                 element={
                   <PrivateRoute>
-                    <NotesPage />
+                    <CreateNotePage />
                   </PrivateRoute>
                 }
               />

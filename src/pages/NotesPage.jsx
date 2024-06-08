@@ -1,7 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { asyncReceiveNotes, asyncUpdateNote } from '../states/notes/thunk';
+import {
+  asyncReceiveNotes,
+  asyncUpdateNote,
+  asyncGetDetailNote,
+} from '../states/notes/thunk';
 import NotesFilterButton from '../components/Notes/NotesFilterButton';
 import NotesSearchForm from '../components/Notes/NotesSearchForm';
 import NotesItemCard from '../components/Notes/NotesItemCard';
@@ -14,6 +18,7 @@ function NotesPage() {
   const navigate = useNavigate();
   const [filter, setFilter] = useState('All');
   const notes = useSelector((state) => state.notes.notes);
+  const detailNote = useSelector((state) => state.notes.detailNote);
 
   useEffect(() => {
     dispatch(asyncReceiveNotes());
@@ -41,16 +46,15 @@ function NotesPage() {
     );
   }, [notes, keyword, filter]);
 
-  const [selectedNote, setSelectedNote] = useState(filteredNotes[0]);
-  const selectedNoteDate = postedAt(selectedNote?.createdAt);
-
   useEffect(() => {
-    if (filteredNotes.length > 0) {
-      setSelectedNote(filteredNotes[0]);
-    } else {
-      setSelectedNote(null);
+    if (filteredNotes.length > 0 && keyword.length > 0) {
+      dispatch(asyncGetDetailNote({ noteId: filteredNotes[0].id }));
     }
-  }, [filteredNotes]);
+  }, [keyword, dispatch, filteredNotes]);
+
+  const handleNoteClick = (noteId) => {
+    dispatch(asyncGetDetailNote({ noteId }));
+  };
 
   const handleToggleArchive = (note) => {
     const updatedNote = {
@@ -66,13 +70,6 @@ function NotesPage() {
       })
     );
   };
-
-  useEffect(() => {
-    if (selectedNote) {
-      const updatedNote = notes.find((note) => note.id === selectedNote.id);
-      setSelectedNote(updatedNote);
-    }
-  }, [notes, selectedNote]);
 
   return (
     <div className="flex flex-col min-h-[90vh]">
@@ -90,12 +87,10 @@ function NotesPage() {
         <div className="flex flex-col flex-[1] rounded-lg max-h-[75vh]">
           <div className="overflow-y-auto flex-grow flex flex-col gap-1">
             {filteredNotes.map((note) => (
-              <div
+              <button
                 key={note.id}
-                onKeyDown={() => setSelectedNote(note)}
-                role="button"
-                tabIndex={0}
-                onClick={() => setSelectedNote(note)}
+                onClick={() => handleNoteClick(note.id)}
+                className="text-left w-full"
               >
                 <NotesItemCard
                   title={note.title}
@@ -103,7 +98,7 @@ function NotesPage() {
                   content={note.body}
                   date={postedAt(note.createdAt)}
                 />
-              </div>
+              </button>
             ))}
           </div>
           <button
@@ -113,15 +108,15 @@ function NotesPage() {
             New Note
           </button>
         </div>
-        {selectedNote && (
+        {detailNote && (
           <div className="flex-[2] bg-card3 rounded-lg max-h-[80vh]">
             <div className="flex flex-col justify-between p-10 h-full">
               <div>
                 <h2 className="text-2xl font-bold text-text">
-                  {selectedNote.title}
+                  {detailNote.title}
                 </h2>
-                <p className="text-text">{selectedNoteDate}</p>
-                <p className="text-text">{selectedNote.body}</p>
+                <p className="text-text">{postedAt(detailNote.createdAt)}</p>
+                <p className="text-text">{detailNote.body}</p>
               </div>
               <div className="mt-4 flex flex-row gap-5">
                 <button className="py-2 px-4 bg-black text-text rounded-lg">
@@ -129,9 +124,9 @@ function NotesPage() {
                 </button>
                 <button
                   className="py-2 px-4 bg-black text-text rounded-lg"
-                  onClick={() => handleToggleArchive(selectedNote)}
+                  onClick={() => handleToggleArchive(detailNote)}
                 >
-                  {selectedNote.archived ? 'Unarchive' : 'Archive'} Note
+                  {detailNote.archived ? 'Unarchive' : 'Archive'} Note
                 </button>
               </div>
             </div>

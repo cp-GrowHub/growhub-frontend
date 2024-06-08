@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { asyncReceiveNotes, asyncUpdateNote } from '../states/notes/thunk';
 import NotesFilterButton from '../components/Notes/NotesFilterButton';
 import NotesSearchForm from '../components/Notes/NotesSearchForm';
@@ -8,8 +9,9 @@ import { postedAt } from '../utils';
 import useInput from '../hooks/useInput';
 
 function NotesPage() {
-  const [keyword, onKeywordChange, resetKeyword] = useInput();
+  const [keyword, onKeywordChange, resetKeyword] = useInput('');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [filter, setFilter] = useState('All');
   const notes = useSelector((state) => state.notes.notes);
 
@@ -34,7 +36,9 @@ function NotesPage() {
       );
     }
 
-    return filtered;
+    return filtered.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
   }, [notes, keyword, filter]);
 
   const [selectedNote, setSelectedNote] = useState(filteredNotes[0]);
@@ -102,7 +106,10 @@ function NotesPage() {
               </div>
             ))}
           </div>
-          <button className="mt-2 py-2 bg-text text-bekgron rounded-lg">
+          <button
+            className="mt-2 py-2 bg-text text-bekgron rounded-lg"
+            onClick={() => navigate('./createNote')}
+          >
             New Note
           </button>
         </div>

@@ -14,7 +14,7 @@ import NavItem from './NavItem';
 
 function Sidebar({ onLogout }) {
   return (
-    <aside className="bg-card1 text-text w-30 p-1 flex flex-col min-h-screen">
+    <aside className="bg-card1 text-text w-30 p-1 flex flex-col min-h-screen fixed top-0 left-0">
       <nav className="flex-1">
         <ul>
           <li className="mb-2">
@@ -28,7 +28,7 @@ function Sidebar({ onLogout }) {
             >
               <div className="flex flex-col items-center">
                 <FaUser className="mb-1 text-2xl" />
-                <span className=" text-sm">My Account</span>
+                <span className="text-sm">My Account</span>
               </div>
             </NavLink>
           </li>
@@ -40,7 +40,7 @@ function Sidebar({ onLogout }) {
           <NavItem to="/blog" label="Blog" Icon={FaBlog} />
         </ul>
       </nav>
-      <div className="sticky bottom-0 p-4">
+      <div className="p-4">
         <button
           type="button"
           className="flex items-center justify-center w-full p-1 rounded-2xl text-text bg-black-0 outline-2 outline hover:bg-red-700"

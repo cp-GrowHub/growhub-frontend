@@ -1,13 +1,11 @@
 import React from 'react';
 import { FaSearch } from 'react-icons/fa';
-import useInput from '../../hooks/useInput';
+import PropTypes from 'prop-types';
 
-function NotesSearchForm() {
-  const [search, onSearchHandler, resetSearch] = useInput('');
-
+function NotesSearchForm({ searchKeyword, onSearch, resetSearch }) {
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(search); // placeholder
+    console.log(searchKeyword); // placeholder
     resetSearch();
   };
 
@@ -21,13 +19,19 @@ function NotesSearchForm() {
       </button>
       <input
         type="text"
-        value={search}
-        onChange={onSearchHandler}
+        value={searchKeyword}
+        onChange={onSearch}
         placeholder="Search Word..."
         className="bg-card1 text-text p-2 rounded-lg focus:outline-none"
       />
     </form>
   );
 }
+
+NotesSearchForm.propTypes = {
+  searchKeyword: PropTypes.string.isRequired,
+  onSearch: PropTypes.func.isRequired,
+  resetSearch: PropTypes.func.isRequired,
+};
 
 export default NotesSearchForm;

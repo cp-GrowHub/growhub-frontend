@@ -6,6 +6,11 @@ function NotesFilterButton({ currentFilter, setFilter }) {
   return (
     <div className="flex flex-row gap-4">
       <OutlineButton
+        text="Show All"
+        onClick={() => setFilter('All')}
+        isActive={currentFilter === 'All'}
+      />
+      <OutlineButton
         text="Archived"
         onClick={() => setFilter('Archived')}
         isActive={currentFilter === 'Archived'}

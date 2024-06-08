@@ -4,8 +4,25 @@ import {
   updateNoteActionCreator,
   deleteNoteActionCreator,
   receiveDetailNoteActionCreator,
+  receiveNotesByUserActionCreator,
 } from './action';
 import api from '../../utils/api';
+
+function asyncReceiveNotes() {
+  return async (dispatch) => {
+    dispatch(showLoading());
+
+    try {
+      const notes = await api.getNotesByUser();
+      console.log(notes);
+      dispatch(receiveNotesByUserActionCreator(notes));
+    } catch (error) {
+      console.error('Failed to fetch notes:', error);
+    } finally {
+      dispatch(hideLoading());
+    }
+  };
+}
 
 function asyncCreateNote({ title, body, archived }) {
   return async (dispatch) => {
@@ -73,6 +90,7 @@ function asyncGetDetailNote({ noteId }) {
 }
 
 export {
+  asyncReceiveNotes,
   asyncCreateNote,
   asyncUpdateNote,
   asyncDeleteNote,

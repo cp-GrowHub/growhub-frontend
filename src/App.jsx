@@ -18,6 +18,7 @@ import MyAccountPage from './pages/MyAccountPage';
 import PrivateRoute from './components/common/PrivateRoute';
 import CreateGoalPage from './pages/CreateGoalPage';
 import CreateNotePage from './pages/CreateNotePage';
+import NoteDetailPage from './pages/NoteDetailPage';
 
 function App() {
   const authUser = useSelector((state) => state.authUser);
@@ -89,6 +90,14 @@ function App() {
                 }
               />
               <Route
+                path="/notes/:noteId"
+                element={
+                  <PrivateRoute>
+                    <NoteDetailPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
                 path="/discussion"
                 element={
                   <PrivateRoute>
@@ -127,11 +136,12 @@ function App() {
           </div>
         </>
       ) : (
-        <div className="min-h-screen w-full flex items-center justify-center">
+        <div className="min-h-screen min-w-full">
           <Loading />
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/shared/notes/:noteId" element={<NoteDetailPage />} />
             <Route path="*" element={<LoginPage />} />
           </Routes>
         </div>

@@ -11,7 +11,7 @@ function OutlineButton({
   ...props
 }) {
   const buttonClassName = `w-full px-4 py-2 border-2 text-text rounded-md focus:outline-none ${
-    isActive ? 'bg-text text-bekgron' : 'border-text hover:bg-card4'
+    isActive ? 'bg-text text-black' : 'border-text hover:bg-card4'
   }`;
 
   if (to) {

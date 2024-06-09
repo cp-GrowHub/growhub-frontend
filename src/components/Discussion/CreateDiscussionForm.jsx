@@ -13,8 +13,6 @@ export default function CreateDiscussionForm({ onSubmit }) {
       .trim()
       .split(' ')
       .filter((tag) => tag);
-    console.log('Tags String:', tags);
-    console.log('Tags Array:', tagsArray);
     onSubmit(title, tagsArray, body);
     resetTitle();
     resetTags();

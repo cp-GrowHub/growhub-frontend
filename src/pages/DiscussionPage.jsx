@@ -96,8 +96,6 @@ export default function DiscussionPage() {
           </button>
         </div>
         <div>
-          {console.log(filteredDiscussions)}
-          {console.log(users)}
           <DiscussionCard discussions={filteredDiscussions} users={users} />
         </div>
       </div>

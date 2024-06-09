@@ -21,6 +21,7 @@ import CreateNotePage from './pages/CreateNotePage';
 import NoteDetailPage from './pages/NoteDetailPage';
 import DetailDiscussionPage from './pages/DetailDiscussionPage';
 import CreateDiscussionPage from './pages/CreateDiscussionPage';
+import DetailBlogPage from './pages/DetailBlogPage';
 
 function App() {
   const authUser = useSelector((state) => state.authUser);
@@ -132,6 +133,14 @@ function App() {
                 }
               />
               <Route
+                path="/blog/:blogId"
+                element={
+                  <PrivateRoute>
+                    <DetailBlogPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
                 path="/profile"
                 element={
                   <PrivateRoute>
@@ -160,6 +169,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/shared/notes/:noteId" element={<NoteDetailPage />} />
+            <Route path="/shared/blog/:blogId" element={<DetailBlogPage />} />
             <Route path="*" element={<LoginPage />} />
           </Routes>
         </div>

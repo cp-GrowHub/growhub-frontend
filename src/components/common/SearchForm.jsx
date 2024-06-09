@@ -2,7 +2,7 @@ import React from 'react';
 import { FaSearch } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
-function NotesSearchForm({ searchKeyword, onSearch, resetSearch }) {
+function SearchForm({ searchKeyword, onSearch, resetSearch }) {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     console.log(searchKeyword); // placeholder
@@ -28,10 +28,10 @@ function NotesSearchForm({ searchKeyword, onSearch, resetSearch }) {
   );
 }
 
-NotesSearchForm.propTypes = {
+SearchForm.propTypes = {
   searchKeyword: PropTypes.string.isRequired,
   onSearch: PropTypes.func.isRequired,
   resetSearch: PropTypes.func.isRequired,
 };
 
-export default NotesSearchForm;
+export default SearchForm;

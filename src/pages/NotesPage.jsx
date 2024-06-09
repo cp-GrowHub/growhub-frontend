@@ -7,7 +7,7 @@ import {
   asyncGetDetailNote,
 } from '../states/notes/thunk';
 import NotesFilterButton from '../components/Notes/NotesFilterButton';
-import NotesSearchForm from '../components/Notes/NotesSearchForm';
+import SearchForm from '../components/common/SearchForm';
 import NotesItemCard from '../components/Notes/NotesItemCard';
 import { postedAt } from '../utils';
 import useInput from '../hooks/useInput';
@@ -77,7 +77,7 @@ function NotesPage() {
         <div className="flex items-center">
           <NotesFilterButton currentFilter={filter} setFilter={setFilter} />
         </div>
-        <NotesSearchForm
+        <SearchForm
           searchKeyword={keyword}
           onSearch={onKeywordChange}
           resetSearch={resetKeyword}

@@ -20,6 +20,7 @@ import CreateGoalPage from './pages/CreateGoalPage';
 import CreateNotePage from './pages/CreateNotePage';
 import NoteDetailPage from './pages/NoteDetailPage';
 import DetailDiscussionPage from './pages/DetailDiscussionPage';
+import CreateDiscussionPage from './pages/CreateDiscussionPage';
 
 function App() {
   const authUser = useSelector((state) => state.authUser);
@@ -111,6 +112,14 @@ function App() {
                 element={
                   <PrivateRoute>
                     <DetailDiscussionPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/discussion/createDiscussion"
+                element={
+                  <PrivateRoute>
+                    <CreateDiscussionPage />
                   </PrivateRoute>
                 }
               />

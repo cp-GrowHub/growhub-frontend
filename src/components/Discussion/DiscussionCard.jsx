@@ -18,7 +18,16 @@ export default function DiscussionCard({ discussions, users }) {
   return (
     <div className="px-3">
       {discussions.map((discussion) => {
+        if (!discussion) return null;
+
         const user = users.find((user) => user.id === discussion.ownerId);
+
+        if (!user || !discussion.tags) return null;
+
+        const tagsArray = Array.isArray(discussion.tags)
+          ? discussion.tags
+          : discussion.tags.split(' ').filter((tag) => tag);
+
         return (
           <div
             key={discussion.id}
@@ -50,7 +59,7 @@ export default function DiscussionCard({ discussions, users }) {
               </h2>
               <p className="text-text mb-4">{discussion.body}</p>
               <div className="flex space-x-2">
-                {discussion.tags.map((tag) => (
+                {tagsArray.map((tag) => (
                   <span key={tag} className="text-gray-400">
                     #{tag}
                   </span>

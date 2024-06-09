@@ -118,9 +118,9 @@ function asyncUpvoteDiscussion({ discussionId }) {
     dispatch(showLoading());
 
     try {
-      const response = await api.upvoteDiscussion({ discussionId });
+      await api.upvoteDiscussion({ discussionId });
       dispatch(upvoteDiscussionActionCreator({ discussionId }));
-      alert(response.message);
+      dispatch(asyncGetDetailDiscussion({ discussionId }));
     } catch (err) {
       alert(err.message);
     } finally {
@@ -134,9 +134,9 @@ function asyncDownvoteDiscussion({ discussionId }) {
     dispatch(showLoading());
 
     try {
-      const response = await api.downvoteDiscussion({ discussionId });
+      await api.downvoteDiscussion({ discussionId });
       dispatch(downvoteDiscussionActionCreator({ discussionId }));
-      alert(response.message);
+      dispatch(asyncGetDetailDiscussion({ discussionId }));
     } catch (err) {
       alert(err.message);
     } finally {
@@ -150,9 +150,9 @@ function asyncNeutralizeDiscussionVote({ discussionId }) {
     dispatch(showLoading());
 
     try {
-      const response = await api.neutralizeDiscussion({ discussionId });
+      await api.neutralizeDiscussion({ discussionId });
       dispatch(neutralizeDiscussionVoteActionCreator({ discussionId }));
-      alert(response.message);
+      dispatch(asyncGetDetailDiscussion({ discussionId }));
     } catch (err) {
       alert(err.message);
     } finally {

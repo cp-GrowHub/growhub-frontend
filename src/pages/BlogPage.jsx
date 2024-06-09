@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import useInput from '../hooks/useInput';
@@ -53,6 +53,40 @@ function BlogPage() {
   const tagFrequency = calculateTagFrequency([...blogs]);
   const sortedBlogs = sortBlogsByTagFrequency([...blogs], tagFrequency);
 
+  const filteredBlogs = useMemo(() => {
+    let filtered = [...blogs];
+
+    if (keyword) {
+      filtered = filtered.filter(
+        (blog) =>
+          blog.title?.toLowerCase().includes(keyword.toLowerCase()) ||
+          (Array.isArray(blog.tags)
+            ? blog.tags.some((tag) =>
+                tag.toLowerCase().includes(keyword.toLowerCase())
+              )
+            : blog.tags
+                ?.split(' ')
+                .some((tag) =>
+                  tag.toLowerCase().includes(keyword.toLowerCase())
+                ))
+      );
+    }
+
+    if (filter === 'Latest') {
+      return filtered.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+    }
+
+    if (filter === 'Top') {
+      return filtered.sort(
+        (a, b) => b.body.split(' ').length - a.body.split(' ').length
+      );
+    }
+
+    return filtered;
+  }, [blogs, keyword, filter]);
+
   const handleCardClick = (blogId) => {
     navigate(`./${blogId}`);
   };
@@ -101,7 +135,7 @@ function BlogPage() {
               </button>
             </div>
             <div>
-              <BlogCard blogs={blogs} users={users} />
+              <BlogCard blogs={filteredBlogs} users={users} />
             </div>
           </div>
         </div>

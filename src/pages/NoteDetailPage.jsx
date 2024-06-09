@@ -56,7 +56,7 @@ function NoteDetailPage() {
                 className="py-2 px-4 bg-bekgron text-text rounded-lg hover:bg-text hover:text-bekgron"
                 onClick={() => {
                   dispatch(asyncDeleteNote({ noteId }));
-                  navigate('/');
+                  navigate('/notes');
                 }}
               >
                 Delete Note

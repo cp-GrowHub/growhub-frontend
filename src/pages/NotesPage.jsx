@@ -25,7 +25,7 @@ function NotesPage() {
   }, [dispatch]);
 
   const filteredNotes = useMemo(() => {
-    let filtered = notes;
+    let filtered = [...notes];
 
     if (filter === 'Unarchived') {
       filtered = filtered.filter((note) => !note.archived);

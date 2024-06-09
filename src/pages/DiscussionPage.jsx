@@ -29,11 +29,17 @@ export default function DiscussionPage() {
     if (keyword) {
       filtered = filtered.filter(
         (discussion) =>
-          discussion.title.toLowerCase().includes(keyword.toLowerCase()) ||
-          discussion.body.toLowerCase().includes(keyword.toLowerCase()) ||
-          discussion.tags.some((tag) =>
-            tag.toLowerCase().includes(keyword.toLowerCase())
-          )
+          discussion.title?.toLowerCase().includes(keyword.toLowerCase()) ||
+          discussion.body?.toLowerCase().includes(keyword.toLowerCase()) ||
+          (Array.isArray(discussion.tags)
+            ? discussion.tags.some((tag) =>
+                tag.toLowerCase().includes(keyword.toLowerCase())
+              )
+            : discussion.tags
+                ?.split(' ')
+                .some((tag) =>
+                  tag.toLowerCase().includes(keyword.toLowerCase())
+                ))
       );
     }
 
@@ -49,6 +55,10 @@ export default function DiscussionPage() {
 
     return filtered;
   }, [discussions, keyword, filter]);
+
+  if (discussions.length === 0 || users.length === 0) {
+    return <h1 className="text-3xl font-bold text-text">Loading...</h1>;
+  }
 
   return (
     <div className="flex flex-col min-h-[90vh]">
@@ -79,13 +89,15 @@ export default function DiscussionPage() {
           <button
             className="text-bekgron bg-text px-6 p-2 rounded-3xl border-2 border-transparent hover:text-text hover:bg-bekgron hover:border-text"
             onClick={() => {
-              navigate('/goals/createGoal');
+              navigate('./createDiscussion');
             }}
           >
             + Create new post
           </button>
         </div>
         <div>
+          {console.log(filteredDiscussions)}
+          {console.log(users)}
           <DiscussionCard discussions={filteredDiscussions} users={users} />
         </div>
       </div>

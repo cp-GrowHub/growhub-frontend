@@ -1,5 +1,8 @@
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
-import { updateProfileActionCreator } from './action';
+import {
+  receiveUsersActionCreator,
+  updateProfileActionCreator,
+} from './action';
 import api from '../../utils/api';
 
 function asyncRegisterUser({ firstName, lastName, email, password }) {
@@ -36,4 +39,19 @@ function asyncUpdateUser({ firstName, lastName, bio, email }) {
   };
 }
 
-export { asyncRegisterUser, asyncUpdateUser };
+function asyncReceiveUsers() {
+  return async (dispatch) => {
+    dispatch(showLoading());
+
+    try {
+      const users = await api.getAllUsers();
+      dispatch(receiveUsersActionCreator(users));
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      dispatch(hideLoading());
+    }
+  };
+}
+
+export { asyncRegisterUser, asyncUpdateUser, asyncReceiveUsers };

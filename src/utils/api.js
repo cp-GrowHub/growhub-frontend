@@ -622,7 +622,7 @@ const api = (() => {
    */
   const deleteBlog = async ({ blogId }) => {
     instance.defaults.headers.common.Authorization = `Bearer ${getAccessToken()}`;
-    const response = await apiRequest('DELETE', `/blogs/${blogId}`);
+    const response = await apiRequest('DELETE', `/blogs/${blogId}/delete`);
 
     return response;
   };

@@ -1,7 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 export default function DiscussionCard({ discussions, users }) {
+  const navigate = useNavigate();
+
+  const handleCardClick = (discussionId) => {
+    navigate(`./${discussionId}`);
+  };
+
+  const handleKeyDown = (event, discussionId) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      handleCardClick(discussionId);
+    }
+  };
+
   return (
     <div className="px-3">
       {discussions.map((discussion) => {
@@ -9,7 +22,11 @@ export default function DiscussionCard({ discussions, users }) {
         return (
           <div
             key={discussion.id}
-            className="mb-4 p-4 bg-card1 rounded-lg hover:bg-card2"
+            className="mb-4 p-4 bg-card1 rounded-lg hover:bg-card2 cursor-pointer"
+            role="button"
+            tabIndex={0}
+            onClick={() => handleCardClick(discussion.id)}
+            onKeyDown={(event) => handleKeyDown(event, discussion.id)}
           >
             <div className="flex items-center mb-2">
               <img

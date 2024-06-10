@@ -15,6 +15,18 @@ export default function DiscussionCard({ discussions, users }) {
     }
   };
 
+  const truncateBody = (body, limit) => {
+    const plainText = body
+      .replace(/<\/?[^>]+(>|$)/g, ' ') // menghapus tag yang dimulai < opsional diikuti / kemudian satu atau lebih karakter yang bukan > dan diakhiri > atau string
+      .replace(/<br>/g, ' '); // karena br self-closing tag maka lolos dan diubah menjadi ' ' di replace kedua
+    if (plainText.length <= limit) {
+      return plainText;
+    }
+    const truncatedText = plainText.slice(0, limit);
+    const lastSpaceIndex = truncatedText.lastIndexOf(' ');
+    return `${truncatedText.slice(0, lastSpaceIndex)}...`;
+  };
+
   return (
     <div className="px-3">
       {discussions.map((discussion) => {
@@ -57,7 +69,9 @@ export default function DiscussionCard({ discussions, users }) {
               <h2 className="text-text text-xl font-bold mb-2">
                 {discussion.title}
               </h2>
-              <p className="text-text mb-4">{discussion.body}</p>
+              <p className="text-text mb-4">
+                {truncateBody(discussion.body, 100)}
+              </p>
               <div className="flex space-x-2">
                 {tagsArray.map((tag) => (
                   <span key={tag} className="text-gray-400">

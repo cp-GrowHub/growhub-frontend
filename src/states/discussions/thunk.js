@@ -39,7 +39,6 @@ function asyncCreateDiscussion({ title, body, tags }) {
       const response = await api.createDiscussion({ title, body, tags });
       const { discussion } = response.data;
       dispatch(createDiscussionActionCreator(discussion));
-      alert(response.message);
     } catch (err) {
       alert(err.message);
     } finally {
@@ -72,7 +71,6 @@ function asyncAddComment({ discussionId, content }) {
       const response = await api.addComment({ discussionId, content });
       const { comment } = response.data;
       dispatch(addCommentActionCreator(discussionId, comment));
-      alert(response.message);
     } catch (err) {
       alert(err.message);
     } finally {

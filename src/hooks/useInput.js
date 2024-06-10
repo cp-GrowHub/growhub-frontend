@@ -1,17 +1,18 @@
-import React from 'react';
+import { useState } from 'react';
 
-function useInput(initialValue) {
-  const [value, setValue] = React.useState(initialValue);
+const useInput = (initialValue, maxLength) => {
+  const [value, setValue] = useState(initialValue);
 
-  const onChangeHandler = (e) => {
+  const handleChange = (e) => {
+    if (maxLength && e.target.value.length > maxLength) {
+      return;
+    }
     setValue(e.target.value);
   };
 
-  const reset = () => {
-    setValue('');
-  };
+  const reset = () => setValue('');
 
-  return [value, onChangeHandler, reset];
-}
+  return [value, handleChange, reset];
+};
 
 export default useInput;

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { asyncUnsetAuthUser } from './states/authUser/thunk';
 import { asyncPreloadProcess } from './states/isPreload/thunk';
 import Loading from './components/common/Loading';
@@ -28,6 +28,7 @@ function App() {
   const isPreload = useSelector((state) => state.isPreload);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const onLogout = (e) => {
     e.preventDefault();
@@ -39,6 +40,13 @@ function App() {
   useEffect(() => {
     dispatch(asyncPreloadProcess());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (authUser && location.pathname.startsWith('/shared')) {
+      const newPath = location.pathname.replace('/shared', '');
+      navigate(newPath, { replace: true });
+    }
+  }, [authUser, location, navigate]);
 
   if (isPreload) {
     return null;

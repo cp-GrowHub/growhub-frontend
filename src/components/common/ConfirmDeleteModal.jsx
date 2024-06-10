@@ -6,7 +6,7 @@ export default function ConfirmDeleteModal({ isVisible, onCancel, onConfirm }) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
-      <div className="bg-text p-8 rounded-lg shadow-lg">
+      <div className="bg-text p-8 rounded-lg shadow-lg text-bekgron">
         <h2 className="text-xl mb-4">Confirm Delete</h2>
         <p>Are you sure you want to delete this?</p>
         <div className="mt-4 flex justify-end gap-4">

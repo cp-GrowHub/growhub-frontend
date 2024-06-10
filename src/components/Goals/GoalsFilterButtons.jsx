@@ -20,6 +20,11 @@ function GoalsFilterButtons({ currentFilter, setFilter }) {
         onClick={() => setFilter('uncompleted')}
         isActive={currentFilter === 'uncompleted'}
       />
+      <OutlineButton
+        text="Expired"
+        onClick={() => setFilter('expired')}
+        isActive={currentFilter === 'expired'}
+      />
     </div>
   );
 }

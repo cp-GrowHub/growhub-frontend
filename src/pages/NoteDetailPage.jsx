@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { asyncGetDetailNote, asyncDeleteNote } from '../states/notes/thunk';
 import { postedAt } from '../utils';
+import Modal from '../components/common/Modal';
+import ConfirmDeleteModal from '../components/common/ConfirmDeleteModal';
+import useCopyLink from '../hooks/useCopyLink';
+import useDelete from '../hooks/useDelete';
 
 function NoteDetailPage() {
   const { noteId } = useParams();
@@ -11,21 +15,14 @@ function NoteDetailPage() {
   const detailNote = useSelector((state) => state.notes.detailNote);
   const authUser = useSelector((state) => state.authUser);
 
-  useEffect(() => {
-    dispatch(asyncGetDetailNote({ noteId })); // Mengirim noteId sebagai string
-  }, [dispatch, noteId]);
+  const { isCopiedModalVisible, setIsCopiedModalVisible, handleCopyLink } =
+    useCopyLink(noteId, 'notes');
+  const { isDeleteModalVisible, setIsDeleteModalVisible, handleDelete } =
+    useDelete(noteId, asyncDeleteNote, 'noteId', '/notes');
 
-  const handleCopyLink = () => {
-    const url = `${window.location.origin}/shared/notes/${noteId}`;
-    navigator.clipboard
-      .writeText(url)
-      .then(() => {
-        alert('Link copied to clipboard');
-      })
-      .catch((err) => {
-        console.error('Failed to copy link: ', err);
-      });
-  };
+  useEffect(() => {
+    dispatch(asyncGetDetailNote({ noteId }));
+  }, [dispatch, noteId]);
 
   if (!detailNote) {
     return <div>Loading...</div>;
@@ -54,10 +51,7 @@ function NoteDetailPage() {
               </button>
               <button
                 className="py-2 px-4 bg-bekgron text-text rounded-lg hover:bg-text hover:text-bekgron"
-                onClick={() => {
-                  dispatch(asyncDeleteNote({ noteId }));
-                  navigate('/notes');
-                }}
+                onClick={() => setIsDeleteModalVisible(true)}
               >
                 Delete Note
               </button>
@@ -70,6 +64,17 @@ function NoteDetailPage() {
             </div>
           </div>
         </div>
+        <Modal
+          text="Copied!"
+          isVisible={isCopiedModalVisible}
+          onClose={() => setIsCopiedModalVisible(false)}
+          color="bg-green-500"
+        />
+        <ConfirmDeleteModal
+          isVisible={isDeleteModalVisible}
+          onCancel={() => setIsDeleteModalVisible(false)}
+          onConfirm={handleDelete}
+        />
       </div>
     );
   }
@@ -90,6 +95,12 @@ function NoteDetailPage() {
       >
         Copy Link
       </button>
+      <Modal
+        text="Copied!"
+        isVisible={isCopiedModalVisible}
+        onClose={() => setIsCopiedModalVisible(false)}
+        color="bg-green-500"
+      />
     </div>
   );
 }

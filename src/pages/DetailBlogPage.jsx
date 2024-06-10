@@ -1,13 +1,21 @@
 import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { asyncReceiveUsers } from '../states/users/thunk';
 import { asyncDeleteBlog, asyncGetDetailBlog } from '../states/blogs/thunk';
+import Modal from '../components/common/Modal';
+import ConfirmDeleteModal from '../components/common/ConfirmDeleteModal';
+import useDelete from '../hooks/useDelete';
+import useCopyLink from '../hooks/useCopyLink';
 
 export default function DetailBlogPage() {
   const { blogId } = useParams();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const { isCopiedModalVisible, setIsCopiedModalVisible, handleCopyLink } =
+    useCopyLink(blogId, 'blog');
+  const { isDeleteModalVisible, setIsDeleteModalVisible, handleDelete } =
+    useDelete(blogId, asyncDeleteBlog, 'blogId', '/blog');
 
   const detailBlog = useSelector((state) => state.blogs.detailBlog);
   const users = useSelector((state) => state.users);
@@ -23,23 +31,6 @@ export default function DetailBlogPage() {
   }
 
   const ownerBlog = users.find((user) => user.id === detailBlog.ownerId);
-
-  const handleDeleteOnClick = (blogId) => {
-    dispatch(asyncDeleteBlog({ blogId }));
-    navigate('/blog');
-  };
-
-  const handleCopyLink = () => {
-    const url = `${window.location.origin}/shared/blog/${blogId}`;
-    navigator.clipboard
-      .writeText(url)
-      .then(() => {
-        alert('Link copied to clipboard');
-      })
-      .catch((err) => {
-        console.error('Failed to copy link: ', err);
-      });
-  };
 
   if (!ownerBlog) {
     return <div>Loading...</div>;
@@ -102,7 +93,7 @@ export default function DetailBlogPage() {
           {isOwner && (
             <button
               className="py-2 px-4 bg-red-900 text-text rounded-lg hover:bg-red-700 hover:text-text"
-              onClick={() => handleDeleteOnClick(blogId)}
+              onClick={() => setIsDeleteModalVisible(true)}
             >
               Delete Blog
             </button>
@@ -115,6 +106,17 @@ export default function DetailBlogPage() {
           </button>
         </div>
       </div>
+      <Modal
+        text="Copied!"
+        isVisible={isCopiedModalVisible}
+        onClose={() => setIsCopiedModalVisible(false)}
+        color="bg-green-500"
+      />
+      <ConfirmDeleteModal
+        isVisible={isDeleteModalVisible}
+        onCancel={() => setIsDeleteModalVisible(false)}
+        onConfirm={handleDelete}
+      />
     </div>
   );
 }

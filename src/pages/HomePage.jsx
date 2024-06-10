@@ -8,7 +8,9 @@ import useGoals from '../hooks/useGoals';
 import useQuote from '../hooks/useQuotes';
 import useTodos from '../hooks/useTodos';
 import useToggleTodo from '../hooks/useToggleTodo';
+import useConfirmModal from '../hooks/useConfirmModal';
 import Modal from '../components/common/Modal';
+import ConfirmModal from '../components/common/ConfirmModal';
 
 function HomePage() {
   const { quote, author } = useQuote();
@@ -23,6 +25,21 @@ function HomePage() {
     handleToggleTodo,
     closeModal,
   } = useToggleTodo();
+
+  const {
+    isConfirmModalVisible,
+    confirmMessage,
+    showConfirmModal,
+    closeConfirmModal,
+    confirm,
+  } = useConfirmModal();
+
+  const handleGoalToggle = (goalId) => {
+    showConfirmModal(
+      `Are you sure you already achieved "${upcomingGoals.find((upcoming) => upcoming.id === goalId).name}" ?`,
+      () => toggleGoalHandler(goalId)
+    );
+  };
 
   return (
     <div className="p-4 flex flex-col gap-10">
@@ -78,7 +95,7 @@ function HomePage() {
                 (new Date(goal.deadline) - new Date()) / (1000 * 60 * 60 * 24)
               }
               isFinished={goal.finished}
-              onToggleFinish={() => toggleGoalHandler(goal.id)}
+              onToggleFinish={() => handleGoalToggle(goal.id)}
             />
           ))}
         </div>
@@ -137,6 +154,12 @@ function HomePage() {
         isVisible={isModalVisible}
         onClose={closeModal}
         color={modalColor}
+      />
+      <ConfirmModal
+        isVisible={isConfirmModalVisible}
+        message={confirmMessage}
+        onClose={closeConfirmModal}
+        onConfirm={confirm}
       />
     </div>
   );

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ToDoListHeader from '../components/ToDoList/ToDoListHeader';
 import ToDoItem from '../components/ToDoList/ToDoItem';
 import AddTaskForm from '../components/ToDoList/AddTaskForm';
+import Modal from '../components/common/Modal';
 import useTodos from '../hooks/useTodos';
 import ConfirmDeleteModal from '../components/common/ConfirmDeleteModal';
 
@@ -9,6 +10,7 @@ function ToDoListPage() {
   const { todos, createTodo, toggleTodoHandler, deleteTodo } = useTodos();
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [todoToDelete, setTodoToDelete] = useState(null);
+  const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
 
   const handleDeleteRequest = (id) => {
     setTodoToDelete(id);
@@ -26,6 +28,15 @@ function ToDoListPage() {
     setTodoToDelete(null);
   };
 
+  const handleCreateTodo = (newTodo) => {
+    createTodo(newTodo);
+    setIsSuccessModalVisible(true);
+  };
+
+  const handleSuccessModalClose = () => {
+    setIsSuccessModalVisible(false);
+  };
+
   return (
     <section className="p-20">
       <ToDoListHeader />
@@ -40,12 +51,18 @@ function ToDoListPage() {
         ))}
       </div>
       <div className="p-4">
-        <AddTaskForm onSubmitCreate={createTodo} />
+        <AddTaskForm onSubmitCreate={handleCreateTodo} />
       </div>
       <ConfirmDeleteModal
         isVisible={isDeleteModalVisible}
         onCancel={handleDeleteCancel}
         onConfirm={handleDeleteConfirm}
+      />
+      <Modal
+        text="Task added successfully!"
+        isVisible={isSuccessModalVisible}
+        onClose={handleSuccessModalClose}
+        color="bg-green-500"
       />
     </section>
   );

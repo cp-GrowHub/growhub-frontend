@@ -23,7 +23,7 @@ function AddTaskForm({ onSubmitCreate }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmitCreate({ name: newTodo, priority, highPriority });
-    setNewTodo(''); // Reset input setelah submit
+    setNewTodo('');
     setPriority(false);
     setHighPriority(false);
   };

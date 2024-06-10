@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import useInput from '../../hooks/useInput';
 
 export default function CreateDiscussionForm({ onSubmit }) {
-  const [title, handleTitleChange, resetTitle] = useInput('');
+  const [title, handleTitleChange, resetTitle] = useInput('', 60);
   const [tags, handleTagsChange, resetTags] = useInput('');
-  const [body, handleBodyChange, resetBody] = useInput('');
+  const bodyRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,10 +13,11 @@ export default function CreateDiscussionForm({ onSubmit }) {
       .trim()
       .split(' ')
       .filter((tag) => tag);
-    onSubmit(title, tagsArray, body);
+    const bodyHTML = bodyRef.current.innerHTML;
+    onSubmit(title, tagsArray, bodyHTML);
     resetTitle();
     resetTags();
-    resetBody();
+    bodyRef.current.innerHTML = '';
   };
 
   return (
@@ -30,7 +31,9 @@ export default function CreateDiscussionForm({ onSubmit }) {
             value={title}
             onChange={handleTitleChange}
             className="text-text bg-card2 text-xl"
+            maxLength="60"
           />
+          <span>{60 - title.length} characters remaining</span>
         </label>
       </div>
       <div>
@@ -46,15 +49,17 @@ export default function CreateDiscussionForm({ onSubmit }) {
         </label>
       </div>
       <div>
-        <label htmlFor="discussionBody" className="flex flex-col">
+        <div id="discussionBodyLabel" className="flex flex-col">
           Discussion Body
-          <textarea
+          <div
+            aria-labelledby="discussionBodyLabel"
             id="discussionBody"
-            value={body}
-            onChange={handleBodyChange}
-            className="text-text h-52 bg-card1"
+            ref={bodyRef}
+            contentEditable
+            className="text-text h-52 bg-card1 p-2 rounded"
+            style={{ minHeight: '200px', border: '1px solid #ccc' }}
           />
-        </label>
+        </div>
       </div>
       <button type="submit" className="bg-text text-bekgron p-2 rounded-3xl">
         Create new discussion

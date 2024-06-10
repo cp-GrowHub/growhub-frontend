@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
+import parse from 'html-react-parser';
 import {
   asyncGetDetailDiscussion,
   asyncUpvoteDiscussion,
@@ -80,7 +81,7 @@ export default function DetailDiscussionPage() {
           </div>
           <div>
             <h1 className="text-2xl font-bold">{detailDiscussion.title}</h1>
-            <p className="text-text">{detailDiscussion.body}</p>
+            <p className="text-text">{parse(detailDiscussion.body)}</p>
           </div>
           <div className="flex flex-row items-center space-x-4">
             <button

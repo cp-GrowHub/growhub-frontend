@@ -16,7 +16,6 @@ function asyncCreateBlog({ title, body, tags }) {
       const response = await api.createBlog({ title, body, tags });
       const { blog } = response.data;
       dispatch(createBlogActionCreator(blog));
-      alert(response.message);
     } catch (err) {
       alert(err.message);
     } finally {
@@ -33,7 +32,6 @@ function asyncUpdateBlog({ title, body, tags, blogId }) {
       const response = await api.editBlog({ title, body, tags, blogId });
       const { blog } = response.data;
       dispatch(updateBlogActionCreator(blog));
-      alert(response.message);
     } catch (err) {
       alert(err.message);
     } finally {
@@ -47,9 +45,8 @@ function asyncDeleteBlog({ blogId }) {
     dispatch(showLoading());
 
     try {
-      const response = await api.deleteBlog({ blogId });
+      await api.deleteBlog({ blogId });
       dispatch(deleteBlogActionCreator({ blogId }));
-      alert(response.message);
     } catch (err) {
       alert(err.message);
     } finally {

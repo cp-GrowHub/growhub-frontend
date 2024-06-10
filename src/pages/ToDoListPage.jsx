@@ -1,73 +1,52 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  asyncReceiveTodos,
-  asyncCreateTodo,
-  asyncDeleteTodo,
-  asyncUpdateTodo,
-} from '../states/todos/thunk';
+import React, { useState } from 'react';
 import ToDoListHeader from '../components/ToDoList/ToDoListHeader';
 import ToDoItem from '../components/ToDoList/ToDoItem';
 import AddTaskForm from '../components/ToDoList/AddTaskForm';
-import { sortTodos } from '../utils';
+import useTodos from '../hooks/useTodos';
+import ConfirmDeleteModal from '../components/common/ConfirmDeleteModal';
 
 function ToDoListPage() {
-  const todos = useSelector((state) =>
-    Array.isArray(state.todos) ? state.todos : []
-  );
-  const dispatch = useDispatch();
+  const { todos, createTodo, toggleTodoHandler, deleteTodo } = useTodos();
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+  const [todoToDelete, setTodoToDelete] = useState(null);
 
-  useEffect(() => {
-    dispatch(asyncReceiveTodos());
-  }, [dispatch]);
-
-  const createTodoHandler = (newTodo) => {
-    dispatch(
-      asyncCreateTodo({
-        name: newTodo.name,
-        highPriority: newTodo.highPriority,
-        priority: newTodo.priority,
-      })
-    );
+  const handleDeleteRequest = (id) => {
+    setTodoToDelete(id);
+    setIsDeleteModalVisible(true);
   };
 
-  const toggleTodoUpdateHandler = (id) => {
-    const selectedTodo = todos.find((todo) => todo.id === id);
-    if (selectedTodo) {
-      dispatch(
-        asyncUpdateTodo({
-          finished: !selectedTodo.finished,
-          todoId: id,
-        })
-      );
-    }
+  const handleDeleteConfirm = () => {
+    deleteTodo(todoToDelete);
+    setIsDeleteModalVisible(false);
+    setTodoToDelete(null);
   };
 
-  const toggleTodoDeleteHandler = (id) => {
-    const selectedTodo = todos.find((todo) => todo.id === id);
-    if (selectedTodo) {
-      dispatch(asyncDeleteTodo({ todoId: id }));
-    }
+  const handleDeleteCancel = () => {
+    setIsDeleteModalVisible(false);
+    setTodoToDelete(null);
   };
-
-  const sortedTodos = sortTodos(todos);
 
   return (
     <section className="p-20">
       <ToDoListHeader />
       <div className="mt-4 overflow-y-auto p-5 max-h-[28rem]">
-        {sortedTodos.map((todo) => (
+        {todos.map((todo) => (
           <ToDoItem
             key={todo.id}
             todo={todo}
-            onToggleUpdate={() => toggleTodoUpdateHandler(todo.id)}
-            onToggleDelete={() => toggleTodoDeleteHandler(todo.id)}
+            onToggleUpdate={() => toggleTodoHandler(todo.id)}
+            onToggleDelete={() => handleDeleteRequest(todo.id)}
           />
         ))}
       </div>
       <div className="p-4">
-        <AddTaskForm onSubmitCreate={createTodoHandler} />
+        <AddTaskForm onSubmitCreate={createTodo} />
       </div>
+      <ConfirmDeleteModal
+        isVisible={isDeleteModalVisible}
+        onCancel={handleDeleteCancel}
+        onConfirm={handleDeleteConfirm}
+      />
     </section>
   );
 }

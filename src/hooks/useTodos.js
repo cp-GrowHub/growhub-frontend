@@ -1,6 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { asyncReceiveTodos, asyncUpdateTodo } from '../states/todos/thunk';
+import {
+  asyncReceiveTodos,
+  asyncCreateTodo,
+  asyncDeleteTodo,
+  asyncUpdateTodo,
+} from '../states/todos/thunk';
 import { sortTodos } from '../utils';
 
 const useTodos = () => {
@@ -13,21 +18,46 @@ const useTodos = () => {
     dispatch(asyncReceiveTodos());
   }, [dispatch]);
 
-  const toggleTodoHandler = (id) => {
-    const selectedTodo = todos.find((todo) => todo.id === id);
-    if (selectedTodo) {
+  const createTodo = useCallback(
+    (newTodo) => {
       dispatch(
-        asyncUpdateTodo({
-          finished: !selectedTodo.finished,
-          todoId: id,
+        asyncCreateTodo({
+          name: newTodo.name,
+          highPriority: newTodo.highPriority,
+          priority: newTodo.priority,
         })
       );
-    }
-  };
+    },
+    [dispatch]
+  );
+
+  const toggleTodoHandler = useCallback(
+    (id) => {
+      const selectedTodo = todos.find((todo) => todo.id === id);
+      if (selectedTodo) {
+        dispatch(
+          asyncUpdateTodo({
+            finished: !selectedTodo.finished,
+            todoId: id,
+          })
+        );
+      }
+    },
+    [dispatch, todos]
+  );
+
+  const deleteTodo = useCallback(
+    (id) => {
+      dispatch(asyncDeleteTodo({ todoId: id }));
+    },
+    [dispatch]
+  );
 
   return {
     todos: sortTodos(todos),
+    createTodo,
     toggleTodoHandler,
+    deleteTodo,
   };
 };
 

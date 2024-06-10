@@ -2,12 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TiDeleteOutline } from 'react-icons/ti';
 
-function ToDoItem({ todo, onToggleUpdate, onToggleDelete }) {
+function ToDoItem({ todo, onToggleUpdate, onToggleDelete, onStatusChange }) {
   const priorityLabel = todo.highPriority
     ? 'High Priority'
     : todo.priority
       ? 'Priority'
       : '';
+
+  const handleChange = (event) => {
+    onToggleUpdate();
+    onStatusChange(todo.name, event.target.checked);
+  };
 
   return (
     <div className="relative flex justify-between items-center text-text p-2 bg-card2 mb-2 rounded transition-all duration-200 hover:bg-card3">
@@ -16,7 +21,7 @@ function ToDoItem({ todo, onToggleUpdate, onToggleDelete }) {
           type="checkbox"
           className="mr-2"
           checked={todo.finished}
-          onChange={onToggleUpdate}
+          onChange={handleChange}
         />
         <span>{todo.name}</span>
       </div>
@@ -50,6 +55,7 @@ ToDoItem.propTypes = {
   }).isRequired,
   onToggleUpdate: PropTypes.func.isRequired,
   onToggleDelete: PropTypes.func.isRequired,
+  onStatusChange: PropTypes.func.isRequired,
 };
 
 export default ToDoItem;

@@ -5,12 +5,21 @@ import AddTaskForm from '../components/ToDoList/AddTaskForm';
 import Modal from '../components/common/Modal';
 import useTodos from '../hooks/useTodos';
 import ConfirmDeleteModal from '../components/common/ConfirmDeleteModal';
+import useToggleTodo from '../hooks/useToggleTodo';
 
 function ToDoListPage() {
   const { todos, createTodo, toggleTodoHandler, deleteTodo } = useTodos();
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [todoToDelete, setTodoToDelete] = useState(null);
   const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
+
+  const {
+    isModalVisible,
+    modalMessage,
+    modalColor,
+    handleToggleTodo,
+    closeModal,
+  } = useToggleTodo();
 
   const handleDeleteRequest = (id) => {
     setTodoToDelete(id);
@@ -47,6 +56,7 @@ function ToDoListPage() {
             todo={todo}
             onToggleUpdate={() => toggleTodoHandler(todo.id)}
             onToggleDelete={() => handleDeleteRequest(todo.id)}
+            onStatusChange={handleToggleTodo}
           />
         ))}
       </div>
@@ -63,6 +73,12 @@ function ToDoListPage() {
         isVisible={isSuccessModalVisible}
         onClose={handleSuccessModalClose}
         color="bg-green-500"
+      />
+      <Modal
+        text={modalMessage}
+        isVisible={isModalVisible}
+        onClose={closeModal}
+        color={modalColor}
       />
     </section>
   );

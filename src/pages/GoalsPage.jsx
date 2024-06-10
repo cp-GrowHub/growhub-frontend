@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import useGoals from '../hooks/useGoals';
 import UpcomingGoalCard from '../components/HomePage/UpcomingGoalCard';
 import GoalsFilterButtons from '../components/Goals/GoalsFilterButtons';
+import useConfirmModal from '../hooks/useConfirmModal';
+import ConfirmModal from '../components/common/ConfirmModal';
 
 function GoalsPage() {
   const { upcomingGoals, sortedGoals, toggleGoalHandler } = useGoals();
@@ -13,10 +15,49 @@ function GoalsPage() {
   const [filter, setFilter] = useState('all');
 
   const filteredGoals = sortedGoals.filter((goal) => {
+    const daysLeft =
+      (new Date(goal.deadline) - new Date()) / (1000 * 60 * 60 * 24);
     if (filter === 'completed') return goal.finished;
-    if (filter === 'uncompleted') return !goal.finished;
+    if (filter === 'uncompleted') return !goal.finished && daysLeft >= 0;
+    if (filter === 'expired') return daysLeft < 0;
+    if (filter === 'all') return daysLeft >= 0;
     return true;
   });
+
+  const {
+    isConfirmModalVisible,
+    confirmMessage,
+    showConfirmModal,
+    closeConfirmModal,
+    confirm,
+  } = useConfirmModal();
+
+  const handleGoalToggle = (goalId) => {
+    const goalFromUpcoming = upcomingGoals.find((goal) => goal.id === goalId);
+    const goalFromFiltered = filteredGoals.find((goal) => goal.id === goalId);
+
+    if (goalFromUpcoming) {
+      return showConfirmModal(
+        `Are you sure you already achieved "${goalFromUpcoming.name}"?`,
+        () => toggleGoalHandler(goalId)
+      );
+    }
+
+    if (goalFromFiltered) {
+      if (goalFromFiltered.finished) {
+        return showConfirmModal(
+          `Do you want to undo the completion of "${goalFromFiltered.name}"?`,
+          () => toggleGoalHandler(goalId)
+        );
+      }
+      return showConfirmModal(
+        `Are you sure you already achieved "${goalFromFiltered.name}"?`,
+        () => toggleGoalHandler(goalId)
+      );
+    }
+
+    return null;
+  };
 
   return (
     <div className="p-10 flex flex-col gap-8">
@@ -35,7 +76,7 @@ function GoalsPage() {
                 (new Date(goal.deadline) - new Date()) / (1000 * 60 * 60 * 24)
               }
               isFinished={goal.finished}
-              onToggleFinish={() => toggleGoalHandler(goal.id)}
+              onToggleFinish={() => handleGoalToggle(goal.id)}
             />
           ))}
         </div>
@@ -56,10 +97,10 @@ function GoalsPage() {
           {filteredGoals.map((goal) => (
             <div
               key={goal.id}
-              className="bg-card2 p-2 rounded-lg shadow-md text-text flex flex-col"
+              className="bg-card2 p-3 px-6 rounded-lg shadow-md text-text flex flex-col"
             >
               <button
-                onClick={() => toggleGoalHandler(goal.id)}
+                onClick={() => handleGoalToggle(goal.id)}
                 className="text-2xl self-start py-2"
               >
                 {goal.finished ? (
@@ -69,16 +110,27 @@ function GoalsPage() {
                 )}
               </button>
               <p className="text-sm">
-                {Math.round(
-                  (new Date(goal.deadline) - new Date()) / (1000 * 60 * 60 * 24)
-                )}{' '}
-                days left
+                {(() => {
+                  const daysLeft = Math.round(
+                    (new Date(goal.deadline) - new Date()) /
+                      (1000 * 60 * 60 * 24)
+                  );
+                  return daysLeft >= 0
+                    ? `${daysLeft} days left`
+                    : `${Math.abs(daysLeft)} days overdue`;
+                })()}
               </p>
               <p className="font-semibold text-lg">{goal.name}</p>
             </div>
           ))}
         </div>
       </section>
+      <ConfirmModal
+        isVisible={isConfirmModalVisible}
+        message={confirmMessage}
+        onClose={closeConfirmModal}
+        onConfirm={confirm}
+      />
     </div>
   );
 }

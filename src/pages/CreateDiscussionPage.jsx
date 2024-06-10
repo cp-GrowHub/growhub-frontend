@@ -1,18 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import CreateDiscussionForm from '../components/Discussion/CreateDiscussionForm';
 import { asyncCreateDiscussion } from '../states/discussions/thunk';
 import Header from '../components/common/Header';
+import Modal from '../components/common/Modal';
 
 export default function CreateDiscussionPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
   const onSubmitHandler = (title, tags, body) => {
     dispatch(asyncCreateDiscussion({ title, body, tags }));
-    navigate('/discussion');
+    setModalMessage('Discussion created successfully!');
+    setIsModalVisible(true);
+    setTimeout(() => {
+      navigate('/discussion');
+    }, 3000);
   };
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
+
   return (
     <div className="text-text flex flex-col pt-16 px-10">
       <div className="flex-1">
@@ -21,6 +33,11 @@ export default function CreateDiscussionPage() {
       <div>
         <CreateDiscussionForm onSubmit={onSubmitHandler} />
       </div>
+      <Modal
+        text={modalMessage}
+        isVisible={isModalVisible}
+        onClose={closeModal}
+      />
     </div>
   );
 }

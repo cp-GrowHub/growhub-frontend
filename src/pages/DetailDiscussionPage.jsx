@@ -12,6 +12,7 @@ import {
 } from '../states/discussions/thunk';
 import { asyncReceiveUsers } from '../states/users/thunk';
 import { postedAt } from '../utils';
+import Modal from '../components/common/Modal';
 
 export default function DetailDiscussionPage() {
   const { discussionId } = useParams();
@@ -22,6 +23,8 @@ export default function DetailDiscussionPage() {
   const users = useSelector((state) => state.users);
   const authUser = useSelector((state) => state.authUser);
   const [comment, setComment] = useState('');
+  const [modalMessage, setModalMessage] = useState('');
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     dispatch(asyncGetDetailDiscussion({ discussionId }));
@@ -37,28 +40,39 @@ export default function DetailDiscussionPage() {
   const handleUpvote = () => {
     if (detailDiscussion.upVotes.includes(authUser.id)) {
       dispatch(asyncNeutralizeDiscussionVote({ discussionId }));
+      setModalMessage('Neutral vote successful');
     } else if (detailDiscussion.downVotes.includes(authUser.id)) {
       dispatch(asyncNeutralizeDiscussionVote({ discussionId }));
       dispatch(asyncUpvoteDiscussion({ discussionId }));
+      setModalMessage('Upvote successful');
     } else {
       dispatch(asyncUpvoteDiscussion({ discussionId }));
+      setModalMessage('Upvote successful');
     }
+    setIsModalVisible(true);
   };
 
   const handleDownvote = () => {
     if (detailDiscussion.downVotes.includes(authUser.id)) {
       dispatch(asyncNeutralizeDiscussionVote({ discussionId }));
+      setModalMessage('Neutral vote successful');
     } else if (detailDiscussion.upVotes.includes(authUser.id)) {
       dispatch(asyncNeutralizeDiscussionVote({ discussionId }));
       dispatch(asyncDownvoteDiscussion({ discussionId }));
+      setModalMessage('Downvote successful');
     } else {
       dispatch(asyncDownvoteDiscussion({ discussionId }));
+      setModalMessage('Downvote successful');
     }
+    setIsModalVisible(true);
   };
+
   const handleAddComment = () => {
     if (comment.trim()) {
       dispatch(asyncAddComment({ discussionId, content: comment }));
       setComment('');
+      setModalMessage('Comment added successfully');
+      setIsModalVisible(true);
     }
   };
 
@@ -66,6 +80,11 @@ export default function DetailDiscussionPage() {
     if (event.key === 'Enter') {
       handleAddComment();
     }
+  };
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+    setModalMessage('');
   };
 
   return (
@@ -159,6 +178,11 @@ export default function DetailDiscussionPage() {
           Add Comment
         </button>
       </div>
+      <Modal
+        text={modalMessage}
+        isVisible={isModalVisible}
+        onClose={closeModal}
+      />
     </div>
   );
 }

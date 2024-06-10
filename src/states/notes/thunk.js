@@ -81,6 +81,7 @@ function asyncDeleteNote({ noteId }) {
     try {
       await api.deleteNote({ noteId });
       dispatch(deleteNoteActionCreator({ noteId }));
+      dispatch(receiveDetailNoteActionCreator(null));
     } catch (err) {
       alert(err.message);
     } finally {

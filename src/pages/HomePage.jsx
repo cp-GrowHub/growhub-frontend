@@ -7,12 +7,39 @@ import OutlineButton from '../components/common/OutlineButton';
 import useGoals from '../hooks/useGoals';
 import useQuote from '../hooks/useQuotes';
 import useTodos from '../hooks/useTodos';
+import useToggleTodo from '../hooks/useToggleTodo';
+import useConfirmModal from '../hooks/useConfirmModal';
+import Modal from '../components/common/Modal';
+import ConfirmModal from '../components/common/ConfirmModal';
 
 function HomePage() {
   const { quote, author } = useQuote();
   const { upcomingGoals, toggleGoalHandler } = useGoals();
   const { todos, toggleTodoHandler } = useTodos();
   const authUser = useSelector((state) => state.authUser);
+
+  const {
+    isModalVisible,
+    modalMessage,
+    modalColor,
+    handleToggleTodo,
+    closeModal,
+  } = useToggleTodo();
+
+  const {
+    isConfirmModalVisible,
+    confirmMessage,
+    showConfirmModal,
+    closeConfirmModal,
+    confirm,
+  } = useConfirmModal();
+
+  const handleGoalToggle = (goalId) => {
+    showConfirmModal(
+      `Are you sure you already achieved "${upcomingGoals.find((upcoming) => upcoming.id === goalId).name}" ?`,
+      () => toggleGoalHandler(goalId)
+    );
+  };
 
   return (
     <div className="p-4 flex flex-col gap-10">
@@ -50,6 +77,7 @@ function HomePage() {
                 key={todo.id}
                 todo={todo}
                 onToggle={() => toggleTodoHandler(todo.id)}
+                onStatusChange={handleToggleTodo}
               />
             ))}
           </div>
@@ -67,7 +95,7 @@ function HomePage() {
                 (new Date(goal.deadline) - new Date()) / (1000 * 60 * 60 * 24)
               }
               isFinished={goal.finished}
-              onToggleFinish={() => toggleGoalHandler(goal.id)}
+              onToggleFinish={() => handleGoalToggle(goal.id)}
             />
           ))}
         </div>
@@ -120,6 +148,19 @@ function HomePage() {
           content="Baca artikel dan tulisan inspiratif dari berbagai penulis."
         />
       </section>
+
+      <Modal
+        text={modalMessage}
+        isVisible={isModalVisible}
+        onClose={closeModal}
+        color={modalColor}
+      />
+      <ConfirmModal
+        isVisible={isConfirmModalVisible}
+        message={confirmMessage}
+        onClose={closeConfirmModal}
+        onConfirm={confirm}
+      />
     </div>
   );
 }

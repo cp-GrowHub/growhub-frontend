@@ -2,8 +2,10 @@ import React from 'react';
 import Sidebar from '../components/common/Sidebar';
 import FormInput from '../components/common/FormInput';
 import Button from '../components/common/Button';
+import { useSelector } from 'react-redux';
 
 function MyAccountPage() {
+  const authUser = useSelector((states) => states.authUser)
   return (
     <div className="min-h-screen w-full flex">
       <Sidebar />
@@ -56,12 +58,12 @@ function MyAccountPage() {
             className="bg-card1 flex-1 rounded-xl p-10 mb-10 flex flex-col items-center"
             style={{ flexBasis: '30%' }}
           >
-            <div className="rounded-full bg-card4 w-20 h-20 mb-5" />
+            <img src={authUser.avatar} className="rounded-full bg-card4 w-20 h-20 mb-5" alt='Avatar' />
             <h3 className="text-lg font-bold mb-1 text-text">
-              capibara geming
+              {authUser.name}
             </h3>
-            <p className="text-card4 mb-3">capibara@gmail.com</p>
-            <p className="text-card4">This user has not added a bio yet.</p>
+            <p className="text-card4 mb-3">{authUser.email}</p>
+            <p className="text-card4">{authUser.bio}</p>
           </div>
         </div>
       </div>

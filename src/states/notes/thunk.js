@@ -38,6 +38,21 @@ function asyncCreateNote({ title, body, archived }) {
   };
 }
 
+function asyncGetDetailNote({ noteId }) {
+  return async (dispatch) => {
+    dispatch(showLoading());
+
+    try {
+      const note = await api.getDetailNote({ noteId });
+      dispatch(receiveDetailNoteActionCreator(note));
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      dispatch(hideLoading());
+    }
+  };
+}
+
 function asyncUpdateNote({ title, body, archived, noteId }) {
   return async (dispatch) => {
     dispatch(showLoading());
@@ -50,6 +65,7 @@ function asyncUpdateNote({ title, body, archived, noteId }) {
         noteId,
       });
       dispatch(updateNoteActionCreator(note));
+      dispatch(asyncGetDetailNote({ noteId }));
     } catch (err) {
       alert(err.message);
     } finally {
@@ -65,21 +81,6 @@ function asyncDeleteNote({ noteId }) {
     try {
       await api.deleteNote({ noteId });
       dispatch(deleteNoteActionCreator({ noteId }));
-    } catch (err) {
-      alert(err.message);
-    } finally {
-      dispatch(hideLoading());
-    }
-  };
-}
-
-function asyncGetDetailNote({ noteId }) {
-  return async (dispatch) => {
-    dispatch(showLoading());
-
-    try {
-      const note = await api.getDetailNote({ noteId });
-      dispatch(receiveDetailNoteActionCreator(note));
     } catch (err) {
       alert(err.message);
     } finally {

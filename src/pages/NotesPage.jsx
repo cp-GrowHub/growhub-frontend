@@ -1,75 +1,23 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  asyncReceiveNotes,
-  asyncUpdateNote,
-  asyncGetDetailNote,
-} from '../states/notes/thunk';
 import NotesFilterButton from '../components/Notes/NotesFilterButton';
 import SearchForm from '../components/common/SearchForm';
 import NotesItemCard from '../components/Notes/NotesItemCard';
 import { postedAt } from '../utils';
 import useInput from '../hooks/useInput';
+import useNotes from '../hooks/useNotes';
 
 function NotesPage() {
   const [keyword, onKeywordChange, resetKeyword] = useInput('');
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [filter, setFilter] = useState('All');
-  const notes = useSelector((state) => state.notes.notes);
-  const detailNote = useSelector((state) => state.notes.detailNote);
-
-  useEffect(() => {
-    dispatch(asyncReceiveNotes());
-  }, [dispatch]);
-
-  const filteredNotes = useMemo(() => {
-    let filtered = [...notes];
-
-    if (filter === 'Unarchived') {
-      filtered = filtered.filter((note) => !note.archived);
-    } else if (filter === 'Archived') {
-      filtered = filtered.filter((note) => note.archived);
-    }
-
-    if (keyword) {
-      filtered = filtered.filter(
-        (note) =>
-          note.title.toLowerCase().includes(keyword.toLowerCase()) ||
-          note.body.toLowerCase().includes(keyword.toLowerCase())
-      );
-    }
-
-    return filtered.sort(
-      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-    );
-  }, [notes, keyword, filter]);
-
-  useEffect(() => {
-    if (filteredNotes.length > 0 && keyword.length > 0) {
-      dispatch(asyncGetDetailNote({ noteId: filteredNotes[0].id }));
-    }
-  }, [keyword, dispatch, filteredNotes]);
-
-  const handleNoteClick = (noteId) => {
-    dispatch(asyncGetDetailNote({ noteId }));
-  };
-
-  const handleToggleArchive = (note) => {
-    const updatedNote = {
-      ...note,
-      archived: !note.archived,
-    };
-    dispatch(
-      asyncUpdateNote({
-        title: updatedNote.title,
-        body: updatedNote.body,
-        archived: updatedNote.archived,
-        noteId: updatedNote.id,
-      })
-    );
-  };
+  const {
+    filteredNotes,
+    detailNote,
+    filter,
+    setFilter,
+    handleNoteClick,
+    handleToggleArchive,
+  } = useNotes(keyword);
 
   return (
     <div className="flex flex-col min-h-[90vh]">

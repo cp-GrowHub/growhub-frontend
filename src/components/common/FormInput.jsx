@@ -11,7 +11,7 @@ function FormInput({ label, type = 'text', id, ...props }) {
       <input
         id={id}
         type={type}
-        className="w-full px-4 py-2 mt-2 border text-white border-white bg-inherit rounded-md focus:outline-none focus:ring-1 focus:ring-card4"
+        className="w-full px-4 py-2 mt-2 text-white bg-card2 rounded-md focus:outline-none focus:ring-1 focus:ring-card4"
         {...props}
       />
     </div>

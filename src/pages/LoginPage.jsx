@@ -27,7 +27,7 @@ function LoginPage() {
         <div className="bg-card2 p-8 rounded-lg shadow-md h-full min-w-full flex items-center justify-center">
           <div className=" w-full">
             <h2 className="text-3xl font-bold mb-6 text-text">Sign in</h2>
-            <form onSubmit={onLogin}>
+            <form onSubmit={onLogin} className="flex flex-col gap-4">
               <FormInput
                 label="Email"
                 id="email"

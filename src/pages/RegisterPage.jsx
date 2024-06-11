@@ -27,7 +27,7 @@ function RegisterPage() {
             <h2 className="text-3xl font-bold mb-6 text-text">
               Create Account
             </h2>
-            <form onSubmit={onRegister}>
+            <form onSubmit={onRegister} className="flex flex-col gap-4">
               <div className="flex flex-row gap-4">
                 <FormInput
                   label="First Name"

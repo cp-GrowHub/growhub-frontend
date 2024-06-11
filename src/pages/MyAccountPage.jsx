@@ -70,7 +70,7 @@ function MyAccountPage() {
 
   return (
     <div className="min-h-screen w-full flex">
-      <div className="flex-1 p-10 ml-32 flex flex-col items-left">
+      <div className="flex-1 p-10 flex flex-col items-left">
         <h1 className="text-3xl font-bold text-text mb-3 ml-2">User</h1>
         <div className="flex space-x-10 w-full">
           <div
@@ -81,13 +81,10 @@ function MyAccountPage() {
               Personal Information
             </h2>
             <div className="flex flex-row gap-6">
-              <div className="flex flex-col gap-4">
-                <form
-                  className="space-y-5 flex-1 w-full"
-                  onSubmit={handleUpdateName}
-                >
+              <div className="flex flex-col gap-4 flex-1">
+                <form className=" flex-1 w-full" onSubmit={handleUpdateName}>
                   <div className="flex flex-col">
-                    <div className="flex flex-col">
+                    <div className="flex flex-col gap-4">
                       <FormInput
                         id="firstName"
                         label="First Name"
@@ -110,7 +107,7 @@ function MyAccountPage() {
                     </div>
                   </div>
                 </form>
-                <form className="space-y-5" onSubmit={handleUpdateEmail}>
+                <form className="" onSubmit={handleUpdateEmail}>
                   <FormInput
                     id="email"
                     label="Email"
@@ -126,7 +123,10 @@ function MyAccountPage() {
                   </div>
                 </form>
               </div>
-              <form className="space-y-5 flex-1" onSubmit={handleUpdateBio}>
+              <form
+                className=" flex-1 flex flex-col"
+                onSubmit={handleUpdateBio}
+              >
                 <label htmlFor="bio" className="flex flex-col">
                   <span className="text-text mb-2">Bio</span>
                   <textarea

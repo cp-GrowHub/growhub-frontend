@@ -49,7 +49,7 @@ function ToDoListPage() {
   return (
     <section className="p-20">
       <ToDoListHeader />
-      <div className="mt-4 overflow-y-auto p-5 max-h-[28rem]">
+      <div className="mt-4 overflow-y-auto p-5 px-10 max-h-[28rem]">
         {todos.map((todo) => (
           <ToDoItem
             key={todo.id}

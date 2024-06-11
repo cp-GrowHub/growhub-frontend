@@ -71,7 +71,7 @@ function MyAccountPage() {
   return (
     <div className="min-h-screen w-full flex">
       <div className="flex-1 p-10 ml-32 flex flex-col items-left">
-        <h1 className="text-3xl font-bold text-text mb-3 ml-2">Users</h1>
+        <h1 className="text-3xl font-bold text-text mb-3 ml-2">User</h1>
         <div className="flex space-x-10 w-full">
           <div
             className="bg-card1 flex-1 rounded-xl p-10 mb-10"

@@ -2,6 +2,7 @@ import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import {
   receiveUsersActionCreator,
   updateProfileActionCreator,
+  updateUser,
 } from './action';
 import api from '../../utils/api';
 
@@ -31,6 +32,7 @@ function asyncUpdateUser({ firstName, lastName, bio, email }) {
         email,
       });
       dispatch(updateProfileActionCreator(user));
+      dispatch(updateUser(user));
     } catch (err) {
       alert(err.message);
     } finally {

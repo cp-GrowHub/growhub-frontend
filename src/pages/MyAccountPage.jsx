@@ -130,7 +130,7 @@ function MyAccountPage() {
                 <label htmlFor="bio" className="flex flex-col">
                   <span className="text-text mb-2">Bio</span>
                   <textarea
-                    className="bg-card2 text-text"
+                    className="bg-card2 text-text px-4 py-2 rounded-xl outline-none focus:ring-1 focus:ring-card4"
                     id="bio"
                     label="Bio"
                     type="textarea"

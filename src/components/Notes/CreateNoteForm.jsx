@@ -15,28 +15,24 @@ export default function CreateNoteForm({ onSubmit }) {
 
   return (
     <form onSubmit={handleSubmit} className="p-10 px-32 flex flex-col gap-4 ">
-      <div>
-        <label htmlFor="noteTitle" className="flex flex-col">
-          Note Title
+      <div className=' flex flex-col'>
+          <label htmlFor="noteTitle" className="flex flex-col">Note Title</label>
           <input
             type="text"
             id="noteTitle"
             value={title}
             onChange={handleTitleChange}
-            className="text-text bg-card2 text-xl"
+            className="text-text bg-card2 text-xl outline-none px-4 py-2 rounded-xl"
           />
-        </label>
       </div>
-      <div>
-        <label htmlFor="noteBody" className="flex flex-col">
-          Note Body
+      <div className=' flex flex-col'>
+        <label htmlFor="noteBody" className="flex flex-col">Note Body</label>
           <textarea
             id="noteBody"
             value={body}
             onChange={handleBodyChange}
-            className="text-text h-52 bg-card1"
+            className="text-text h-52 bg-card2 px-4 py-2 outline-none rounded-xl"
           />
-        </label>
       </div>
       <button type="submit" className="bg-text text-bekgron p-2 rounded-3xl">
         Create new note

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { asyncRegisterUser } from '../states/users/thunk';
 import FormInput from '../components/common/FormInput';
+import { asyncRegisterUser } from '../states/users/thunk';
 import Button from '../components/common/Button';
 
 function RegisterPage() {
@@ -28,24 +28,32 @@ function RegisterPage() {
               Create Account
             </h2>
             <form onSubmit={onRegister}>
-              <FormInput
-                label="First Name"
-                id="firstName"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-              <FormInput
-                label="Last Name"
-                id="lastName"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-              />
+              <div className="flex flex-row gap-4">
+                <FormInput
+                  label="First Name"
+                  id="firstName"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  tailwindClass="border"
+                  maxLength="15"
+                />
+                <FormInput
+                  label="Last Name"
+                  id="lastName"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  tailwindClass="border"
+                  maxLength="15"
+                />
+              </div>
               <FormInput
                 label="Email"
                 id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                tailwindClass="border"
+                maxLength="30"
               />
               <FormInput
                 label="Password"
@@ -53,8 +61,14 @@ function RegisterPage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                tailwindClass="border"
+                maxLength="40"
               />
-              <Button type="submit" text="Create Account" />
+              <Button
+                type="submit"
+                text="Create Account"
+                tailwindClass="bg-bekgron border-none"
+              />
             </form>
             <p className="mt-4 text-sm text-white">
               Already have an account?{' '}

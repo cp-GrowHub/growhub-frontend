@@ -34,6 +34,7 @@ function LoginPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                tailwindClass="border"
               />
               <FormInput
                 label="Password"
@@ -41,8 +42,13 @@ function LoginPage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                tailwindClass="border"
               />
-              <Button type="submit" text="Sign in" />
+              <Button
+                type="submit"
+                text="Sign in"
+                tailwindClass="bg-bekgron border-none"
+              />
             </form>
             <p className="mt-4 text-sm text-white">
               Don&apos;t have an account?{' '}

@@ -92,14 +92,14 @@ function MyAccountPage() {
                         id="firstName"
                         label="First Name"
                         placeholder="first name.."
-                        maxLength="10"
+                        maxLength="15"
                         onChange={handleFirstNameChange}
                       />
                       <FormInput
                         id="lastName"
                         label="Last Name"
                         placeholder="last name.."
-                        maxLength="10"
+                        maxLength="15"
                         onChange={handleLastNameChange}
                       />
                     </div>

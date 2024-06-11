@@ -16,5 +16,5 @@ export default Header;
 
 Header.propTypes = {
   children: PropTypes.string.isRequired,
-  className: PropTypes.element,
+  className: PropTypes.string,
 };

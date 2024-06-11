@@ -49,6 +49,12 @@ function App() {
     }
   }, [authUser, location, navigate]);
 
+  useEffect(() => {
+    if (!authUser && location.pathname !== '/register') {
+      navigate('/login');
+    }
+  }, [authUser, navigate, location.pathname]);
+
   if (isPreload) {
     return null;
   }

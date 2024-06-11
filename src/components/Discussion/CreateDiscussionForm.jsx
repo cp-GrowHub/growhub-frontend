@@ -22,44 +22,38 @@ export default function CreateDiscussionForm({ onSubmit }) {
 
   return (
     <form onSubmit={handleSubmit} className="p-10 px-32 flex flex-col gap-4 ">
-      <div>
-        <label htmlFor="discussionTitle" className="flex flex-col">
-          Discussion Title
+      <div className=' flex flex-col'>
+        <label htmlFor="discussionTitle" className="flex flex-col">Discussion Title</label>
           <input
             type="text"
             id="discussionTitle"
             value={title}
             onChange={handleTitleChange}
-            className="text-text bg-card2 text-xl"
+            className="text-text bg-card2 text-xl px-4 py-2 rounded-xl outline-none"
             maxLength="60"
           />
           <span>{60 - title.length} characters remaining</span>
-        </label>
       </div>
-      <div>
-        <label htmlFor="discussionTags" className="flex flex-col">
-          Discussion Category (tags)
+      <div className=' flex flex-col'>
+        <label htmlFor="discussionTags" className="flex flex-col">Discussion Category (tags)</label>
           <input
             type="text"
             id="discussionTags"
             value={tags}
             onChange={handleTagsChange}
-            className="text-text bg-card2 text-xl"
+            className="text-text bg-card2 text-xl px-4 py-2 rounded-xl outline-none"
           />
-        </label>
       </div>
       <div>
-        <div id="discussionBodyLabel" className="flex flex-col">
-          Discussion Body
+        <div id="discussionBodyLabel" className="flex flex-col">Discussion Body</div>
           <div
             aria-labelledby="discussionBodyLabel"
             id="discussionBody"
             ref={bodyRef}
             contentEditable
-            className="text-text h-52 bg-card1 p-2 rounded"
-            style={{ minHeight: '200px', border: '1px solid #ccc' }}
+            className="text-text h-52 bg-card2 px-4 py-2 rounded-xl outline-none"
+            style={{ minHeight: '200px' }}
           />
-        </div>
       </div>
       <button type="submit" className="bg-text text-bekgron p-2 rounded-3xl">
         Create new discussion

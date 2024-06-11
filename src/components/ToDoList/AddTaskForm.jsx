@@ -35,7 +35,7 @@ function AddTaskForm({ onSubmitCreate }) {
         value={newTodo}
         onChange={handleInputChange}
         placeholder="Create new task"
-        className="flex-1 p-2 rounded mr-2"
+        className="flex-1 px-4 py-2 rounded mr-2 outline-none"
       />
       <button
         type="button"

@@ -37,7 +37,7 @@ function CreateGoalPage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Enter goal name"
-                className="w-full px-3 py-2 border rounded bg-card1 text-text placeholder-gray-500"
+                className="w-full px-4 py-2 rounded bg-card2 text-text outline-none placeholder-gray-500"
                 required
               />
             </label>
@@ -53,7 +53,7 @@ function CreateGoalPage() {
                 type="date"
                 value={deadline}
                 onChange={(e) => setDeadline(e.target.value)}
-                className="w-full px-3 py-2 border rounded bg-card1 text-text placeholder-gray-500"
+                className="w-full px-4 py-2 rounded bg-card2 outline-none text-text placeholder-gray-500"
                 required
               />
             </label>

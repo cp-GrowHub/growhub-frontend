@@ -128,7 +128,7 @@ function BlogPage() {
               <button
                 className="text-bekgron bg-text px-6 p-2 rounded-3xl border-2 border-transparent hover:text-text hover:bg-bekgron hover:border-text"
                 onClick={() => {
-                  navigate('./createDiscussion');
+                  navigate('./createBlog');
                 }}
               >
                 + Create new blog

@@ -22,6 +22,7 @@ import NoteDetailPage from './pages/NoteDetailPage';
 import DetailDiscussionPage from './pages/DetailDiscussionPage';
 import CreateDiscussionPage from './pages/CreateDiscussionPage';
 import DetailBlogPage from './pages/DetailBlogPage';
+import CreateBlogPage from './pages/CreateBlogPage';
 
 function App() {
   const authUser = useSelector((state) => state.authUser);
@@ -137,6 +138,14 @@ function App() {
                 element={
                   <PrivateRoute>
                     <BlogPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/blog/createBlog"
+                element={
+                  <PrivateRoute>
+                    <CreateBlogPage />
                   </PrivateRoute>
                 }
               />

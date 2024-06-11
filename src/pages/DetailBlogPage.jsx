@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import parse from 'html-react-parser';
 import { asyncReceiveUsers } from '../states/users/thunk';
 import { asyncDeleteBlog, asyncGetDetailBlog } from '../states/blogs/thunk';
 import Modal from '../components/common/Modal';
@@ -71,7 +72,7 @@ export default function DetailBlogPage() {
                 })}
               </div>
             </div>
-            <p>{detailBlog.body}</p>
+            <p>{parse(detailBlog.body)}</p>
           </div>
         </div>
       </div>

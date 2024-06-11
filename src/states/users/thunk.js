@@ -2,9 +2,9 @@ import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import {
   receiveUsersActionCreator,
   updateProfileActionCreator,
-  updateUser,
 } from './action';
 import api from '../../utils/api';
+import { setAuthUserActionCreator } from '../authUser/action';
 
 function asyncRegisterUser({ firstName, lastName, email, password }) {
   return async (dispatch) => {
@@ -32,7 +32,8 @@ function asyncUpdateUser({ firstName, lastName, bio, email }) {
         email,
       });
       dispatch(updateProfileActionCreator(user));
-      dispatch(updateUser(user));
+      const authUser = await api.getOwnProfile();
+      dispatch(setAuthUserActionCreator(authUser));
     } catch (err) {
       alert(err.message);
     } finally {

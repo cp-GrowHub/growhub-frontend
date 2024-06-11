@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = (() => {
-  const BASE_URL = 'http://47.128.243.240:5000';
+  const BASE_URL = 'http://localhost:5000';
   const QUOTES_URL = 'https://stoic.tekloon.net';
 
   const instance = axios.create({

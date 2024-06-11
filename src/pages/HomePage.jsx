@@ -71,7 +71,7 @@ function HomePage() {
           <h2 className="text-3xl font-bold text-text p-4">
             Your Path to Productivity
           </h2>
-          <div className="bg-card2 p-4 rounded-xl overflow-y-auto space-y-4 h-full flex-grow">
+          <div className="p-3 rounded-xl overflow-y-auto space-y-2 h-full flex-grow">
             {todos.map((todo) => (
               <ToDoListCard
                 key={todo.id}

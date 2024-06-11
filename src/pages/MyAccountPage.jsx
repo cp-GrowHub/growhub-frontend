@@ -93,7 +93,6 @@ function MyAccountPage() {
                         label="First Name"
                         placeholder="first name.."
                         maxLength="10"
-                        value={firstName}
                         onChange={handleFirstNameChange}
                       />
                       <FormInput
@@ -101,7 +100,6 @@ function MyAccountPage() {
                         label="Last Name"
                         placeholder="last name.."
                         maxLength="10"
-                        value={lastName}
                         onChange={handleLastNameChange}
                       />
                     </div>
@@ -119,7 +117,6 @@ function MyAccountPage() {
                     type="email"
                     placeholder="new email..."
                     maxLength="30"
-                    value={email}
                     onChange={handleEmailChange}
                   />
                   <div className="flex justify-end">
@@ -140,7 +137,6 @@ function MyAccountPage() {
                     placeholder="new bio..."
                     maxLength="80"
                     rows="4"
-                    value={bio}
                     onChange={handleBioChange}
                   />
                 </label>

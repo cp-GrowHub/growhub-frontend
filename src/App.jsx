@@ -49,12 +49,6 @@ function App() {
     }
   }, [authUser, location, navigate]);
 
-  useEffect(() => {
-    if (!authUser) {
-      navigate('/login');
-    }
-  }, [authUser, navigate]);
-
   if (isPreload) {
     return null;
   }

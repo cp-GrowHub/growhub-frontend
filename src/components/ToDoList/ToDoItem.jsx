@@ -17,12 +17,25 @@ function ToDoItem({ todo, onToggleUpdate, onToggleDelete, onStatusChange }) {
   return (
     <div className="relative flex justify-between items-center text-text p-2 bg-card2 mb-2 rounded transition-all duration-200 hover:bg-card3">
       <div className="flex items-center">
-        <input
-          type="checkbox"
-          className="mr-2"
-          checked={todo.finished}
-          onChange={handleChange}
-        />
+        <label
+          htmlFor={`checkbox-${todo.name}`}
+          className={`w-5 h-5 border-2 rounded-sm relative cursor-pointer mr-2 ${
+            todo.finished ? 'border-green-500' : 'border-text'
+          }`}
+        >
+          <input
+            type="checkbox"
+            id={`checkbox-${todo.name}`}
+            className="hidden"
+            checked={todo.finished}
+            onChange={handleChange}
+          />
+          <span
+            className={`absolute w-1.5 h-3 border-r-2 border-b-2 top-[0.05rem] left-[0.32rem] transform rotate-45 ${
+              todo.finished ? 'block border-green-500' : 'hidden'
+            }`}
+          />
+        </label>
         <span>{todo.name}</span>
       </div>
       <div className="flex items-center">

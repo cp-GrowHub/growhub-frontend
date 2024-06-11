@@ -14,19 +14,34 @@ function ToDoListCard({ todo, onToggle, onStatusChange }) {
   };
 
   return (
-    <div className="flex items-center justify-between p-2 border-b border-card4 bg-card1 rounded-lg">
+    <div className="flex items-center justify-between py-3 px-4 border-card4 bg-card1 rounded-lg">
       <div className="flex items-center">
-        <input
-          type="checkbox"
-          className="mr-2"
-          checked={todo.finished}
-          onChange={handleChange}
-        />
+        <label
+          htmlFor={`checkbox-${todo.name}`}
+          className={`w-5 h-5 border-2 rounded-sm relative cursor-pointer mr-2 ${
+            todo.finished ? 'border-green-500' : 'border-text'
+          }`}
+        >
+          <input
+            type="checkbox"
+            id={`checkbox-${todo.name}`}
+            className="hidden"
+            checked={todo.finished}
+            onChange={handleChange}
+          />
+          <span
+            className={`absolute w-1.5 h-3 border-r-2 border-b-2 top-[0.05rem] left-[0.35rem] transform rotate-45 ${
+              todo.finished ? 'block border-green-500' : 'hidden'
+            }`}
+          />
+        </label>
         <span className="text-text">{todo.name}</span>
       </div>
       {priorityLabel && (
         <span
-          className={`px-2 py-1 rounded ${priorityLabel === 'High Priority' ? 'bg-red-500' : 'bg-yellow-500'}`}
+          className={`px-2 py-1 rounded ${
+            priorityLabel === 'High Priority' ? 'bg-red-500' : 'bg-yellow-500'
+          }`}
         >
           {priorityLabel}
         </span>

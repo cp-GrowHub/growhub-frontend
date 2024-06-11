@@ -35,7 +35,7 @@ function App() {
     e.preventDefault();
 
     dispatch(asyncUnsetAuthUser());
-    navigate('/');
+    navigate('/login');
   };
 
   useEffect(() => {
@@ -48,6 +48,12 @@ function App() {
       navigate(newPath, { replace: true });
     }
   }, [authUser, location, navigate]);
+
+  useEffect(() => {
+    if (!authUser) {
+      navigate('/login');
+    }
+  }, [authUser, navigate]);
 
   if (isPreload) {
     return null;

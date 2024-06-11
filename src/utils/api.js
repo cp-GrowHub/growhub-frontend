@@ -1,4 +1,6 @@
 import axios from 'axios';
+import store from '../states/index';
+import { asyncUnsetAuthUser } from '../states/authUser/thunk';
 
 const api = (() => {
   const BASE_URL = 'http://localhost:5000';
@@ -17,6 +19,20 @@ const api = (() => {
       'Content-Type': 'application/json',
     },
   });
+
+  instance.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      if (error.response) {
+        const { status, data } = error.response;
+        if (status === 401 && data.message === 'Token is no longer valid') {
+          // Jika status 401 dan pesan adalah 'Token is no longer valid', unset auth user
+          store.dispatch(asyncUnsetAuthUser());
+        }
+      }
+      return Promise.reject(error);
+    }
+  );
 
   const apiRequest = async (method, endpoint, data) => {
     try {

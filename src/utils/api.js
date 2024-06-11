@@ -3,7 +3,7 @@ import store from '../states/index';
 import { asyncUnsetAuthUser } from '../states/authUser/thunk';
 
 const api = (() => {
-  const BASE_URL = 'https://47.128.243.240';
+  const BASE_URL = '/api';
   const QUOTES_URL = 'https://stoic.tekloon.net';
 
   const instance = axios.create({

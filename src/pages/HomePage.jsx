@@ -136,13 +136,13 @@ function HomePage() {
 
       <section className="grid grid-cols-3 gap-6 mb-10">
         <PageCard
-          to="/discussions"
+          to="/discussion"
           title="Discussions"
           color="card2"
           content="Ikuti diskusi dan bagikan pandangan Anda dengan komunitas."
         />
         <PageCard
-          to="/blogs"
+          to="/blog"
           title="Blogs"
           color="card3"
           content="Baca artikel dan tulisan inspiratif dari berbagai penulis."

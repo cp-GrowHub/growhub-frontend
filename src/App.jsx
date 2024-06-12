@@ -43,17 +43,22 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
+    if (
+      !isPreload &&
+      !authUser &&
+      location.pathname !== '/register' &&
+      !location.pathname.startsWith('/shared')
+    ) {
+      navigate('/login');
+    }
+  }, [authUser, navigate, location.pathname, isPreload]);
+
+  useEffect(() => {
     if (authUser && location.pathname.startsWith('/shared')) {
       const newPath = location.pathname.replace('/shared', '');
       navigate(newPath, { replace: true });
     }
   }, [authUser, location, navigate]);
-
-  useEffect(() => {
-    if (!authUser && location.pathname !== '/register') {
-      navigate('/login');
-    }
-  }, [authUser, navigate, location.pathname]);
 
   if (isPreload) {
     return null;

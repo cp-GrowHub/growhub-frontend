@@ -4,5 +4,8 @@
       "source": "/api/(.*)",
       "destination": "https://47.128.243.240/$1"
     }
+  ],
+  "redirects": [
+    { "source": "/(.*)", "destination": "/", "statusCode": 200 }
   ]
 }

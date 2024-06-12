@@ -14,7 +14,7 @@ import NavItem from './NavItem';
 
 function Sidebar({ onLogout }) {
   return (
-    <aside className="bg-card1 text-text w-30 p-1 flex flex-col min-h-screen fixed top-0 left-0">
+    <aside className="bg-card1 text-text w-14 md:w-32 p-1 flex flex-col min-h-screen fixed top-0 left-0">
       <nav className="flex-1">
         <ul>
           <li className="mb-2">
@@ -28,7 +28,7 @@ function Sidebar({ onLogout }) {
             >
               <div className="flex flex-col items-center">
                 <FaUser className="mb-1 text-2xl" />
-                <span className="text-sm">My Account</span>
+                <span className="text-sm hidden md:block">My Account</span>
               </div>
             </NavLink>
           </li>

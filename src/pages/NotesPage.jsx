@@ -21,19 +21,21 @@ function NotesPage() {
 
   return (
     <div className="flex flex-col min-h-[90vh]">
-      <header className="bg-card1 flex flex-row p-3 px-10 justify-between items-center">
-        <div className="flex items-center">
-          <NotesFilterButton currentFilter={filter} setFilter={setFilter} />
+      <header className="p-3 md:px-10 md:bg-card1">
+        <div className=" bg-card1 flex flex-col md:flex-row justify-between items-center rounded-lg gap-2">
+          <div className="flex items-center">
+            <NotesFilterButton currentFilter={filter} setFilter={setFilter} />
+          </div>
+          <SearchForm
+            searchKeyword={keyword}
+            onSearch={onKeywordChange}
+            resetSearch={resetKeyword}
+          />
         </div>
-        <SearchForm
-          searchKeyword={keyword}
-          onSearch={onKeywordChange}
-          resetSearch={resetKeyword}
-        />
       </header>
-      <div className="flex flex-row gap-5 p-5 flex-1">
-        <div className="flex flex-col flex-[1] rounded-lg max-h-[75vh]">
-          <div className="overflow-y-auto flex-grow flex flex-col gap-1">
+      <div className="flex flex-col md:flex-row gap-5 p-4 md:p-5 flex-1">
+        <div className="order-2 md:order-1 flex flex-col flex-[1] rounded-lg max-h-[75vh]">
+          <div className="overflow-y-auto flex-grow flex flex-col gap-2">
             {filteredNotes.map((note) => (
               <button
                 key={note.id}
@@ -57,14 +59,18 @@ function NotesPage() {
           </button>
         </div>
         {detailNote && (
-          <div className="flex-[2] bg-card3 rounded-lg max-h-[80vh]">
-            <div className="flex flex-col justify-between p-10 h-full">
+          <div className="order-1 md:order-2 flex-[2] bg-card3 rounded-lg max-h-[80vh] p-4 md:p-10">
+            <div className="flex flex-col justify-between h-full">
               <div>
-                <h2 className="text-2xl font-bold text-text">
+                <h2 className="text-lg md:text-2xl font-bold text-text">
                   {detailNote.title}
                 </h2>
-                <p className="text-text">{postedAt(detailNote.createdAt)}</p>
-                <p className="text-text">{detailNote.body}</p>
+                <p className="text-text text-xs mb-2 md:text-base">
+                  {postedAt(detailNote.createdAt)}
+                </p>
+                <p className="text-text text-sm md:text-base">
+                  {detailNote.body}
+                </p>
               </div>
               <div className="mt-4 flex flex-row gap-5">
                 <button

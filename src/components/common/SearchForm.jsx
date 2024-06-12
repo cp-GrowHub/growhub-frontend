@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 function SearchForm({ searchKeyword, onSearch, resetSearch }) {
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(searchKeyword); // placeholder
     resetSearch();
   };
 

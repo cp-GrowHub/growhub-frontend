@@ -47,9 +47,9 @@ function ToDoListPage() {
   };
 
   return (
-    <section className="p-20">
+    <section className="pl-3 md:p-20 flex flex-col gap-4">
       <ToDoListHeader />
-      <div className="mt-4 overflow-y-auto p-5 px-10 max-h-[28rem]">
+      <div className="overflow-y-auto p-3 md:p-5 md:px-10 max-h-[28rem] rounded-lg">
         {todos.map((todo) => (
           <ToDoItem
             key={todo.id}
@@ -60,7 +60,7 @@ function ToDoListPage() {
           />
         ))}
       </div>
-      <div className="p-4">
+      <div className="p-3 md:p-4">
         <AddTaskForm onSubmitCreate={handleCreateTodo} />
       </div>
       <ConfirmDeleteModal

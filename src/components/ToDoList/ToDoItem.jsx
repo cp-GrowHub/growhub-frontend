@@ -15,7 +15,7 @@ function ToDoItem({ todo, onToggleUpdate, onToggleDelete, onStatusChange }) {
   };
 
   return (
-    <div className="relative flex justify-between items-center text-text p-2 bg-card2 mb-2 rounded transition-all duration-200 hover:bg-card3">
+    <div className="relative flex flex-row justify-between items-center text-text p-3 bg-card2 mb-2 rounded transition-all duration-200 hover:bg-card3">
       <div className="flex items-center">
         <label
           htmlFor={`checkbox-${todo.name}`}
@@ -38,10 +38,12 @@ function ToDoItem({ todo, onToggleUpdate, onToggleDelete, onStatusChange }) {
         </label>
         <span>{todo.name}</span>
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center max-w-[40%] md:max-w-full">
         {priorityLabel && (
           <span
-            className={`px-2 py-1 rounded mr-2 ${priorityLabel === 'High Priority' ? 'bg-red-500' : 'bg-yellow-500'}`}
+            className={`px-2 py-1 rounded mr-2 max-w-xs truncate ${
+              priorityLabel === 'High Priority' ? 'bg-red-500' : 'bg-yellow-500'
+            }`}
           >
             {priorityLabel}
           </span>

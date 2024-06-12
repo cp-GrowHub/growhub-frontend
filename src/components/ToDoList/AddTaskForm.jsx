@@ -46,41 +46,45 @@ function AddTaskForm({ onSubmitCreate }) {
 
   return (
     <>
-      <div className="flex flex-row justify-end">
+      <div className="flex justify-end">
         {error && (
-          <span className="text-text font-semibold text-lg bg-card1 border inline-block p-2 px-10 rounded-2xl">
+          <span className="text-text font-semibold md:text-lg bg-card1 border inline-block p-2 px-4 rounded-2xl">
             {error}
           </span>
         )}
       </div>
-      <form className="flex items-center mt-4" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={newTodo}
-          onChange={handleInputChange}
-          placeholder="Create new task"
-          className="flex-1 px-4 py-2 rounded mr-2 outline-none"
-        />
-        <button
-          type="button"
-          onClick={() => handlePriorityChange('priority')}
-          className={`p-2 rounded text-white border border-transparent ${priority ? 'bg-card1 border border-green-500' : 'bg-gray-500'}`}
-        >
-          Priority
-        </button>
-        <button
-          type="button"
-          onClick={() => handlePriorityChange('highPriority')}
-          className={`p-2 rounded text-white border border-transparent ml-2 ${highPriority ? 'bg-card1 border border-green-500' : 'bg-gray-500'}`}
-        >
-          High Priority
-        </button>
-        <button
-          type="submit"
-          className="p-2 bg-green-500 rounded text-white ml-2"
-        >
-          Add Task
-        </button>
+      <form
+        className="flex flex-col md:flex-row items-center mt-4 gap-2"
+        onSubmit={handleSubmit}
+      >
+        <div className="flex-1">
+          <input
+            type="text"
+            value={newTodo}
+            onChange={handleInputChange}
+            placeholder="Create new task"
+            className="flex-1 px-4 py-2 rounded outline-none w-full"
+          />
+        </div>
+        <div className="flex flex-row gap-2">
+          <button
+            type="button"
+            onClick={() => handlePriorityChange('priority')}
+            className={`p-2 rounded text-white border border-transparent ${priority ? 'bg-card1 border border-green-500' : 'bg-gray-500'}`}
+          >
+            Priority
+          </button>
+          <button
+            type="button"
+            onClick={() => handlePriorityChange('highPriority')}
+            className={`p-2 rounded text-white border border-transparent ${highPriority ? 'bg-card1 border border-green-500' : 'bg-gray-500'}`}
+          >
+            High Priority
+          </button>
+          <button type="submit" className="p-2 bg-green-500 rounded text-white">
+            Add Task
+          </button>
+        </div>
       </form>
     </>
   );

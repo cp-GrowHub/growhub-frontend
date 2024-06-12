@@ -5,7 +5,10 @@ import { FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
 function UpcomingGoalCard({ title, daysLeft, isFinished, onToggleFinish }) {
   return (
     <div className="bg-card2 p-4 rounded-lg shadow-md text-text flex flex-row gap-4">
-      <button onClick={onToggleFinish} className="text-2xl self-start py-2">
+      <button
+        onClick={onToggleFinish}
+        className="text-xl md:text-2xl self-start py-2"
+      >
         {isFinished ? (
           <FaCheckCircle className="text-green-500" />
         ) : (
@@ -20,7 +23,7 @@ function UpcomingGoalCard({ title, daysLeft, isFinished, onToggleFinish }) {
             {daysLeft < 0 ? 'Past due' : `${Math.round(daysLeft)} days left`}
           </p>
         </div>
-        <h3 className="text-lg font-bold">{title}</h3>
+        <h3 className="text-base md:text-lg font-bold">{title}</h3>
       </div>
     </div>
   );

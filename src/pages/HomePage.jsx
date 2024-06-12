@@ -42,17 +42,19 @@ function HomePage() {
   };
 
   return (
-    <div className="p-4 flex flex-col gap-10">
-      <section className="flex gap-3 xl:max-h-[27rem] sm:max-h-[32rem]">
+    <div className="pl-4 md:p-4 flex flex-col gap-10">
+      <section className="flex flex-col lg:flex-row gap-3 xl:max-h-[27rem] sm:max-h-[32rem]">
         <div className="flex-1 flex flex-col gap-3">
-          <div className="bg-card3 rounded-xl px-10 py-6 flex items-center">
-            <h2 className="text-3xl font-semibold text-text">
+          <div className="bg-card3 rounded-xl px-6 py-4 lg:px-10 lg:py-6 flex items-center">
+            <h2 className="text-2xl lg:text-3xl font-semibold text-text">
               Hello, {authUser.name}!
             </h2>
           </div>
-          <div className="bg-card1 px-10 py-10 rounded-xl flex flex-col gap-3 h-full flex-grow justify-center">
-            <h2 className="text-3xl font-bold text-text">GrowHub</h2>
-            <p className="text-text pb-3">
+          <div className="bg-card1 px-6 py-4 lg:px-10 lg:py-10 rounded-xl flex flex-col gap-3 h-full flex-grow justify-center">
+            <h2 className="text-2xl lg:text-3xl font-bold text-text">
+              GrowHub
+            </h2>
+            <p className="text-text text-sm md:text-base pb-3">
               GrowHub adalah aplikasi manajemen yang dirancang untuk membantu
               Anda mengelola kehidupan sehari-hari dengan lebih efektif.
               Aplikasi ini memungkinkan Anda untuk membuat dan melacak to-do
@@ -67,11 +69,11 @@ function HomePage() {
             />
           </div>
         </div>
-        <div className="flex-1 flex flex-col gap-3 ">
-          <h2 className="text-3xl font-bold text-text p-4">
+        <div className="flex-1 flex flex-col gap-3">
+          <h2 className="text-2xl lg:text-3xl font-bold text-text p-4">
             Your Path to Productivity
           </h2>
-          <div className="p-3 rounded-xl overflow-y-auto space-y-2 h-full flex-grow">
+          <div className="p-3 rounded-xl overflow-y-auto space-y-2 h-full flex-grow max-h-[50vh]">
             {todos.map((todo) => (
               <ToDoListCard
                 key={todo.id}
@@ -84,9 +86,11 @@ function HomePage() {
         </div>
       </section>
 
-      <section className=" bg-card4 bg-opacity-60 px-6 py-4 rounded-xl">
-        <h2 className="text-2xl font-bold text-text pb-6">Upcoming goals</h2>
-        <div className="grid grid-cols-3 gap-4">
+      <section className="bg-card4 bg-opacity-60 px-4 py-4 lg:px-6 lg:py-4 rounded-xl">
+        <h2 className="text-2xl font-bold text-text pb-4 lg:pb-6">
+          Upcoming goals
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {upcomingGoals.map((goal) => (
             <UpcomingGoalCard
               key={goal.id}
@@ -105,7 +109,7 @@ function HomePage() {
         <h2 className="text-text text-2xl font-bold mb-4">
           Be the best version!
         </h2>
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <PageCard
             to="/notes"
             title="Notes"
@@ -127,14 +131,14 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="border rounded-3xl p-10 px-16 bg-card3">
+      <section className="border rounded-3xl p-6 lg:p-10 lg:px-16 bg-card3">
         <blockquote className="text-text flex flex-col items-start">
           <p className="text-text">&quot;{quote}&quot;</p>
           <footer className="text-right text-text italic">- {author}</footer>
         </blockquote>
       </section>
 
-      <section className="grid grid-cols-3 gap-6 mb-10">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
         <PageCard
           to="/discussion"
           title="Discussions"

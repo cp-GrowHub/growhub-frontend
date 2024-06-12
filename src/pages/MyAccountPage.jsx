@@ -69,45 +69,40 @@ function MyAccountPage() {
   };
 
   return (
-    <div className="min-h-screen w-full flex">
-      <div className="flex-1 p-10 flex flex-col items-left">
-        <h1 className="text-3xl font-bold text-text mb-3 ml-2">User</h1>
-        <div className="flex space-x-10 w-full">
-          <div
-            className="bg-card1 flex-1 rounded-xl p-10 mb-10"
-            style={{ flexBasis: '70%' }}
-          >
+    <div className="min-h-screen w-[89%] md:w-full flex flex-col md:flex-row px-4">
+      <div className="flex-1 flex flex-col items-left">
+        <h1 className="hidden md:block md:text-3xl font-bold text-text mb-3">
+          User
+        </h1>
+        <div className="flex flex-col md:flex-row w-full gap-3 md:gap-6">
+          <div className="bg-card1 order-2 md:order-1 flex-1 md:flex-[2] rounded-xl p-6 mb-6 md:mb-0">
             <h2 className="text-lg font-bold mb-5 text-white">
               Personal Information
             </h2>
-            <div className="flex flex-row gap-6">
+            <div className="flex flex-col md:flex-row gap-6">
               <div className="flex flex-col gap-4 flex-1">
-                <form className=" flex-1 w-full" onSubmit={handleUpdateName}>
-                  <div className="flex flex-col">
-                    <div className="flex flex-col gap-4">
-                      <FormInput
-                        id="firstName"
-                        label="First Name"
-                        placeholder="first name.."
-                        maxLength="15"
-                        onChange={handleFirstNameChange}
-                      />
-                      <FormInput
-                        id="lastName"
-                        label="Last Name"
-                        placeholder="last name.."
-                        maxLength="15"
-                        onChange={handleLastNameChange}
-                      />
-                    </div>
+                <form className="flex-1 w-full" onSubmit={handleUpdateName}>
+                  <div className="flex flex-col gap-4">
+                    <FormInput
+                      id="firstName"
+                      label="First Name"
+                      placeholder="first name.."
+                      maxLength="15"
+                      onChange={handleFirstNameChange}
+                    />
+                    <FormInput
+                      id="lastName"
+                      label="Last Name"
+                      placeholder="last name.."
+                      maxLength="15"
+                      onChange={handleLastNameChange}
+                    />
                     <div className="flex justify-end">
-                      <div>
-                        <Button type="submit" text="Update Name" />
-                      </div>
+                      <Button type="submit" text="Update Name" />
                     </div>
                   </div>
                 </form>
-                <form className="" onSubmit={handleUpdateEmail}>
+                <form onSubmit={handleUpdateEmail}>
                   <FormInput
                     id="email"
                     label="Email"
@@ -117,16 +112,11 @@ function MyAccountPage() {
                     onChange={handleEmailChange}
                   />
                   <div className="flex justify-end">
-                    <div>
-                      <Button type="submit" text="Update Email" />
-                    </div>
+                    <Button type="submit" text="Update Email" />
                   </div>
                 </form>
               </div>
-              <form
-                className=" flex-1 flex flex-col"
-                onSubmit={handleUpdateBio}
-              >
+              <form className="flex-1 flex flex-col" onSubmit={handleUpdateBio}>
                 <label htmlFor="bio" className="flex flex-col">
                   <span className="text-text mb-2">Bio</span>
                   <textarea
@@ -141,17 +131,12 @@ function MyAccountPage() {
                   />
                 </label>
                 <div className="flex justify-end">
-                  <div>
-                    <Button type="submit" text="Update Bio" />
-                  </div>
+                  <Button type="submit" text="Update Bio" />
                 </div>
               </form>
             </div>
           </div>
-          <div
-            className="bg-card1 flex-1 rounded-xl p-10 mb-10 flex flex-col items-center"
-            style={{ flexBasis: '30%' }}
-          >
+          <div className="bg-card1 order-1 md:order-2 flex-1 rounded-xl p-6 flex flex-col items-center md:mb-0">
             <img
               src={authUser.avatar}
               className="rounded-full bg-card4 w-20 h-20 mb-5"

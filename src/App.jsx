@@ -70,7 +70,7 @@ function App() {
         <>
           <Loading />
           <Sidebar onLogout={onLogout} />
-          <div className="ml-[8rem] flex-1 flex flex-col p-4">
+          <div className="ml-[8vw] md:ml-[8rem] flex-1 flex flex-col px-4 md:p-4">
             <Routes>
               <Route
                 path="/"

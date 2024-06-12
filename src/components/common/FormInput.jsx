@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function FormInput({ label, type = 'text', id, tailwindClass, ...props }) {
   return (
-    <div>
+    <div className="w-full">
       <label htmlFor={id} className="block text-text">
         {label}
         <input

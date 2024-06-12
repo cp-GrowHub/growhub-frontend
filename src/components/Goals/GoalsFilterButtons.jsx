@@ -4,7 +4,7 @@ import OutlineButton from '../common/OutlineButton';
 
 function GoalsFilterButtons({ currentFilter, setFilter }) {
   return (
-    <div className="flex flex-row gap-4">
+    <div className="grid grid-cols-2 md:flex md:flex-row gap-2 sm:gap-4">
       <OutlineButton
         text="Show All"
         onClick={() => setFilter('all')}

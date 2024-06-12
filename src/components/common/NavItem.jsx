@@ -16,17 +16,17 @@ function NavItem({ to, label, Icon }) {
       >
         <div className="flex flex-col items-center">
           <Icon className="mb-1 text-2xl" />
-          <span className="text-sm">{label}</span>
+          <span className="text-sm hidden md:block">{label}</span>
         </div>
       </NavLink>
     </li>
   );
 }
 
-export default NavItem;
-
 NavItem.propTypes = {
   to: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   Icon: PropTypes.elementType.isRequired,
 };
+
+export default NavItem;

@@ -14,8 +14,8 @@ function ToDoListCard({ todo, onToggle, onStatusChange }) {
   };
 
   return (
-    <div className="flex items-center justify-between py-3 px-4 border-card4 bg-card1 rounded-lg">
-      <div className="flex items-center">
+    <div className="flex flex-row items-center justify-between py-3 px-4 border-card4 bg-card1 rounded-lg">
+      <div className="flex items-center w-full sm:w-auto mb-2 sm:mb-0">
         <label
           htmlFor={`checkbox-${todo.name}`}
           className={`w-5 h-5 border-2 rounded-sm relative cursor-pointer mr-2 ${
@@ -39,7 +39,7 @@ function ToDoListCard({ todo, onToggle, onStatusChange }) {
       </div>
       {priorityLabel && (
         <span
-          className={`px-2 py-1 rounded ${
+          className={`px-2 py-1 rounded max-w-xs truncate ${
             priorityLabel === 'High Priority' ? 'bg-red-500' : 'bg-yellow-500'
           }`}
         >

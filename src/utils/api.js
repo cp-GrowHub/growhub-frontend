@@ -25,7 +25,12 @@ const api = (() => {
     (error) => {
       if (error.response) {
         const { status, data } = error.response;
-        if (status === 401 && data.message === 'Token is no longer valid') {
+        if (
+          status === 401 &&
+          (data.message === 'Token has expired' ||
+            data.message === 'Token is no longer valid' ||
+            data.message === 'Invalid token')
+        ) {
           // Jika status 401 dan pesan adalah 'Token is no longer valid', unset auth user
           store.dispatch(asyncUnsetAuthUser());
         }

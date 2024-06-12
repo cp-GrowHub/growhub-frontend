@@ -20,15 +20,15 @@ function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-row justify-end  p-5">
-      <div className=" bg-card1 min-h-full w-1/2 rounded-xl flex items-center justify-center p-5">
-        <div className="bg-card2 p-8 rounded-lg shadow-md h-full min-w-full flex items-center justify-center">
+    <div className="min-h-screen w-full flex flex-col md:flex-row justify-center md:justify-end p-5">
+      <div className="bg-card1 w-full sm:w-3/4 md:w-1/2 lg:w-1/2 xl:w-1/3 rounded-xl flex items-center justify-center p-5 shadow-md">
+        <div className="bg-card2 p-8 rounded-lg h-full w-full flex flex-col items-center justify-center">
           <div className="w-full">
             <h2 className="text-3xl font-bold mb-6 text-text">
               Create Account
             </h2>
             <form onSubmit={onRegister} className="flex flex-col gap-4">
-              <div className="flex flex-row gap-4">
+              <div className="flex flex-col md:flex-row gap-4 justify-between">
                 <FormInput
                   label="First Name"
                   id="firstName"

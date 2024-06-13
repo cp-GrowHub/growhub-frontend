@@ -53,7 +53,7 @@ export default function BlogCard({ blogs, users }) {
                 </p>
               </div>
             </div>
-            <div className="px-10">
+            <div className="px-4 md:px-10">
               <h2 className="text-text text-2xl font-bold">{blog.title}</h2>
               <div className="flex space-x-2">
                 {tagsArray.map((tag) => (

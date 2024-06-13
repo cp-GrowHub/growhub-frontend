@@ -20,18 +20,14 @@ function NotesPage() {
   } = useNotes(keyword);
 
   return (
-    <div className="flex flex-col min-h-[90vh]">
-      <header className="p-3 md:px-10 md:bg-card1">
-        <div className=" bg-card1 flex flex-col md:flex-row justify-between items-center rounded-lg gap-2">
-          <div className="flex items-center">
-            <NotesFilterButton currentFilter={filter} setFilter={setFilter} />
-          </div>
-          <SearchForm
-            searchKeyword={keyword}
-            onSearch={onKeywordChange}
-            resetSearch={resetKeyword}
-          />
-        </div>
+    <div className="flex flex-col min-h-[90vh] max-w-[40vh] md:max-w-full">
+      <header className="pl-5 pt-3 md:px-10 md:py-4 md:bg-card1 rounded-lg flex flex-col gap-1 md:flex-row justify-between">
+        <NotesFilterButton currentFilter={filter} setFilter={setFilter} />
+        <SearchForm
+          searchKeyword={keyword}
+          onSearch={onKeywordChange}
+          resetSearch={resetKeyword}
+        />
       </header>
       <div className="flex flex-col md:flex-row gap-3 md:gap-5 pl-4 md:p-5 flex-1">
         <div className="order-2 md:order-1 flex flex-col flex-[1] rounded-lg max-h-[75vh]">

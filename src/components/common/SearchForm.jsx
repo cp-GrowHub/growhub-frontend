@@ -13,7 +13,7 @@ function SearchForm({ searchKeyword, onSearch, resetSearch }) {
       onSubmit={onSubmitHandler}
       className="flex items-center border-2 rounded-xl px-1"
     >
-      <button type="submit" className="ml-2 p-2 rounded-lg bg-card1">
+      <button type="submit" className="p-2 rounded-lg bg-card1">
         <FaSearch className="text-white" />
       </button>
       <input
@@ -21,7 +21,7 @@ function SearchForm({ searchKeyword, onSearch, resetSearch }) {
         value={searchKeyword}
         onChange={onSearch}
         placeholder="Search Word..."
-        className="bg-card1 text-text p-2 rounded-lg focus:outline-none"
+        className="bg-card1 text-text p-2 rounded-lg focus:outline-none max-w-[90%] md:max-w-full"
       />
     </form>
   );

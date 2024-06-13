@@ -33,7 +33,7 @@ function NotesPage() {
           />
         </div>
       </header>
-      <div className="flex flex-col md:flex-row gap-5 p-4 md:p-5 flex-1">
+      <div className="flex flex-col md:flex-row gap-3 md:gap-5 pl-4 md:p-5 flex-1">
         <div className="order-2 md:order-1 flex flex-col flex-[1] rounded-lg max-h-[75vh]">
           <div className="overflow-y-auto flex-grow flex flex-col gap-2">
             {filteredNotes.map((note) => (

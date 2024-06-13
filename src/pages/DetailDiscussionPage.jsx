@@ -88,10 +88,10 @@ export default function DetailDiscussionPage() {
   };
 
   return (
-    <div className="min-h-[90vh] text-text px-10 py-4 flex flex-col justify-between">
+    <div className="min-h-[90vh] text-text pl-4 md:px-10 pt-2 md:py-4 flex flex-col justify-between">
       <div className="rounded-lg flex flex-col gap-4">
-        <div className="bg-card1 px-8 py-6 flex flex-col gap-2">
-          <div className="flex flex-row space-x-2 ">
+        <div className="bg-card1 px-4 py-2 md:px-8 md:py-6 flex flex-col gap-2">
+          <div className="flex flex-wrap gap-2 ">
             {detailDiscussion.tags.map((tag) => (
               <span key={tag} className="text-gray-400 text-sm">
                 #{tag}
@@ -102,31 +102,34 @@ export default function DetailDiscussionPage() {
             <h1 className="text-2xl font-bold">{detailDiscussion.title}</h1>
             <p className="text-text">{parse(detailDiscussion.body)}</p>
           </div>
-          <div className="flex flex-row items-center space-x-4">
-            <button
-              onClick={handleUpvote}
-              className="flex items-center space-x-1"
-            >
-              <FaThumbsUp />
-              <span>{detailDiscussion.upVotes.length}</span>
-            </button>
-            <button
-              onClick={handleDownvote}
-              className="flex items-center space-x-1"
-            >
-              <FaThumbsDown />
-              <span>{detailDiscussion.downVotes.length}</span>
-            </button>
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+            <div className="flex flex-row gap-4 self-start">
+              <button
+                onClick={handleUpvote}
+                className="flex items-center space-x-1"
+              >
+                <FaThumbsUp />
+                <span>{detailDiscussion.upVotes.length}</span>
+              </button>
+              <button
+                onClick={handleDownvote}
+                className="flex items-center space-x-1"
+              >
+                <FaThumbsDown />
+                <span>{detailDiscussion.downVotes.length}</span>
+              </button>
+            </div>
+
             {ownerUser && (
               <div className="flex flex-row items-center gap-2">
-                <p>Dibuat oleh</p>
+                <p className="text-sm md:text-base">Dibuat oleh</p>
                 <img
                   src={ownerUser.avatar}
                   alt={ownerUser.name}
                   className="w-6 h-6 rounded-full"
                 />
-                <p>{ownerUser.name}</p>
-                <p className="text-sm">
+                <p className="text-sm md:text-base">{ownerUser.name}</p>
+                <p className="text-xs md:text-sm">
                   {postedAt(detailDiscussion.createdAt)}
                 </p>
               </div>
@@ -162,7 +165,7 @@ export default function DetailDiscussionPage() {
           })}
         </div>
       </div>
-      <div className="mt-4 flex items-center px-40">
+      <div className="mt-4 flex flex-col gap-2 md:gap-0 items-center md:px-40 md:flex-row">
         <input
           type="text"
           value={comment}
@@ -173,7 +176,7 @@ export default function DetailDiscussionPage() {
         />
         <button
           onClick={handleAddComment}
-          className="ml-2 p-2 bg-text text-bekgron rounded-lg"
+          className="p-1 md:ml-2 md:p-2 bg-text text-bekgron rounded-lg"
         >
           Add Comment
         </button>

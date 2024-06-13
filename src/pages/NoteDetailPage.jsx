@@ -32,17 +32,21 @@ function NoteDetailPage() {
 
   if (isOwner) {
     return (
-      <div className="p-8">
-        <div className="flex flex-col min-h-[80vh] p-10 bg-card1 rounded-lg">
-          <div className="flex flex-col justify-between p-10 h-full">
-            <div>
-              <h2 className="text-2xl font-bold text-text">
-                {detailNote.title}
-              </h2>
-              <p className="text-text">{postedAt(detailNote.createdAt)}</p>
-              <p className="text-text">{detailNote.body}</p>
+      <div className="pl-4 pt-2 md:p-8">
+        <div className="min-h-[80vh] md:p-10 bg-card1 rounded-lg h-full">
+          <div className="flex flex-col justify-between h-full">
+            <div className="flex flex-col gap-2 p-4 md:p-0">
+              <div className="flex flex-col justify-between">
+                <h2 className="text-xl md:text-2xl font-bold text-text">
+                  {detailNote.title}
+                </h2>
+                <p className="text-text text-sm">
+                  {postedAt(detailNote.createdAt)}
+                </p>
+              </div>
+              <p className="text-text text-md ">{detailNote.body}</p>
             </div>
-            <div className="mt-4 flex flex-row gap-5">
+            <div className="flex flex-row gap-2 p-3 md:p-0 md:gap-5">
               <button
                 className="py-2 px-4 bg-bekgron text-text rounded-lg hover:bg-text hover:text-bekgron"
                 onClick={() => navigate('/notes')}

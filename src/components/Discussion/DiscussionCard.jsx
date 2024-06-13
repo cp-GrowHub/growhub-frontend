@@ -28,7 +28,7 @@ export default function DiscussionCard({ discussions, users }) {
   };
 
   return (
-    <div className="px-3">
+    <div className="md:px-3">
       {discussions.map((discussion) => {
         if (!discussion) return null;
 
@@ -65,14 +65,14 @@ export default function DiscussionCard({ discussions, users }) {
                 </p>
               </div>
             </div>
-            <div className="px-10">
+            <div className="px-4 md:px-10">
               <h2 className="text-text text-xl font-bold mb-2">
                 {discussion.title}
               </h2>
               <p className="text-text mb-4">
                 {truncateBody(discussion.body, 100)}
               </p>
-              <div className="flex space-x-2">
+              <div className="flex space-x-2 truncate">
                 {tagsArray.map((tag) => (
                   <span key={tag} className="text-gray-400">
                     #{tag}

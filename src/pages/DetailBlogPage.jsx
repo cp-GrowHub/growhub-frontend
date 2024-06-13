@@ -40,7 +40,7 @@ export default function DetailBlogPage() {
   const isOwner = authUser && detailBlog.ownerId === authUser.id;
 
   return (
-    <div className="flex flex-row min-h-[90vh] text-text gap-8 p-4">
+    <div className="flex flex-col md:flex-row min-h-[90vh] text-text pl-4 pt-2 gap-2 md:gap-8 md:p-4">
       <div className="bg-card1 flex-[4] rounded-2xl">
         <div className="p-8 flex flex-col gap-2">
           <div className="flex items-center">
@@ -61,7 +61,9 @@ export default function DetailBlogPage() {
           </div>
           <div className="flex flex-col gap-2">
             <div>
-              <h1 className="text-2xl font-bold">{detailBlog.title}</h1>
+              <h1 className="text-xl md:text-2xl font-bold">
+                {detailBlog.title}
+              </h1>
               <div className="flex space-x-2">
                 {detailBlog.tags.map((tag) => {
                   return (
@@ -72,7 +74,7 @@ export default function DetailBlogPage() {
                 })}
               </div>
             </div>
-            <p>{parse(detailBlog.body)}</p>
+            <p className="text-sm md:text-base">{parse(detailBlog.body)}</p>
           </div>
         </div>
       </div>
@@ -90,7 +92,7 @@ export default function DetailBlogPage() {
             <span className="text-sm">{ownerBlog.bio}</span>
           </div>
         </div>
-        <div className="flex flex-col gap-4 px-10 py-4">
+        <div className="flex flex-col gap-4 py-2 md:py-4">
           {isOwner && (
             <button
               className="py-2 px-4 bg-red-900 text-text rounded-lg hover:bg-red-700 hover:text-text"

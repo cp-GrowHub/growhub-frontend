@@ -4,7 +4,7 @@ import OutlineButton from '../common/OutlineButton';
 
 function NotesFilterButton({ currentFilter, setFilter }) {
   return (
-    <div className="flex flex-row gap-4">
+    <div className="flex flex-row gap-1 md:gap-4">
       <OutlineButton
         text="Show All"
         onClick={() => setFilter('All')}

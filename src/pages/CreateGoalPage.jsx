@@ -19,12 +19,15 @@ function CreateGoalPage() {
   };
 
   return (
-    <div className="flex flex-col">
-      <div className=" flex-1 pt-40 px-40">
+    <div className="flex flex-col pl-4 py-40 md:p-4">
+      <div className=" flex-1 md:pt-40 md:px-40">
         <Header className="border-b-2 pb-3">Create your new Goal!</Header>
       </div>
       <div className=" bg-bekgron text-text flex flex-col items-center justify-center p-6">
-        <form onSubmit={onSubmitHandler} className="w-full px-64">
+        <form
+          onSubmit={onSubmitHandler}
+          className="w-full max-w-lg px-4 md:max-w-[50%] md:px-0"
+        >
           <div className="mb-6">
             <label
               className="block text-sm font-semibold mb-2"

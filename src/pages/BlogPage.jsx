@@ -98,21 +98,19 @@ function BlogPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-[90vh]">
-      <header className="bg-card1 flex flex-row p-3 px-10 justify-between items-center">
-        <div className="flex items-center text-text">
-          <h1 className="text-2xl font-semibold">Blog Page</h1>
-        </div>
+    <div className="flex flex-col min-h-[90vh] pl-4 md:pl-0">
+      <header className="bg-card1 flex flex-col md:flex-row gap-2 md:gap-0 p-3 md:px-10 justify-between items-center">
+        <h1 className="text-text text-2xl font-semibold">Blog Page</h1>{' '}
         <SearchForm
           searchKeyword={keyword}
           onSearch={onKeywordChange}
           resetSearch={resetKeyword}
         />
       </header>
-      <div className="flex flex-row">
-        <div className="flex-[5] p-6 px-10">
+      <div className="flex flex-col md:flex-row">
+        <div className="flex-1 md:flex-[5] p-4 md:p-6 md:px-10">
           <div className="flex flex-col text-text gap-3">
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-col md:flex-row justify-between gap-2 md:gap-0">
               <div className="flex flex-row gap-4">
                 <OutlineButton
                   text="Latest"
@@ -134,34 +132,30 @@ function BlogPage() {
                 + Create new blog
               </button>
             </div>
-            <div>
-              <BlogCard blogs={filteredBlogs} users={users} />
-            </div>
+            <BlogCard blogs={filteredBlogs} users={users} />
           </div>
         </div>
-        <div className="flex-[1] pt-10">
-          <div>
-            <h2 className="text-text text-lg font-semibold">trending now</h2>
-            {sortedBlogs.slice(0, 5).map((blog) => (
-              <div
-                key={blog.id}
-                className="my-2 text-text bg-card1 px-4 py-2 hover:bg-card2"
-                role="button"
-                tabIndex={0}
-                onClick={() => handleCardClick(blog.id)}
-                onKeyDown={(event) => handleKeyDown(event, blog.id)}
-              >
-                <h3 className="text-md ">{blog.title}</h3>
-                <div className="flex space-x-2">
-                  {blog.tags.map((tag) => (
-                    <span key={tag} className="text-gray-400 text-sm">
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
+        <div className="md:flex-[1] p-4 md:pt-10">
+          <h2 className="text-text text-lg font-semibold">Trending Now</h2>
+          {sortedBlogs.slice(0, 5).map((blog) => (
+            <div
+              key={blog.id}
+              className="my-2 text-text bg-card1 px-4 py-2 hover:bg-card2 cursor-pointer rounded-md"
+              role="button"
+              tabIndex={0}
+              onClick={() => handleCardClick(blog.id)}
+              onKeyDown={(event) => handleKeyDown(event, blog.id)}
+            >
+              <h3 className="text-md">{blog.title}</h3>
+              <div className="flex space-x-2">
+                {blog.tags.map((tag) => (
+                  <span key={tag} className="text-gray-400 text-sm">
+                    #{tag}
+                  </span>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

@@ -21,21 +21,27 @@ export default function CreateBlogForm({ onSubmit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-10 px-32 flex flex-col gap-4 ">
-      <div className=' flex flex-col'>
-        <label htmlFor="blogTitle" className="flex flex-col">Blog Title</label>
-        <input
+    <form
+      onSubmit={handleSubmit}
+      className="md:p-10 md:px-32 flex flex-col md:gap-4 gap-2"
+    >
+      <div className=" flex flex-col">
+        <label htmlFor="blogTitle" className="flex flex-col">
+          Blog Title
+          <input
             type="text"
             id="blogTitle"
             value={title}
             onChange={handleTitleChange}
-            className="text-text bg-card2 text-xl outline-none px-4 py-2 rounded-xl"
+            className="text-text bg-card2 text-xl px-4 py-2 rounded-xl outline-none"
             maxLength="60"
-        />
-        <span>{60 - title.length} characters remaining</span>
+          />
+          <span>{60 - title.length} characters remaining</span>
+        </label>
       </div>
-      <div className=' flex flex-col'>
-        <label htmlFor="blogTags" className="flex flex-col">Blog Category (tags)</label>
+      <div className=" flex flex-col">
+        <label htmlFor="blogTags" className="flex flex-col">
+          Blog Category (tags)
           <input
             type="text"
             id="blogTags"
@@ -43,20 +49,23 @@ export default function CreateBlogForm({ onSubmit }) {
             onChange={handleTagsChange}
             className="text-text bg-card2 text-xl px-4 py-2 rounded-xl outline-none"
           />
+        </label>
       </div>
       <div>
-        <div id="blogBodyLabel" className="flex flex-col">Blog Content</div>
-          <div
-            aria-labelledby="blogBodyLabel"
-            id="discussionBody"
-            ref={bodyRef}
-            contentEditable
-            className="text-text h-52 bg-card2 px-4 py-2 rounded-xl outline-none"
-            style={{ minHeight: '200px' }}
-          />
+        <div id="blogBodyLabel" className="flex flex-col">
+          Blog Content
+        </div>
+        <div
+          aria-labelledby="blogBodyLabel"
+          id="blogBody"
+          ref={bodyRef}
+          contentEditable
+          className="text-text h-52 bg-card2 px-4 py-2 rounded-xl outline-none"
+          style={{ minHeight: '200px' }}
+        />
       </div>
       <button type="submit" className="bg-text text-bekgron p-2 rounded-3xl">
-        Create new discussion
+        Create new blog
       </button>
     </form>
   );

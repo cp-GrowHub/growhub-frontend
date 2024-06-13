@@ -21,9 +21,13 @@ export default function CreateDiscussionForm({ onSubmit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-10 px-32 flex flex-col gap-4 ">
-      <div className=' flex flex-col'>
-        <label htmlFor="discussionTitle" className="flex flex-col">Discussion Title</label>
+    <form
+      onSubmit={handleSubmit}
+      className="md:p-10 md:px-32 flex flex-col md:gap-4 gap-2"
+    >
+      <div className=" flex flex-col">
+        <label htmlFor="discussionTitle" className="flex flex-col">
+          Discussion Title
           <input
             type="text"
             id="discussionTitle"
@@ -33,9 +37,11 @@ export default function CreateDiscussionForm({ onSubmit }) {
             maxLength="60"
           />
           <span>{60 - title.length} characters remaining</span>
+        </label>
       </div>
-      <div className=' flex flex-col'>
-        <label htmlFor="discussionTags" className="flex flex-col">Discussion Category (tags)</label>
+      <div className=" flex flex-col">
+        <label htmlFor="discussionTags" className="flex flex-col">
+          Discussion Category (tags)
           <input
             type="text"
             id="discussionTags"
@@ -43,17 +49,20 @@ export default function CreateDiscussionForm({ onSubmit }) {
             onChange={handleTagsChange}
             className="text-text bg-card2 text-xl px-4 py-2 rounded-xl outline-none"
           />
+        </label>
       </div>
       <div>
-        <div id="discussionBodyLabel" className="flex flex-col">Discussion Body</div>
-          <div
-            aria-labelledby="discussionBodyLabel"
-            id="discussionBody"
-            ref={bodyRef}
-            contentEditable
-            className="text-text h-52 bg-card2 px-4 py-2 rounded-xl outline-none"
-            style={{ minHeight: '200px' }}
-          />
+        <div id="discussionBodyLabel" className="flex flex-col">
+          Discussion Body
+        </div>
+        <div
+          aria-labelledby="discussionBodyLabel"
+          id="discussionBody"
+          ref={bodyRef}
+          contentEditable
+          className="text-text h-52 bg-card2 px-4 py-2 rounded-xl outline-none"
+          style={{ minHeight: '200px' }}
+        />
       </div>
       <button type="submit" className="bg-text text-bekgron p-2 rounded-3xl">
         Create new discussion

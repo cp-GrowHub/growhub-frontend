@@ -61,8 +61,8 @@ export default function DiscussionPage() {
   }
 
   return (
-    <div className="flex flex-col min-h-[90vh]">
-      <header className="bg-card1 flex flex-row p-3 px-10 justify-between items-center">
+    <div className="flex flex-col min-h-[90vh] pl-4 pt-2 md:p-0">
+      <header className="bg-card1 flex flex-col md:flex-row gap-1 pb-2 md:p-3 md:px-10 justify-between items-center">
         <div className="flex items-center text-text">
           <h1 className="text-2xl font-semibold">Discussion Page</h1>
         </div>
@@ -73,7 +73,7 @@ export default function DiscussionPage() {
         />
       </header>
       <div className="flex flex-col text-text p-3 gap-3">
-        <div className="flex flex-row justify-between p-4">
+        <div className="flex flex-col md:flex-row justify-between gap-2 md:gap-0 md:p-4">
           <div className="flex flex-row gap-4">
             <OutlineButton
               text="Latest"
@@ -95,10 +95,8 @@ export default function DiscussionPage() {
             + Create new post
           </button>
         </div>
-        <div>
-          <DiscussionCard discussions={filteredDiscussions} users={users} />
-        </div>
       </div>
+      <DiscussionCard discussions={filteredDiscussions} users={users} />
     </div>
   );
 }

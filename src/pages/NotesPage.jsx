@@ -20,7 +20,7 @@ function NotesPage() {
   } = useNotes(keyword);
 
   return (
-    <div className="flex flex-col min-h-[90vh] max-w-[40vh] md:max-w-full">
+    <div className="flex flex-col min-h-[90vh] max-w-[44vh] md:max-w-full">
       <header className="pl-5 pt-3 md:px-10 md:py-4 md:bg-card1 rounded-lg flex flex-col gap-1 md:flex-row justify-between">
         <NotesFilterButton currentFilter={filter} setFilter={setFilter} />
         <SearchForm

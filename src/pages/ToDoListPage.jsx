@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaRegFrownOpen } from 'react-icons/fa';
 import ToDoListHeader from '../components/ToDoList/ToDoListHeader';
 import ToDoItem from '../components/ToDoList/ToDoItem';
 import AddTaskForm from '../components/ToDoList/AddTaskForm';
@@ -47,18 +48,27 @@ function ToDoListPage() {
   };
 
   return (
-    <section className="pl-3 md:p-20 flex flex-col gap-4">
+    <section className="pl-3 md:p-12 md:px-20 flex flex-col gap-4">
       <ToDoListHeader />
       <div className="overflow-y-auto p-3 md:p-5 md:px-10 max-h-[28rem] rounded-lg">
-        {todos.map((todo) => (
-          <ToDoItem
-            key={todo.id}
-            todo={todo}
-            onToggleUpdate={() => toggleTodoHandler(todo.id)}
-            onToggleDelete={() => handleDeleteRequest(todo.id)}
-            onStatusChange={handleToggleTodo}
-          />
-        ))}
+        {todos.length === 0 ? (
+          <div className="flex flex-col items-center justify-center gap-2 bg-card1 p-5 rounded-lg">
+            <FaRegFrownOpen className="h-12 w-12 text-text" />
+            <span className="text-center text-text font-bold md:text-xl">
+              No tasks found!
+            </span>
+          </div>
+        ) : (
+          todos.map((todo) => (
+            <ToDoItem
+              key={todo.id}
+              todo={todo}
+              onToggleUpdate={() => toggleTodoHandler(todo.id)}
+              onToggleDelete={() => handleDeleteRequest(todo.id)}
+              onStatusChange={handleToggleTodo}
+            />
+          ))
+        )}
       </div>
       <div className="p-3 md:p-4">
         <AddTaskForm onSubmitCreate={handleCreateTodo} />

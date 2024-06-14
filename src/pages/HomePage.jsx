@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { FaRegFrownOpen } from 'react-icons/fa';
 import PageCard from '../components/HomePage/PageCard';
 import UpcomingGoalCard from '../components/HomePage/UpcomingGoalCard';
 import ToDoListCard from '../components/HomePage/ToDoListCard';
@@ -74,14 +75,23 @@ function HomePage() {
             Your Path to Productivity
           </h2>
           <div className="p-3 rounded-xl overflow-y-auto space-y-2 h-full flex-grow max-h-[50vh]">
-            {todos.map((todo) => (
-              <ToDoListCard
-                key={todo.id}
-                todo={todo}
-                onToggle={() => toggleTodoHandler(todo.id)}
-                onStatusChange={handleToggleTodo}
-              />
-            ))}
+            {todos.length === 0 ? (
+              <div className="flex flex-col items-center justify-center gap-2 bg-card1 p-5 ">
+                <FaRegFrownOpen className="h-12 w-12 text-text" />
+                <span className="text-center text-text font-bold md:text-xl">
+                  No tasks found!
+                </span>
+              </div>
+            ) : (
+              todos.map((todo) => (
+                <ToDoListCard
+                  key={todo.id}
+                  todo={todo}
+                  onToggle={() => toggleTodoHandler(todo.id)}
+                  onStatusChange={handleToggleTodo}
+                />
+              ))
+            )}
           </div>
         </div>
       </section>
@@ -91,17 +101,24 @@ function HomePage() {
           Upcoming goals
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {upcomingGoals.map((goal) => (
-            <UpcomingGoalCard
-              key={goal.id}
-              title={goal.name}
-              daysLeft={
-                (new Date(goal.deadline) - new Date()) / (1000 * 60 * 60 * 24)
-              }
-              isFinished={goal.finished}
-              onToggleFinish={() => handleGoalToggle(goal.id)}
-            />
-          ))}
+          {upcomingGoals.length === 0 ? (
+            <div className="col-span-full py-4 text-center text-text bg-card1 rounded-xl font-semibold md:text-xl flex flex-col items-center">
+              <FaRegFrownOpen className="text-4xl mb-2" />
+              No goals found!
+            </div>
+          ) : (
+            upcomingGoals.map((goal) => (
+              <UpcomingGoalCard
+                key={goal.id}
+                title={goal.name}
+                daysLeft={
+                  (new Date(goal.deadline) - new Date()) / (1000 * 60 * 60 * 24)
+                }
+                isFinished={goal.finished}
+                onToggleFinish={() => handleGoalToggle(goal.id)}
+              />
+            ))
+          )}
         </div>
       </section>
 

@@ -61,7 +61,7 @@ function LoginPage() {
       </div>
 
       <div className="hidden md:flex md:flex-1 items-center justify-center">
-        <div className="flex flex-row text-text items-center gap-8 bg-card1 hover:bg-bekgron hover:border-[1px] p-4 px-10 rounded-3xl  group">
+        <div className="flex flex-row text-text items-center gap-8 bg-card2 hover:bg-bekgron hover:border-[1px] p-4 px-10 rounded-3xl  group">
           <img
             src="/logo.svg"
             alt="icon"

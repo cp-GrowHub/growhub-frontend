@@ -22,7 +22,7 @@ function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col md:flex-row justify-center md:justify-between p-5">
+    <div className="min-h-screen w-full flex flex-col md:flex-row justify-center md:justify-between p-5 gap-4">
       <div className="bg-card1 w-full sm:w-3/4 md:w-1/2 lg:w-1/2 xl:w-1/3 rounded-xl flex items-center justify-center p-5 shadow-md">
         <div className="bg-card2 p-8 rounded-lg h-full w-full flex flex-col items-center justify-center">
           <div className="w-full">
@@ -75,9 +75,9 @@ function LoginPage() {
               memiliki beberapa fitur utama, termasuk autentikasi pengguna untuk{' '}
               <em>register</em> dan <em>login</em>, <em>Homepage</em>,{' '}
               <em>To-Do List</em>, <em>Goals</em>, <em>Notes</em>,{' '}
-              <em>Discussion</em>, dan <em>Blog</em>. Serta memiliki fitur
-              berbagi untuk catatan dan blog untuk <em>guest</em> atau{' '}
-              <em>registered user</em>.
+              <em>Discussion</em>, dan <em>Blog</em>. Serta memiliki fitur untuk
+              berbagi catatan atau blog sehingga <em>guest</em> atau{' '}
+              <em>registered user</em> lain dapat membacanya.
             </p>
             <div className="absolute top-0 left-[10rem] mt-[0.4rem] hidden group-hover:block">
               <a

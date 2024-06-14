@@ -61,13 +61,13 @@ function LoginPage() {
       </div>
 
       <div className="hidden md:flex md:flex-1 items-center justify-center">
-        <div className="flex flex-row text-text items-center gap-8 bg-card2 hover:bg-bekgron hover:border-[1px] p-4 px-10 rounded-3xl  group">
+        <div className="flex flex-row text-text items-center gap-8 bg-card2 hover:bg-bekgron hover:border-[1px] p-7 px-10 rounded-3xl  group">
           <img
             src="/logo.svg"
             alt="icon"
             className="object-cover rounded-3xl w-40 h-40"
           />
-          <div className="flex flex-col gap-1 relative">
+          <div className="flex flex-col relative">
             <h1 className="text-3xl font-bold">GrowHub</h1>
             <p className="text-lg max-w-[50rem]">
               GrowHub adalah aplikasi yang dirancang untuk membantu pengguna

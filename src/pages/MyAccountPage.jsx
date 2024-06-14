@@ -69,7 +69,7 @@ function MyAccountPage() {
   };
 
   return (
-    <div className="min-h-screen w-[89%] md:w-full flex flex-col md:flex-row px-4">
+    <div className="min-h-screen w-[89%] md:w-full md:py-8 flex flex-col md:flex-row px-4">
       <div className="flex-1 flex flex-col items-left">
         <h1 className="hidden md:block md:text-3xl font-bold text-text mb-3">
           User

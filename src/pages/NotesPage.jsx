@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaRegFrownOpen } from 'react-icons/fa';
 import NotesFilterButton from '../components/Notes/NotesFilterButton';
 import SearchForm from '../components/common/SearchForm';
 import NotesItemCard from '../components/Notes/NotesItemCard';
@@ -32,20 +33,29 @@ function NotesPage() {
       <div className="flex flex-col md:flex-row gap-3 md:gap-5 pl-4 md:p-5 flex-1">
         <div className="order-2 md:order-1 flex flex-col flex-[1] rounded-lg max-h-[75vh]">
           <div className="overflow-y-auto flex-grow flex flex-col gap-2">
-            {filteredNotes.map((note) => (
-              <button
-                key={note.id}
-                onClick={() => handleNoteClick(note.id)}
-                className="text-left w-full"
-              >
-                <NotesItemCard
-                  title={note.title}
-                  archived={note.archived}
-                  content={note.body}
-                  date={postedAt(note.createdAt)}
-                />
-              </button>
-            ))}
+            {filteredNotes.length === 0 ? (
+              <div className="flex flex-col items-center justify-center gap-2 bg-card1 p-5 rounded-lg">
+                <FaRegFrownOpen className="h-12 w-12 text-text" />
+                <span className="text-center text-text font-bold md:text-xl">
+                  No notes found!
+                </span>
+              </div>
+            ) : (
+              filteredNotes.map((note) => (
+                <button
+                  key={note.id}
+                  onClick={() => handleNoteClick(note.id)}
+                  className="text-left w-full"
+                >
+                  <NotesItemCard
+                    title={note.title}
+                    archived={note.archived}
+                    content={note.body}
+                    date={postedAt(note.createdAt)}
+                  />
+                </button>
+              ))
+            )}
           </div>
           <button
             className="mt-2 py-2 bg-text text-bekgron rounded-lg"

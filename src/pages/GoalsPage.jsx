@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
-import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
+import { FaCheckCircle, FaTimesCircle, FaRegFrownOpen } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import useGoals from '../hooks/useGoals';
 import UpcomingGoalCard from '../components/HomePage/UpcomingGoalCard';
@@ -72,17 +72,24 @@ function GoalsPage() {
           Upcoming goals
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {upcomingGoals.map((goal) => (
-            <UpcomingGoalCard
-              key={goal.id}
-              title={goal.name}
-              daysLeft={
-                (new Date(goal.deadline) - new Date()) / (1000 * 60 * 60 * 24)
-              }
-              isFinished={goal.finished}
-              onToggleFinish={() => handleGoalToggle(goal.id)}
-            />
-          ))}
+          {upcomingGoals.length === 0 ? (
+            <div className="col-span-full py-4 text-center text-text bg-card1 rounded-xl font-semibold md:text-xl flex flex-col items-center">
+              <FaRegFrownOpen className="text-4xl mb-2" />
+              No goals found!
+            </div>
+          ) : (
+            upcomingGoals.map((goal) => (
+              <UpcomingGoalCard
+                key={goal.id}
+                title={goal.name}
+                daysLeft={
+                  (new Date(goal.deadline) - new Date()) / (1000 * 60 * 60 * 24)
+                }
+                isFinished={goal.finished}
+                onToggleFinish={() => handleGoalToggle(goal.id)}
+              />
+            ))
+          )}
         </div>
       </section>
       <section className="p-4 rounded-xl">
@@ -98,35 +105,42 @@ function GoalsPage() {
           </button>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 overflow-y-auto max-h-80">
-          {filteredGoals.map((goal) => (
-            <div
-              key={goal.id}
-              className="bg-card2 p-3 md:px-6 rounded-lg shadow-md text-text flex flex-col"
-            >
-              <button
-                onClick={() => handleGoalToggle(goal.id)}
-                className="text-2xl self-start py-2"
-              >
-                {goal.finished ? (
-                  <FaCheckCircle className="text-green-500" />
-                ) : (
-                  <FaTimesCircle className="text-red-500" />
-                )}
-              </button>
-              <p className="text-sm">
-                {(() => {
-                  const daysLeft = Math.round(
-                    (new Date(goal.deadline) - new Date()) /
-                      (1000 * 60 * 60 * 24)
-                  );
-                  return daysLeft >= 0
-                    ? `${daysLeft} days left`
-                    : `${Math.abs(daysLeft)} days overdue`;
-                })()}
-              </p>
-              <p className="font-semibold text-lg">{goal.name}</p>
+          {filteredGoals.length === 0 ? (
+            <div className="col-span-full py-4 text-center text-text bg-card1 rounded-xl font-semibold md:text-xl flex flex-col items-center">
+              <FaRegFrownOpen className="text-4xl mb-2" />
+              No goals found!
             </div>
-          ))}
+          ) : (
+            filteredGoals.map((goal) => (
+              <div
+                key={goal.id}
+                className="bg-card2 p-3 md:px-6 rounded-lg shadow-md text-text flex flex-col"
+              >
+                <button
+                  onClick={() => handleGoalToggle(goal.id)}
+                  className="text-2xl self-start py-2"
+                >
+                  {goal.finished ? (
+                    <FaCheckCircle className="text-green-500" />
+                  ) : (
+                    <FaTimesCircle className="text-red-500" />
+                  )}
+                </button>
+                <p className="text-sm">
+                  {(() => {
+                    const daysLeft = Math.round(
+                      (new Date(goal.deadline) - new Date()) /
+                        (1000 * 60 * 60 * 24)
+                    );
+                    return daysLeft >= 0
+                      ? `${daysLeft} days left`
+                      : `${Math.abs(daysLeft)} days overdue`;
+                  })()}
+                </p>
+                <p className="font-semibold text-lg">{goal.name}</p>
+              </div>
+            ))
+          )}
         </div>
       </section>
       <ConfirmModal

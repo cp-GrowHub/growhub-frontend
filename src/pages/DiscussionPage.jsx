@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { FaRegFrownOpen } from 'react-icons/fa';
 import DiscussionCard from '../components/Discussion/DiscussionCard';
 import SearchForm from '../components/common/SearchForm';
 import useInput from '../hooks/useInput';
@@ -96,7 +97,14 @@ export default function DiscussionPage() {
           </button>
         </div>
       </div>
-      <DiscussionCard discussions={filteredDiscussions} users={users} />
+      {filteredDiscussions.length === 0 ? (
+        <div className="flex flex-col items-center justify-center gap-2 bg-card1 p-5 rounded-lg text-text font-semibold md:text-xl">
+          <FaRegFrownOpen className="text-4xl mb-2" />
+          No discussions found!
+        </div>
+      ) : (
+        <DiscussionCard discussions={filteredDiscussions} users={users} />
+      )}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { FaRegFrownOpen } from 'react-icons/fa';
 import useInput from '../hooks/useInput';
 import SearchForm from '../components/common/SearchForm';
 import OutlineButton from '../components/common/OutlineButton';
@@ -100,7 +101,7 @@ function BlogPage() {
   return (
     <div className="flex flex-col min-h-[90vh] pl-4 md:pl-0">
       <header className="bg-card1 flex flex-col md:flex-row gap-2 md:gap-0 p-3 md:px-10 justify-between items-center">
-        <h1 className="text-text text-2xl font-semibold">Blog Page</h1>{' '}
+        <h1 className="text-text text-2xl font-semibold">Blog Page</h1>
         <SearchForm
           searchKeyword={keyword}
           onSearch={onKeywordChange}
@@ -109,7 +110,7 @@ function BlogPage() {
       </header>
       <div className="flex flex-col md:flex-row">
         <div className="flex-1 md:flex-[5] p-4 md:p-6 md:px-10">
-          <div className="flex flex-col text-text gap-3">
+          <div className="flex flex-col text-text gap-6">
             <div className="flex flex-col md:flex-row justify-between gap-2 md:gap-0">
               <div className="flex flex-row gap-4">
                 <OutlineButton
@@ -132,30 +133,48 @@ function BlogPage() {
                 + Create new blog
               </button>
             </div>
-            <BlogCard blogs={filteredBlogs} users={users} />
+            {filteredBlogs.length === 0 ? (
+              <div className="flex flex-col items-center justify-center gap-2 bg-card1 p-5 rounded-lg">
+                <FaRegFrownOpen className="h-12 w-12 text-text" />
+                <span className="text-center text-text font-bold md:text-xl">
+                  No blogs found!
+                </span>
+              </div>
+            ) : (
+              <BlogCard blogs={filteredBlogs} users={users} />
+            )}
           </div>
         </div>
         <div className="md:flex-[1] p-4 md:pt-10">
           <h2 className="text-text text-lg font-semibold">Trending Now</h2>
-          {sortedBlogs.slice(0, 5).map((blog) => (
-            <div
-              key={blog.id}
-              className="my-2 text-text bg-card1 px-4 py-2 hover:bg-card2 cursor-pointer rounded-md"
-              role="button"
-              tabIndex={0}
-              onClick={() => handleCardClick(blog.id)}
-              onKeyDown={(event) => handleKeyDown(event, blog.id)}
-            >
-              <h3 className="text-md">{blog.title}</h3>
-              <div className="flex space-x-2">
-                {blog.tags.map((tag) => (
-                  <span key={tag} className="text-gray-400 text-sm">
-                    #{tag}
-                  </span>
-                ))}
-              </div>
+          {sortedBlogs.slice(0, 5).length === 0 ? (
+            <div className="flex flex-col items-center justify-center gap-2 bg-card1 p-5 rounded-lg">
+              <FaRegFrownOpen className="h-12 w-12 text-text" />
+              <span className="text-center text-text font-bold md:text-xl">
+                No blogs found!
+              </span>
             </div>
-          ))}
+          ) : (
+            sortedBlogs.slice(0, 5).map((blog) => (
+              <div
+                key={blog.id}
+                className="my-2 text-text bg-card1 px-4 py-2 hover:bg-card2 cursor-pointer rounded-md"
+                role="button"
+                tabIndex={0}
+                onClick={() => handleCardClick(blog.id)}
+                onKeyDown={(event) => handleKeyDown(event, blog.id)}
+              >
+                <h3 className="text-md">{blog.title}</h3>
+                <div className="flex space-x-2">
+                  {blog.tags.map((tag) => (
+                    <span key={tag} className="text-gray-400 text-sm">
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>

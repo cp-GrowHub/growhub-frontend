@@ -18,7 +18,7 @@ function Sidebar({ onLogout }) {
     <aside className="bg-card1 text-text w-14 md:w-32 p-1 flex flex-col min-h-screen fixed top-0 left-0">
       <nav className="flex-1 h-full">
         <ul>
-          <li className="mb-2">
+          <li className="mb-2 md:mb-1">
             <NavLink
               to="/profile"
               className={({ isActive }) =>

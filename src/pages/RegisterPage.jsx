@@ -20,7 +20,7 @@ function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col md:flex-row justify-center md:justify-end p-5">
+    <div className="min-h-screen w-full flex flex-col md:flex-row justify-center md:justify-end p-5 gap-4">
       <div className="hidden md:flex md:flex-1 items-center justify-center ">
         <div className="flex flex-col gap-1 bg-card2 text-text p-8 rounded-2xl">
           <h1 className="text-3xl font-bold">Registration Info</h1>

@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 
 function NavItem({ to, label, Icon }) {
   return (
-    <li className="mb-2">
+    <li className="mb-2 md:mb-1">
       <NavLink
         to={to}
         exact="true"
         className={({ isActive }) =>
-          `flex items-center justify-center p-3 py-4 rounded
+          `flex items-center justify-center py-4 md:p-2 rounded
           hover:bg-text hover:text-bekgron 
           ${isActive ? 'text-white bg-card4' : ''}`
         }

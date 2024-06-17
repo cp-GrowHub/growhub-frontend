@@ -4,6 +4,7 @@ const ActionType = {
   UPDATE_NOTE: 'notes/UPDATE_NOTE',
   DELETE_NOTE: 'notes/DELETE_NOTE',
   RECEIVE_DETAIL_NOTE: 'notes/RECEIVE_DETAIL_NOTE',
+  CLEAR_DETAIL_NOTE: 'notes/CLEAR_DETAIL_NOTE',
 };
 
 function receiveNotesByUserActionCreator(notes) {
@@ -51,6 +52,12 @@ function receiveDetailNoteActionCreator(note) {
   };
 }
 
+function clearDetailNoteActionCreator() {
+  return {
+    type: ActionType.CLEAR_DETAIL_NOTE,
+  };
+}
+
 export {
   ActionType,
   receiveNotesByUserActionCreator,
@@ -58,4 +65,5 @@ export {
   updateNoteActionCreator,
   deleteNoteActionCreator,
   receiveDetailNoteActionCreator,
+  clearDetailNoteActionCreator,
 };

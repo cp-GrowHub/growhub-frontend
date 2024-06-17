@@ -38,7 +38,7 @@ function getUpcomingGoals(goals) {
   const upcomingGoals = [...goals]
     .filter(
       (goal) =>
-        (new Date(goal.deadline) - new Date()) / (1000 * 60 * 60 * 24) > 0
+        (new Date(goal.deadline) - new Date()) / (1000 * 60 * 60 * 24) > -1
     )
     .filter((goal) => !goal.finished)
     .sort((a, b) => new Date(a.deadline) - new Date(b.deadline))

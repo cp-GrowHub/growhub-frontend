@@ -75,9 +75,17 @@ function NotesPage() {
                 <p className="text-text text-xs mb-2 md:text-base">
                   {postedAt(detailNote.createdAt)}
                 </p>
-                <p className="text-text text-sm md:text-base">
+                <div
+                  className="text-text text-sm md:text-base overflow-hidden"
+                  style={{
+                    display: '-webkit-box',
+                    WebkitBoxOrient: 'vertical',
+                    WebkitLineClamp: 12,
+                    textOverflow: 'ellipsis',
+                  }}
+                >
                   {parse(detailNote.body)}
-                </p>
+                </div>
               </div>
               <div className="mt-4 flex flex-row gap-5">
                 <button

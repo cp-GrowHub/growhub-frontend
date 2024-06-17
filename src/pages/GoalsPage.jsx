@@ -7,12 +7,16 @@ import UpcomingGoalCard from '../components/HomePage/UpcomingGoalCard';
 import GoalsFilterButtons from '../components/Goals/GoalsFilterButtons';
 import useConfirmModal from '../hooks/useConfirmModal';
 import ConfirmModal from '../components/common/ConfirmModal';
+import Modal from '../components/common/Modal';
 
 function GoalsPage() {
   const { upcomingGoals, sortedGoals, toggleGoalHandler } = useGoals();
   const authUser = useSelector((state) => state.authUser);
   const navigate = useNavigate();
   const [filter, setFilter] = useState('all');
+
+  const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
   const filteredGoals = sortedGoals.filter((goal) => {
     const daysLeft =
@@ -33,30 +37,34 @@ function GoalsPage() {
   } = useConfirmModal();
 
   const handleGoalToggle = (goalId) => {
-    const goalFromUpcoming = upcomingGoals.find((goal) => goal.id === goalId);
-    const goalFromFiltered = filteredGoals.find((goal) => goal.id === goalId);
+    const goal = sortedGoals.find((goal) => goal.id === goalId);
 
-    if (goalFromUpcoming) {
-      return showConfirmModal(
-        `Are you sure you already achieved "${goalFromUpcoming.name}"?`,
-        () => toggleGoalHandler(goalId)
-      );
-    }
-
-    if (goalFromFiltered) {
-      if (goalFromFiltered.finished) {
+    if (goal) {
+      if (goal.finished) {
         return showConfirmModal(
-          `Do you want to undo the completion of "${goalFromFiltered.name}"?`,
-          () => toggleGoalHandler(goalId)
+          `Do you want to undo the completion of "${goal.name}"?`,
+          () => {
+            toggleGoalHandler(goalId);
+            setSuccessMessage(`Successfully undone the goal: "${goal.name}"`);
+            setIsSuccessModalVisible(true);
+          }
         );
       }
       return showConfirmModal(
-        `Are you sure you already achieved "${goalFromFiltered.name}"?`,
-        () => toggleGoalHandler(goalId)
+        `Are you sure you already achieved "${goal.name}"?`,
+        () => {
+          toggleGoalHandler(goalId);
+          setSuccessMessage(`Successfully achieved the goal: "${goal.name}"`);
+          setIsSuccessModalVisible(true);
+        }
       );
     }
 
     return null;
+  };
+
+  const handleSuccessModalClose = () => {
+    setIsSuccessModalVisible(false);
   };
 
   return (
@@ -148,6 +156,12 @@ function GoalsPage() {
         message={confirmMessage}
         onClose={closeConfirmModal}
         onConfirm={confirm}
+      />
+      <Modal
+        text={successMessage}
+        isVisible={isSuccessModalVisible}
+        onClose={handleSuccessModalClose}
+        color="bg-green-500"
       />
     </div>
   );

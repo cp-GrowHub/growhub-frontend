@@ -26,7 +26,7 @@ export default function CreateDiscussionPage() {
   };
 
   return (
-    <div className="text-text flex flex-col pt-2 pl-4 md:pt-16 md:px-10 max-w-[40vh] md:max-w-full gap-4">
+    <div className="text-text flex flex-col pt-16 px-10">
       <div className="flex-1">
         <Header className="border-b-2 pb-3">Start new Discussion!</Header>
       </div>

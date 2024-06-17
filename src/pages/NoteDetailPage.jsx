@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
+import parse from 'html-react-parser';
 import { asyncGetDetailNote, asyncDeleteNote } from '../states/notes/thunk';
 import { postedAt } from '../utils';
 import Modal from '../components/common/Modal';
@@ -44,7 +45,16 @@ function NoteDetailPage() {
                   {postedAt(detailNote.createdAt)}
                 </p>
               </div>
-              <p className="text-text text-md ">{detailNote.body}</p>
+              <div
+                className="text-text text-md overflow-y-auto"
+                style={{
+                  maxHeight: '50vh',
+                  overflowY: 'auto',
+                  textOverflow: 'ellipsis',
+                }}
+              >
+                {parse(detailNote.body)}
+              </div>
             </div>
             <div className="flex flex-row gap-2 p-3 md:p-0 md:gap-5">
               <button
@@ -90,11 +100,20 @@ function NoteDetailPage() {
           <h2 className="text-2xl font-bold text-text">{detailNote.title}</h2>
           <p className="text-text text-sm">{postedAt(detailNote.createdAt)}</p>
         </div>
-        <p className="text-text">{detailNote.body}</p>
+        <div
+          className="text-text overflow-y-auto"
+          style={{
+            maxHeight: '50vh',
+            overflowY: 'auto',
+            textOverflow: 'ellipsis',
+          }}
+        >
+          {parse(detailNote.body)}
+        </div>
       </div>
 
       <button
-        className=" bg-card4 text-text rounded-lg px-8 py-2 hover:bg-text hover:text-bekgron"
+        className="bg-card4 text-text rounded-lg px-8 py-2 hover:bg-text hover:text-bekgron"
         onClick={handleCopyLink}
       >
         Copy Link

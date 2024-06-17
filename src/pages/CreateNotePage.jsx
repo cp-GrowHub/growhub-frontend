@@ -17,7 +17,7 @@ export default function CreateNotePage() {
   return (
     <div className="text-text flex flex-col pt-16 px-10">
       <div className="flex-1">
-        <Header className="border-b-2 pb-3">Create your new Goal!</Header>
+        <Header className="border-b-2 pb-3">Create your new Note!</Header>
       </div>
       <div>
         <CreateNoteForm onSubmit={onSubmitHandler} />

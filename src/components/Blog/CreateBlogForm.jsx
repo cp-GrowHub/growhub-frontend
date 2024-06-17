@@ -13,7 +13,11 @@ export default function CreateBlogForm({ onSubmit }) {
       .trim()
       .split(' ')
       .filter((tag) => tag);
-    const bodyHTML = bodyRef.current.innerHTML;
+    const bodyHTML = bodyRef.current.innerHTML.trim(); // Trim whitespace
+    if (!title || !bodyHTML || !tags) {
+      alert('Title, Tag, and Body are required');
+      return;
+    }
     onSubmit(title, tagsArray, bodyHTML);
     resetTitle();
     resetTags();
@@ -60,8 +64,14 @@ export default function CreateBlogForm({ onSubmit }) {
           id="blogBody"
           ref={bodyRef}
           contentEditable
-          className="text-text h-52 bg-card2 px-4 py-2 rounded-xl outline-none"
-          style={{ minHeight: '200px' }}
+          className="text-text bg-card2 px-4 py-2 outline-none rounded-xl overflow-y-auto"
+          style={{
+            minHeight: '200px',
+            maxHeight: '300px',
+            overflowY: 'auto',
+            whiteSpace: 'pre-wrap',
+            wordWrap: 'break-word',
+          }}
         />
       </div>
       <button type="submit" className="bg-text text-bekgron p-2 rounded-3xl">

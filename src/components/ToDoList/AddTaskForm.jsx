@@ -70,14 +70,14 @@ function AddTaskForm({ onSubmitCreate }) {
           <button
             type="button"
             onClick={() => handlePriorityChange('priority')}
-            className={`p-2 rounded text-white border border-transparent ${priority ? 'bg-card1 border border-green-500' : 'bg-gray-500'}`}
+            className={`p-2 rounded text-white bg-card1 border ${priority ? 'border-green-500' : 'border-transparent'} ${!priority ? 'bg-gray-500' : ''}`}
           >
             Priority
           </button>
           <button
             type="button"
             onClick={() => handlePriorityChange('highPriority')}
-            className={`p-2 rounded text-white border border-transparent ${highPriority ? 'bg-card1 border border-green-500' : 'bg-gray-500'}`}
+            className={`p-2 rounded text-white bg-card1 border ${highPriority ? 'border-green-500' : 'border-transparent'} ${!highPriority ? 'bg-gray-500' : ''}`}
           >
             High Priority
           </button>

@@ -34,6 +34,11 @@ const notesReducer = (state = initialState, action = {}) => {
         ...state,
         detailNote: action.payload.note,
       };
+    case ActionType.CLEAR_DETAIL_NOTE:
+      return {
+        ...state,
+        detailNote: null,
+      };
     default:
       return state;
   }

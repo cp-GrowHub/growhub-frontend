@@ -5,6 +5,7 @@ import {
   deleteNoteActionCreator,
   receiveDetailNoteActionCreator,
   receiveNotesByUserActionCreator,
+  clearDetailNoteActionCreator,
 } from './action';
 import api from '../../utils/api';
 
@@ -15,6 +16,7 @@ function asyncReceiveNotes() {
     try {
       const notes = await api.getNotesByUser();
       dispatch(receiveNotesByUserActionCreator(notes));
+      dispatch(clearDetailNoteActionCreator());
     } catch (error) {
       console.error('Failed to fetch notes:', error);
     } finally {
@@ -82,6 +84,7 @@ function asyncDeleteNote({ noteId }) {
       await api.deleteNote({ noteId });
       dispatch(deleteNoteActionCreator({ noteId }));
       dispatch(receiveDetailNoteActionCreator(null));
+      dispatch(asyncReceiveNotes());
     } catch (err) {
       alert(err.message);
     } finally {

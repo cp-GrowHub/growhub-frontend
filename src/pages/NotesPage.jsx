@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaRegFrownOpen } from 'react-icons/fa';
+import parse from 'html-react-parser';
 import NotesFilterButton from '../components/Notes/NotesFilterButton';
 import SearchForm from '../components/common/SearchForm';
 import NotesItemCard from '../components/Notes/NotesItemCard';
@@ -74,9 +75,17 @@ function NotesPage() {
                 <p className="text-text text-xs mb-2 md:text-base">
                   {postedAt(detailNote.createdAt)}
                 </p>
-                <p className="text-text text-sm md:text-base">
-                  {detailNote.body}
-                </p>
+                <div
+                  className="text-text text-sm md:text-base overflow-hidden"
+                  style={{
+                    display: '-webkit-box',
+                    WebkitBoxOrient: 'vertical',
+                    WebkitLineClamp: 12,
+                    textOverflow: 'ellipsis',
+                  }}
+                >
+                  {parse(detailNote.body)}
+                </div>
               </div>
               <div className="mt-4 flex flex-row gap-5">
                 <button

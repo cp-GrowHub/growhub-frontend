@@ -19,11 +19,12 @@ function GoalsPage() {
   const [successMessage, setSuccessMessage] = useState('');
 
   const filteredGoals = sortedGoals.filter((goal) => {
-    const daysLeft =
-      (new Date(goal.deadline) - new Date()) / (1000 * 60 * 60 * 24);
-    if (filter === 'completed') return goal.finished;
+    const daysLeft = Math.ceil(
+      (new Date(goal.deadline) - new Date()) / (1000 * 60 * 60 * 24)
+    );
+    if (filter === 'completed') return goal.finished && daysLeft >= 0;
     if (filter === 'uncompleted') return !goal.finished && daysLeft >= 0;
-    if (filter === 'expired') return daysLeft < 0;
+    if (filter === 'expired') return daysLeft <= -1;
     if (filter === 'all') return daysLeft >= 0;
     return true;
   });
@@ -90,9 +91,9 @@ function GoalsPage() {
               <UpcomingGoalCard
                 key={goal.id}
                 title={goal.name}
-                daysLeft={
+                daysLeft={Math.ceil(
                   (new Date(goal.deadline) - new Date()) / (1000 * 60 * 60 * 24)
-                }
+                )}
                 isFinished={goal.finished}
                 onToggleFinish={() => handleGoalToggle(goal.id)}
               />

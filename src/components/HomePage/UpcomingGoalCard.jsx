@@ -18,9 +18,9 @@ function UpcomingGoalCard({ title, daysLeft, isFinished, onToggleFinish }) {
       <div className="flex-1 flex flex-col">
         <div className="flex">
           <p
-            className={`text-sm inline-block border-b px-1 pb-[0.1rem] mb-1 ${daysLeft < 0 ? 'text-red-400 font-semibold' : 'text-text'}`}
+            className={`text-sm inline-block border-b px-1 pb-[0.1rem] mb-1 ${daysLeft <= 0 ? 'text-red-500 font-semibold' : 'text-text'}`}
           >
-            {daysLeft < 0 ? 'Past due' : `${Math.round(daysLeft)} days left`}
+            {daysLeft <= 0 ? 'Today!' : `${Math.ceil(daysLeft)} days left`}
           </p>
         </div>
         <h3 className="text-base md:text-lg font-bold">{title}</h3>

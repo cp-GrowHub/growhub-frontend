@@ -8,15 +8,22 @@ export default function CreateNoteForm({ onSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const bodyHTML = bodyRef.current.innerHTML;
+    const bodyHTML = bodyRef.current.innerHTML.trim(); // Trim whitespace
+    if (!title || !bodyHTML) {
+      alert('Title and Body are required');
+      return;
+    }
     onSubmit(title, bodyHTML);
     resetTitle();
     bodyRef.current.innerHTML = '';
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-10 px-32 flex flex-col gap-4 ">
-      <div className=" flex flex-col">
+    <form
+      onSubmit={handleSubmit}
+      className="md:p-10 md:px-32 flex flex-col md:gap-4 gap-2"
+    >
+      <div className="flex flex-col">
         <label htmlFor="noteTitle" className="flex flex-col">
           Note Title
           <input
@@ -25,10 +32,11 @@ export default function CreateNoteForm({ onSubmit }) {
             value={title}
             onChange={handleTitleChange}
             className="text-text bg-card2 text-xl outline-none px-4 py-2 rounded-xl"
+            required
           />
         </label>
       </div>
-      <div className=" flex flex-col">
+      <div className="flex flex-col">
         <div id="noteBodyLabel" className="flex flex-col">
           Note Body
         </div>

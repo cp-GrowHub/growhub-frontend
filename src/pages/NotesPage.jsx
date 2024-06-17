@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaRegFrownOpen } from 'react-icons/fa';
+import parse from 'html-react-parser';
 import NotesFilterButton from '../components/Notes/NotesFilterButton';
 import SearchForm from '../components/common/SearchForm';
 import NotesItemCard from '../components/Notes/NotesItemCard';
@@ -75,7 +76,7 @@ function NotesPage() {
                   {postedAt(detailNote.createdAt)}
                 </p>
                 <p className="text-text text-sm md:text-base">
-                  {detailNote.body}
+                  {parse(detailNote.body)}
                 </p>
               </div>
               <div className="mt-4 flex flex-row gap-5">

@@ -40,21 +40,6 @@ function asyncUpdateBlog({ title, body, tags, blogId }) {
   };
 }
 
-function asyncDeleteBlog({ blogId }) {
-  return async (dispatch) => {
-    dispatch(showLoading());
-
-    try {
-      await api.deleteBlog({ blogId });
-      dispatch(deleteBlogActionCreator({ blogId }));
-    } catch (err) {
-      alert(err.message);
-    } finally {
-      dispatch(hideLoading());
-    }
-  };
-}
-
 function asyncGetAllBlogs() {
   return async (dispatch) => {
     dispatch(showLoading());
@@ -63,6 +48,22 @@ function asyncGetAllBlogs() {
       const response = await api.getAllBlogs();
       const { blogs } = response.data;
       dispatch(receiveBlogsActionCreator(blogs));
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      dispatch(hideLoading());
+    }
+  };
+}
+
+function asyncDeleteBlog({ blogId }) {
+  return async (dispatch) => {
+    dispatch(showLoading());
+
+    try {
+      await api.deleteBlog({ blogId });
+      dispatch(deleteBlogActionCreator({ blogId }));
+      dispatch(asyncGetAllBlogs());
     } catch (err) {
       alert(err.message);
     } finally {

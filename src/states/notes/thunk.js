@@ -32,6 +32,7 @@ function asyncCreateNote({ title, body, archived }) {
     try {
       const note = await api.createNote({ title, body, archived });
       dispatch(createNoteActionCreator(note));
+      dispatch(asyncReceiveNotes());
     } catch (err) {
       alert(err.message);
     } finally {
